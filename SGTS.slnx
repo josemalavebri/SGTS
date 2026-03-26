@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="SGTS.Business/SGTS.Business.csproj" />
+  <Project Path="SGTS.Data/SGTS.Data.csproj" />
+  <Project Path="SGTS.Models/SGTS.Models.csproj" />
+  <Project Path="SGTS.Tests/SGTS.Tests.csproj" />
+  <Project Path="SGTS.Web/SGTS.Web.csproj" />
+</Solution>

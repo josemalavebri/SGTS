@@ -1,0 +1,11 @@
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\bin\Debug\net10.0\SGTS.Models.deps.json
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\bin\Debug\net10.0\SGTS.Models.dll
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\bin\Debug\net10.0\SGTS.Models.pdb
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\obj\Debug\net10.0\SGTS.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\obj\Debug\net10.0\SGTS.Models.AssemblyInfoInputs.cache
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\obj\Debug\net10.0\SGTS.Models.AssemblyInfo.cs
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\obj\Debug\net10.0\SGTS.Models.csproj.CoreCompileInputs.cache
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\obj\Debug\net10.0\SGTS.Models.dll
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\obj\Debug\net10.0\refint\SGTS.Models.dll
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\obj\Debug\net10.0\SGTS.Models.pdb
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\obj\Debug\net10.0\ref\SGTS.Models.dll
