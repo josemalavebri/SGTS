@@ -1,0 +1,19 @@
+import loader from "../components/ui/loader.js";
+import "../core/interceptors/errorInterceptor.js";
+import "../core/interceptors/networkInterceptor.js";
+
+const pages = {
+  usuarios: () => import("../pages/userPage.js"),
+  problemas: () => import("../pages/problemPage.js"),
+};
+
+document.addEventListener("DOMContentLoaded", async () => {
+  loader.init();
+  const app = document.getElementById("app");
+  const pageName = app?.dataset.page;
+
+  if (pageName && pages[pageName]) {
+    const module = await pages[pageName]();
+    module.default.init();
+  }
+});

@@ -3,7 +3,9 @@ C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Data\bin\Debug\net10.
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Data\bin\Debug\net10.0\SGTS.Data.dll
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Data\bin\Debug\net10.0\SGTS.Data.pdb
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Data\bin\Debug\net10.0\SGTS.Models.dll
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Data\bin\Debug\net10.0\SGTS.Shared.dll
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Data\bin\Debug\net10.0\SGTS.Models.pdb
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Data\bin\Debug\net10.0\SGTS.Shared.pdb
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Data\obj\Debug\net10.0\SGTS.Data.csproj.AssemblyReference.cache
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Data\obj\Debug\net10.0\SGTS.Data.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Data\obj\Debug\net10.0\SGTS.Data.AssemblyInfoInputs.cache

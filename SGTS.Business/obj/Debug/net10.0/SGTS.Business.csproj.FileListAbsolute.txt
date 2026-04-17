@@ -3,8 +3,10 @@ C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Business\bin\Debug\ne
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Business\bin\Debug\net10.0\SGTS.Business.pdb
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Business\bin\Debug\net10.0\SGTS.Data.dll
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Business\bin\Debug\net10.0\SGTS.Models.dll
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Business\bin\Debug\net10.0\SGTS.Shared.dll
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Business\bin\Debug\net10.0\SGTS.Data.pdb
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Business\bin\Debug\net10.0\SGTS.Models.pdb
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Business\bin\Debug\net10.0\SGTS.Shared.pdb
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Business\obj\Debug\net10.0\SGTS.Business.csproj.AssemblyReference.cache
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Business\obj\Debug\net10.0\SGTS.Business.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Business\obj\Debug\net10.0\SGTS.Business.AssemblyInfoInputs.cache

@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SGTS.Business\SGTS.Business.csproj" />
     <ProjectReference Include="..\SGTS.Models\SGTS.Models.csproj" />
+    <ProjectReference Include="..\SGTS.Shared\SGTS.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -11,7 +11,8 @@
           "Microsoft.EntityFrameworkCore": "10.0.5",
           "Microsoft.EntityFrameworkCore.Design": "10.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "10.0.5",
-          "SGTS.Models": "1.0.0"
+          "SGTS.Models": "1.0.0",
+          "SGTS.Shared": "1.0.0"
         },
         "runtime": {
           "SGTS.Data.dll": {}
@@ -913,6 +914,14 @@
             "fileVersion": "1.0.0.0"
           }
         }
+      },
+      "SGTS.Shared/1.0.0": {
+        "runtime": {
+          "SGTS.Shared.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -1301,6 +1310,11 @@
       "hashPath": "system.security.cryptography.protecteddata.9.0.4.nupkg.sha512"
     },
     "SGTS.Models/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SGTS.Shared/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

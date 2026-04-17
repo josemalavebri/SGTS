@@ -4,11 +4,24 @@ using SGTS.Business.Services;
 using SGTS.Data.Context;
 using SGTS.Data.Interfaces;
 using SGTS.Data.Repositories;
+using SGTS.Data.Services;
+using SGTS.Web.Filters;
+using SGTS.Web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<ValidateModelFilter>();
+});
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.DefaultIgnoreCondition =
+            System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+    });
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -17,8 +30,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IProblemaRepository, ProblemaRepository>();
+builder.Services.AddScoped<IProblemaService, ProblemaService>();
+builder.Services.AddScoped<DataTableQueryService, DataTableQueryService>();
 
 var app = builder.Build();
+app.UseMiddleware<ExceptionMiddleware>();
 
 if (!app.Environment.IsDevelopment())
 {
@@ -31,7 +48,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapStaticAssets();
+app.UseStaticFiles();
 
 app.MapControllerRoute(
     name: "default",

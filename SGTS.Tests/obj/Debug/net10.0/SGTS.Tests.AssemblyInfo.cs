@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SGTS.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5c6a98a27e1db59db2fc5f560c3f7bccaadd2ce8")]
 [assembly: System.Reflection.AssemblyProductAttribute("SGTS.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SGTS.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

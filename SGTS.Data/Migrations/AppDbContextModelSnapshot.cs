@@ -22,7 +22,7 @@ namespace SGTS.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SGTS.Models.Entities.EstadoProblema", b =>
+            modelBuilder.Entity("SGTS.Data.Entities.EstadoTicket", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -37,10 +37,32 @@ namespace SGTS.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EstadosProblemas");
+                    b.ToTable("Estados");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nombre = "abierto"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nombre = "en-progreso"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Nombre = "resuelto"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Nombre = "cerrado"
+                        });
                 });
 
-            modelBuilder.Entity("SGTS.Models.Entities.Prioridad", b =>
+            modelBuilder.Entity("SGTS.Data.Entities.Imagen", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,7 +70,32 @@ namespace SGTS.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Nivel")
+                    b.Property<byte[]>("Data")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TipoMime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Imagenes");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Prioridad", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -56,9 +103,26 @@ namespace SGTS.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Prioridad");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nombre = "baja"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nombre = "media"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Nombre = "alta"
+                        });
                 });
 
-            modelBuilder.Entity("SGTS.Models.Entities.Problema", b =>
+            modelBuilder.Entity("SGTS.Data.Entities.Tecnico", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,87 +132,6 @@ namespace SGTS.Data.Migrations
 
                     b.Property<bool>("Activo")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<int>("EstadoProblemaId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("FechaReporte")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("FechaResolucion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PrioridadId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EstadoProblemaId");
-
-                    b.HasIndex("PrioridadId");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("Problemas");
-                });
-
-            modelBuilder.Entity("SGTS.Models.Entities.ProblemaResolucion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("Activo")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProblemaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TecnicoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProblemaId");
-
-                    b.HasIndex("TecnicoId");
-
-                    b.ToTable("ProblemasResoluciones");
-                });
-
-            modelBuilder.Entity("SGTS.Models.Entities.Tecnico", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("Activo")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Especialidad")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -165,7 +148,77 @@ namespace SGTS.Data.Migrations
                     b.ToTable("Tecnicos");
                 });
 
-            modelBuilder.Entity("SGTS.Models.Entities.Usuario", b =>
+            modelBuilder.Entity("SGTS.Data.Entities.Ticket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaReporte")
+                        .HasMaxLength(500)
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ImagenId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrioridadId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ImagenId");
+
+                    b.HasIndex("PrioridadId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Problemas");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.TicketHistorialEstado", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EstadoTicketId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaCambio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("TecnicoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EstadoTicketId");
+
+                    b.HasIndex("TecnicoId");
+
+                    b.HasIndex("TicketId");
+
+                    b.ToTable("ProblemasResoluciones");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -196,50 +249,54 @@ namespace SGTS.Data.Migrations
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("SGTS.Models.Entities.Problema", b =>
+            modelBuilder.Entity("SGTS.Data.Entities.Ticket", b =>
                 {
-                    b.HasOne("SGTS.Models.Entities.EstadoProblema", "Estado")
+                    b.HasOne("SGTS.Data.Entities.Imagen", "Imagen")
                         .WithMany()
-                        .HasForeignKey("EstadoProblemaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ImagenId");
 
-                    b.HasOne("SGTS.Models.Entities.Prioridad", "Prioridad")
+                    b.HasOne("SGTS.Data.Entities.Prioridad", "Prioridad")
                         .WithMany()
                         .HasForeignKey("PrioridadId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SGTS.Models.Entities.Usuario", "Usuario")
+                    b.HasOne("SGTS.Data.Entities.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Estado");
+                    b.Navigation("Imagen");
 
                     b.Navigation("Prioridad");
 
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("SGTS.Models.Entities.ProblemaResolucion", b =>
+            modelBuilder.Entity("SGTS.Data.Entities.TicketHistorialEstado", b =>
                 {
-                    b.HasOne("SGTS.Models.Entities.Problema", "Problema")
+                    b.HasOne("SGTS.Data.Entities.EstadoTicket", "EstadoTicket")
                         .WithMany()
-                        .HasForeignKey("ProblemaId")
+                        .HasForeignKey("EstadoTicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SGTS.Models.Entities.Tecnico", "Tecnico")
+                    b.HasOne("SGTS.Data.Entities.Usuario", "Tecnico")
                         .WithMany()
-                        .HasForeignKey("TecnicoId")
+                        .HasForeignKey("TecnicoId");
+
+                    b.HasOne("SGTS.Data.Entities.Ticket", "Ticket")
+                        .WithMany()
+                        .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Problema");
+                    b.Navigation("EstadoTicket");
 
                     b.Navigation("Tecnico");
+
+                    b.Navigation("Ticket");
                 });
 #pragma warning restore 612, 618
         }

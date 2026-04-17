@@ -1,0 +1,14 @@
+@{
+  ViewData["Title"] = "Gestión de Problemas";
+}
+<div class="container">
+  <button class="btn btn-success mb-3" id="btnNewProblema">
+    Nuevo Problema
+  </button>
+  <div id="app" data-page="problemas">
+    <table id="problemTable" class="display"></table>
+  </div>
+</div>
+
+
+<partial name="_ProblemaForm" />

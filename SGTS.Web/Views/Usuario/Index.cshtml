@@ -1,0 +1,13 @@
+@{
+  ViewData["Title"] = "Gestión de Usuarios";
+}
+<div class="container">
+  <button class="btn btn-success mb-3" id="btnNew">
+    Nuevo Usuario
+  </button>
+  <div id="app" data-page="usuarios">
+    <table id="userTable" class="display"></table>
+  </div>
+</div>
+
+<partial name="_UserForm" />

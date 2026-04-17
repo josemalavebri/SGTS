@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SGTS.Models\SGTS.Models.csproj" />
+    <ProjectReference Include="..\SGTS.Shared\SGTS.Shared.csproj" />
   </ItemGroup>
 
 </Project>

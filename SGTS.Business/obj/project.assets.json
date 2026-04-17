@@ -689,7 +689,8 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "10.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "10.0.5",
-          "SGTS.Models": "1.0.0"
+          "SGTS.Models": "1.0.0",
+          "SGTS.Shared": "1.0.0"
         },
         "compile": {
           "bin/placeholder/SGTS.Data.dll": {}
@@ -706,6 +707,16 @@
         },
         "runtime": {
           "bin/placeholder/SGTS.Models.dll": {}
+        }
+      },
+      "SGTS.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/SGTS.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SGTS.Shared.dll": {}
         }
       }
     }
@@ -1701,12 +1712,18 @@
       "type": "project",
       "path": "../SGTS.Models/SGTS.Models.csproj",
       "msbuildProject": "../SGTS.Models/SGTS.Models.csproj"
+    },
+    "SGTS.Shared/1.0.0": {
+      "type": "project",
+      "path": "../SGTS.Shared/SGTS.Shared.csproj",
+      "msbuildProject": "../SGTS.Shared/SGTS.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
       "SGTS.Data >= 1.0.0",
-      "SGTS.Models >= 1.0.0"
+      "SGTS.Models >= 1.0.0",
+      "SGTS.Shared >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1739,6 +1756,9 @@
             },
             "C:\\Users\\josem\\Programacion\\Proyectos Produccion\\SGTS\\SGTS.Models\\SGTS.Models.csproj": {
               "projectPath": "C:\\Users\\josem\\Programacion\\Proyectos Produccion\\SGTS\\SGTS.Models\\SGTS.Models.csproj"
+            },
+            "C:\\Users\\josem\\Programacion\\Proyectos Produccion\\SGTS\\SGTS.Shared\\SGTS.Shared.csproj": {
+              "projectPath": "C:\\Users\\josem\\Programacion\\Proyectos Produccion\\SGTS\\SGTS.Shared\\SGTS.Shared.csproj"
             }
           }
         }
@@ -1774,7 +1794,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.104/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.106/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

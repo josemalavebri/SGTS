@@ -1,12 +1,36 @@
-﻿@using SGTS.Models.DTOs
-@model IEnumerable<SGTS.Models.DTOs.UsuarioDTO>
-@{
-  ViewData["Title"] = "Home Page";
+﻿@{
+  ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-  <h1 class="display-4">Welcome</h1>
-  <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+@model SGTS.Web.Models.DashboardViewModel
+
+<h2>Problemas por Estado</h2>
+<div class="row">
+  @foreach (var estado in Model.Estados)
+  {
+    <div class="col-md-3">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-body">
+          <h5 class="card-title">@estado.Nombre</h5>
+          <p class="card-text">@estado.Cantidad</p>
+        </div>
+      </div>
+    </div>
+  }
 </div>
 
-
+<h2>Problemas por Prioridad</h2>
+<div class="row">
+  @foreach (var prioridad in Model.Prioridades)
+  {
+    <div class="col-md-4">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-body">
+          <h5 class="card-title">@prioridad.Nombre</h5>
+          <p class="card-text">@prioridad.Cantidad</p>
+        </div>
+      </div>
+    </div>
+  }
+</div>
