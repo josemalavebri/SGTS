@@ -22,281 +22,547 @@ namespace SGTS.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SGTS.Data.Entities.EstadoTicket", b =>
+            modelBuilder.Entity("SGTS.Data.Entities.Adjunto", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdAdjunto")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAdjunto"));
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaCarga")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdTicket")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NombreArchivo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RutaArchivo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("Tamano")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("IdAdjunto");
+
+                    b.HasIndex("IdTicket");
+
+                    b.ToTable("Adjuntos");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Categoria", b =>
+                {
+                    b.Property<int>("IdCategoria")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCategoria"));
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdCategoria");
+
+                    b.ToTable("Categorias");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Comentario", b =>
+                {
+                    b.Property<int>("IdComentario")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdComentario"));
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdTicket")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Texto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdComentario");
+
+                    b.HasIndex("IdTicket");
+
+                    b.HasIndex("IdUsuario");
+
+                    b.ToTable("Comentarios");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Departamento", b =>
+                {
+                    b.Property<int>("IdDepartamento")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdDepartamento"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdDepartamento");
+
+                    b.ToTable("Departamentos");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Estado", b =>
+                {
+                    b.Property<int>("IdEstado")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEstado"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdEstado");
 
                     b.ToTable("Estados");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            IdEstado = 1,
                             Nombre = "abierto"
                         },
                         new
                         {
-                            Id = 2,
+                            IdEstado = 2,
                             Nombre = "en-progreso"
                         },
                         new
                         {
-                            Id = 3,
+                            IdEstado = 3,
                             Nombre = "resuelto"
                         },
                         new
                         {
-                            Id = 4,
+                            IdEstado = 4,
                             Nombre = "cerrado"
                         });
                 });
 
-            modelBuilder.Entity("SGTS.Data.Entities.Imagen", b =>
+            modelBuilder.Entity("SGTS.Data.Entities.Historial", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdHistorial")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdHistorial"));
 
-                    b.Property<byte[]>("Data")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Accion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TipoMime")
-                        .IsRequired()
+                    b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
 
-                    b.ToTable("Imagenes");
+                    b.Property<int>("IdTicket")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdHistorial");
+
+                    b.HasIndex("IdTicket");
+
+                    b.HasIndex("IdUsuario");
+
+                    b.ToTable("Historiales");
                 });
 
             modelBuilder.Entity("SGTS.Data.Entities.Prioridad", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdPrioridad")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPrioridad"));
+
+                    b.Property<int>("Nivel")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdPrioridad");
 
-                    b.ToTable("Prioridad");
+                    b.ToTable("Prioridades");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            IdPrioridad = 1,
+                            Nivel = 0,
                             Nombre = "baja"
                         },
                         new
                         {
-                            Id = 2,
+                            IdPrioridad = 2,
+                            Nivel = 0,
                             Nombre = "media"
                         },
                         new
                         {
-                            Id = 3,
+                            IdPrioridad = 3,
+                            Nivel = 0,
                             Nombre = "alta"
                         });
                 });
 
-            modelBuilder.Entity("SGTS.Data.Entities.Tecnico", b =>
+            modelBuilder.Entity("SGTS.Data.Entities.Rol", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdRol")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdRol"));
 
-                    b.Property<bool>("Activo")
-                        .HasColumnType("bit");
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                    b.HasKey("IdRol");
 
-                    b.HasKey("Id");
+                    b.ToTable("Roles");
 
-                    b.ToTable("Tecnicos");
+                    b.HasData(
+                        new
+                        {
+                            IdRol = 1,
+                            Nombre = "administrador"
+                        },
+                        new
+                        {
+                            IdRol = 2,
+                            Nombre = "tecnico"
+                        },
+                        new
+                        {
+                            IdRol = 3,
+                            Nombre = "empleado"
+                        },
+                        new
+                        {
+                            IdRol = 4,
+                            Nombre = "supervisor"
+                        });
                 });
 
             modelBuilder.Entity("SGTS.Data.Entities.Ticket", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdTicket")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("Activo")
-                        .HasColumnType("bit");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTicket"));
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("FechaReporte")
-                        .HasMaxLength(500)
+                    b.Property<DateTime?>("FechaActualizacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ImagenId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PrioridadId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ImagenId");
-
-                    b.HasIndex("PrioridadId");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("Problemas");
-                });
-
-            modelBuilder.Entity("SGTS.Data.Entities.TicketHistorialEstado", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EstadoTicketId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("FechaCambio")
+                    b.Property<DateTime?>("FechaCierre")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("TecnicoId")
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdCategoria")
                         .HasColumnType("int");
 
-                    b.Property<int>("TicketId")
+                    b.Property<int>("IdEstado")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("IdPrioridad")
+                        .HasColumnType("int");
 
-                    b.HasIndex("EstadoTicketId");
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
 
-                    b.HasIndex("TecnicoId");
+                    b.Property<int?>("TecnicoAsignadoId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("TicketId");
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("ProblemasResoluciones");
+                    b.HasKey("IdTicket");
+
+                    b.HasIndex("IdCategoria");
+
+                    b.HasIndex("IdEstado");
+
+                    b.HasIndex("IdPrioridad");
+
+                    b.HasIndex("IdUsuario");
+
+                    b.HasIndex("TecnicoAsignadoId");
+
+                    b.ToTable("Tickets");
                 });
 
             modelBuilder.Entity("SGTS.Data.Entities.Usuario", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdUsuario")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUsuario"));
 
                     b.Property<bool>("Activo")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Apellido")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Correo")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdDepartamento")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdUsuario");
+
+                    b.HasIndex("IdDepartamento");
 
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("SGTS.Data.Entities.Ticket", b =>
+            modelBuilder.Entity("SGTS.Data.Entities.UsuarioRol", b =>
                 {
-                    b.HasOne("SGTS.Data.Entities.Imagen", "Imagen")
-                        .WithMany()
-                        .HasForeignKey("ImagenId");
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
 
-                    b.HasOne("SGTS.Data.Entities.Prioridad", "Prioridad")
-                        .WithMany()
-                        .HasForeignKey("PrioridadId")
+                    b.Property<int>("IdRol")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdUsuario", "IdRol");
+
+                    b.HasIndex("IdRol");
+
+                    b.ToTable("UsuariosRoles");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Adjunto", b =>
+                {
+                    b.HasOne("SGTS.Data.Entities.Ticket", "Ticket")
+                        .WithMany("Adjuntos")
+                        .HasForeignKey("IdTicket")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ticket");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Comentario", b =>
+                {
+                    b.HasOne("SGTS.Data.Entities.Ticket", "Ticket")
+                        .WithMany("Comentarios")
+                        .HasForeignKey("IdTicket")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SGTS.Data.Entities.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany("Comentarios")
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Imagen");
-
-                    b.Navigation("Prioridad");
+                    b.Navigation("Ticket");
 
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("SGTS.Data.Entities.TicketHistorialEstado", b =>
+            modelBuilder.Entity("SGTS.Data.Entities.Historial", b =>
                 {
-                    b.HasOne("SGTS.Data.Entities.EstadoTicket", "EstadoTicket")
-                        .WithMany()
-                        .HasForeignKey("EstadoTicketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SGTS.Data.Entities.Usuario", "Tecnico")
-                        .WithMany()
-                        .HasForeignKey("TecnicoId");
-
                     b.HasOne("SGTS.Data.Entities.Ticket", "Ticket")
-                        .WithMany()
-                        .HasForeignKey("TicketId")
+                        .WithMany("Historiales")
+                        .HasForeignKey("IdTicket")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("EstadoTicket");
-
-                    b.Navigation("Tecnico");
+                    b.HasOne("SGTS.Data.Entities.Usuario", "Usuario")
+                        .WithMany("Historiales")
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Ticket");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Ticket", b =>
+                {
+                    b.HasOne("SGTS.Data.Entities.Categoria", "Categoria")
+                        .WithMany("Tickets")
+                        .HasForeignKey("IdCategoria")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SGTS.Data.Entities.Estado", "Estado")
+                        .WithMany("Tickets")
+                        .HasForeignKey("IdEstado")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SGTS.Data.Entities.Prioridad", "Prioridad")
+                        .WithMany("Tickets")
+                        .HasForeignKey("IdPrioridad")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SGTS.Data.Entities.Usuario", "Usuario")
+                        .WithMany("TicketsCreados")
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SGTS.Data.Entities.Usuario", "TecnicoAsignado")
+                        .WithMany("TicketsAsignados")
+                        .HasForeignKey("TecnicoAsignadoId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Categoria");
+
+                    b.Navigation("Estado");
+
+                    b.Navigation("Prioridad");
+
+                    b.Navigation("TecnicoAsignado");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Usuario", b =>
+                {
+                    b.HasOne("SGTS.Data.Entities.Departamento", "Departamento")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("IdDepartamento")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Departamento");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.UsuarioRol", b =>
+                {
+                    b.HasOne("SGTS.Data.Entities.Rol", "Rol")
+                        .WithMany("UsuarioRoles")
+                        .HasForeignKey("IdRol")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SGTS.Data.Entities.Usuario", "Usuario")
+                        .WithMany("UsuarioRoles")
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Rol");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Categoria", b =>
+                {
+                    b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Departamento", b =>
+                {
+                    b.Navigation("Usuarios");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Estado", b =>
+                {
+                    b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Prioridad", b =>
+                {
+                    b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Rol", b =>
+                {
+                    b.Navigation("UsuarioRoles");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Ticket", b =>
+                {
+                    b.Navigation("Adjuntos");
+
+                    b.Navigation("Comentarios");
+
+                    b.Navigation("Historiales");
+                });
+
+            modelBuilder.Entity("SGTS.Data.Entities.Usuario", b =>
+                {
+                    b.Navigation("Comentarios");
+
+                    b.Navigation("Historiales");
+
+                    b.Navigation("TicketsAsignados");
+
+                    b.Navigation("TicketsCreados");
+
+                    b.Navigation("UsuarioRoles");
                 });
 #pragma warning restore 612, 618
         }

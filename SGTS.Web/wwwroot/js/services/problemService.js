@@ -1,14 +1,8 @@
-import { apiClient } from "../core/apiClient.js";
+import { apiClient } from "../infrastructure/apiClient.js";
 import { API_ROUTES } from "../constants/apiRoutes.js";
 
 const query = async (params) => {
-  const result = await apiClient.post(API_ROUTES.PROBLEMAS_QUERY, params);
-  if (!result) return result;
-  return {
-    success: true,
-    data: result.data,
-    pagination: result.pagination,
-  };
+  return await apiClient.post(API_ROUTES.PROBLEMAS_QUERY, params);
 };
 
 const create = async (problema) => {

@@ -1,62 +1,56 @@
 import formComponent from "../components/form/core/formComponent.js";
 import uiModal from "../components/ui/modal.js";
 
-const createUserFormHandler = ({
-  formConfig, // 👈 ahora viene desde afuera
-  onSubmit,
-  onSuccess,
-}) => {
-  const userForm = formComponent.createFormComponent(formConfig);
+const createUserFormHandler = ({ formConfig, onSubmit, onSuccess }) => {
+  const form = formComponent.createFormComponent(formConfig);
 
-  const openCreate = () => {
-    userForm.set(null);
-    uiModal.setTitle("userModal", "Crear Usuario");
-    uiModal.show("userModal");
+  const ui = {
+    btnCreate: document.getElementById("btnNew"),
+    btnSave: document.getElementById("btnSave"),
+    modalId: "userModal",
   };
 
-  const openEdit = (user) => {
-    userForm.set(user);
-    uiModal.setTitle("userModal", "Editar Usuario");
-    uiModal.show("userModal");
+  const closeAndReset = () => {
+    uiModal.hide(ui.modalId);
+    uiModal.clean();
+    form.set(null);
+    form.reset();
   };
 
-  const handleSubmit = async () => {
-    const data = await userForm.submit();
-    if (!data) return;
+  const openModal = (title, data = null) => {
+    form.set(data);
+    if (!data) form.reset(); 
+    uiModal.setTitle(ui.modalId, title);
+    uiModal.show(ui.modalId);
+  };
 
-    const isEdit = !!data.id;
+  const handleSave = async (e) => {
+    e.preventDefault();
 
+    const rawData = await form.submit();
+    if (!rawData) return;
+
+    const isEdit = !!rawData.id;
     const payload = {
-      nombre: data.nombre,
-      correo: data.correo,
-      telefono: data.telefono,
-      ...(isEdit && { id: Number(data.id) }),
+      nombre: rawData.nombre,
+      correo: rawData.correo,
+      telefono: rawData.telefono,
+      ...(isEdit && { id: Number(rawData.id) }),
     };
 
     const success = await onSubmit({ payload, isEdit });
-    if (!success) return;
 
-    uiModal.hide("userModal");
-    uiModal.clean();
-    userForm.reset();
-
-    onSuccess?.();
+    if (success) {
+      closeAndReset();
+      onSuccess?.();
+    }
   };
 
-  const bindEvents = () => {
-    document.getElementById("btnNew")?.addEventListener("click", openCreate);
-
-    document.getElementById("btnSave")?.addEventListener("click", async (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      await handleSubmit();
-    });
-  };
-
-  bindEvents();
+  ui.btnCreate?.addEventListener("click", () => openModal("Crear Usuario"));
+  ui.btnSave?.addEventListener("click", handleSave);
 
   return {
-    openEdit,
+    handleEditUser: (user) => openModal("Editar Usuario", user),
   };
 };
 

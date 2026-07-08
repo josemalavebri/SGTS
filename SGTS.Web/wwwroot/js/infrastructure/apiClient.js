@@ -6,6 +6,8 @@ function buildUrl(endpoint) {
   return `${API_BASE_URL}${endpoint}`;
 }
 
+// NO TENGO CONTROLADO AQUÍ EL CATCH SE ME OLVIDÓ QUE HACE
+// TENGO EL LOARDING DUPLICADO EN ESTE SITIO Y TAMBIEN EN EL INTERCEPTOR
 async function requestHandler(requestFn) {
   loadingStore.startLoading();
   try {

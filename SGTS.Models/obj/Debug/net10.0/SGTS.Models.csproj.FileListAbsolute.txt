@@ -9,3 +9,4 @@ C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\obj\Debug\net1
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\obj\Debug\net10.0\refint\SGTS.Models.dll
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\obj\Debug\net10.0\SGTS.Models.pdb
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\obj\Debug\net10.0\ref\SGTS.Models.dll
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Models\obj\Debug\net10.0\SGTS.Models.sourcelink.json

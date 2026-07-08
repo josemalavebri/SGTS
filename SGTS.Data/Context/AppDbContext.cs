@@ -5,31 +5,188 @@ namespace SGTS.Data.Context;
 
 public class AppDbContext : DbContext
 {
+    public AppDbContext(DbContextOptions<AppDbContext> options)
 
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+        : base(options)
     {
-        base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<EstadoTicket>().HasData(
-            new EstadoTicket { Id = 1, Nombre = "abierto" },
-            new EstadoTicket { Id = 2, Nombre = "en-progreso" },
-            new EstadoTicket { Id = 3, Nombre = "resuelto" },
-            new EstadoTicket { Id = 4, Nombre = "cerrado" }
-        );
-
-        modelBuilder.Entity<Prioridad>().HasData(
-            new Prioridad { Id = 1, Nombre = "baja" },
-            new Prioridad { Id = 2, Nombre = "media" },
-            new Prioridad { Id = 3, Nombre = "alta" }
-        );
 
     }
 
+    public DbSet<Departamento> Departamentos { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
-    public DbSet<Ticket> Problemas { get; set; }
-    public DbSet<Tecnico> Tecnicos { get; set; }
-    public DbSet<EstadoTicket> Estados { get; set; }
-    public DbSet<TicketHistorialEstado> ProblemasResoluciones { get; set; }
-    public DbSet<Imagen> Imagenes { get; set; }
+    public DbSet<Rol> Roles { get; set; }
+    public DbSet<UsuarioRol> UsuariosRoles { get; set; }
+    public DbSet<Categoria> Categorias { get; set; }
+    public DbSet<Prioridad> Prioridades { get; set; }
+    public DbSet<Estado> Estados { get; set; }
+    public DbSet<Ticket> Tickets { get; set; }
+    public DbSet<Comentario> Comentarios { get; set; }
+    public DbSet<Adjunto> Adjuntos { get; set; }
+    public DbSet<Historial> Historiales { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Departamento>()
+            .HasKey(d => d.IdDepartamento);
+
+        modelBuilder.Entity<Historial>()
+            .HasKey(d => d.IdHistorial);
+
+        modelBuilder.Entity<Ticket>()
+            .HasKey(d => d.IdTicket);
+
+        modelBuilder.Entity<Usuario>()
+            .HasKey(u => u.IdUsuario);
+
+        modelBuilder.Entity<Rol>()
+            .HasKey(r => r.IdRol);
+
+        modelBuilder.Entity<Prioridad>()
+            .HasKey(p => p.IdPrioridad);
+
+        modelBuilder.Entity<Estado>()
+            .HasKey(e => e.IdEstado);
+
+        modelBuilder.Entity<Categoria>()
+                    .HasKey(c => c.IdCategoria);
+
+        modelBuilder.Entity<Comentario>()
+                    .HasKey(c => c.IdComentario);
+
+        modelBuilder.Entity<Adjunto>()
+                    .HasKey(a => a.IdAdjunto);
+        modelBuilder.Entity<Ticket>()
+                    .HasOne(t => t.Usuario)
+                    .WithMany(u => u.TicketsCreados)
+                    .HasForeignKey(t => t.IdUsuario)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Ticket>()
+                    .HasOne(t => t.TecnicoAsignado)
+                    .WithMany(u => u.TicketsAsignados)
+                    .HasForeignKey(t => t.TecnicoAsignadoId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+        // Departamento 1:N Usuario
+        modelBuilder.Entity<Usuario>()
+                    .HasOne(u => u.Departamento)
+                    .WithMany(d => d.Usuarios)
+                    .HasForeignKey(u => u.IdDepartamento)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+        // Usuario 1:N Ticket creados
+        modelBuilder.Entity<Ticket>()
+                    .HasOne(t => t.Usuario)
+                    .WithMany(u => u.TicketsCreados)
+                    .HasForeignKey(t => t.IdUsuario)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+        // Usuario 1:N Ticket asignados como técnico
+        modelBuilder.Entity<Ticket>()
+                    .HasOne(t => t.TecnicoAsignado)
+                    .WithMany(u => u.TicketsAsignados)
+                    .HasForeignKey(t => t.TecnicoAsignadoId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+
+        // Categoria 1:N Ticket
+        modelBuilder.Entity<Ticket>()
+                    .HasOne(t => t.Categoria)
+                    .WithMany(c => c.Tickets)
+                    .HasForeignKey(t => t.IdCategoria)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+        // Prioridad 1:N Ticket
+        modelBuilder.Entity<Ticket>()
+                    .HasOne(t => t.Prioridad)
+                    .WithMany(p => p.Tickets)
+                    .HasForeignKey(t => t.IdPrioridad)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+        // Estado 1:N Ticket
+        modelBuilder.Entity<Ticket>()
+                    .HasOne(t => t.Estado)
+                    .WithMany(e => e.Tickets)
+                    .HasForeignKey(t => t.IdEstado)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+        // Ticket 1:N Comentario
+        modelBuilder.Entity<Comentario>()
+                    .HasOne(c => c.Ticket)
+                    .WithMany(t => t.Comentarios)
+                    .HasForeignKey(c => c.IdTicket)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+        // Usuario 1:N Comentario
+        modelBuilder.Entity<Comentario>()
+                    .HasOne(c => c.Usuario)
+                    .WithMany(u => u.Comentarios)
+                    .HasForeignKey(c => c.IdUsuario)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+        // Ticket 1:N Adjunto
+        modelBuilder.Entity<Adjunto>()
+                    .HasOne(a => a.Ticket)
+                    .WithMany(t => t.Adjuntos)
+                    .HasForeignKey(a => a.IdTicket)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+        // Ticket 1:N Historial
+        modelBuilder.Entity<Historial>()
+                    .HasOne(h => h.Ticket)
+                    .WithMany(t => t.Historiales)
+                    .HasForeignKey(h => h.IdTicket)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+        // Usuario 1:N Historial
+        modelBuilder.Entity<Historial>()
+                    .HasOne(h => h.Usuario)
+                    .WithMany(u => u.Historiales)
+                    .HasForeignKey(h => h.IdUsuario)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+
+        // UsuarioRol N:N Usuario-Rol
+        modelBuilder.Entity<UsuarioRol>()
+            .HasKey(ur => new { ur.IdUsuario, ur.IdRol });
+
+        modelBuilder.Entity<UsuarioRol>()
+                    .HasOne(ur => ur.Usuario)
+                    .WithMany(u => u.UsuarioRoles)
+                    .HasForeignKey(ur => ur.IdUsuario)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<UsuarioRol>()
+                    .HasOne(ur => ur.Rol)
+                    .WithMany(r => r.UsuarioRoles)
+                    .HasForeignKey(ur => ur.IdRol)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+
+        // Estados iniciales
+        modelBuilder.Entity<Estado>().HasData(
+            new Estado { IdEstado = 1, Nombre = "abierto" },
+            new Estado { IdEstado = 2, Nombre = "en-progreso" },
+            new Estado { IdEstado = 3, Nombre = "resuelto" },
+            new Estado { IdEstado = 4, Nombre = "cerrado" }
+        );
+
+        // Prioridades iniciales
+        modelBuilder.Entity<Prioridad>().HasData(
+            new Prioridad { IdPrioridad = 1, Nombre = "baja" },
+            new Prioridad { IdPrioridad = 2, Nombre = "media" },
+            new Prioridad { IdPrioridad = 3, Nombre = "alta" }
+        );
+
+        // Roles iniciales
+        modelBuilder.Entity<Rol>().HasData(
+            new Rol { IdRol = 1, Nombre = "administrador" },
+            new Rol { IdRol = 2, Nombre = "tecnico" },
+            new Rol { IdRol = 3, Nombre = "empleado" },
+            new Rol { IdRol = 4, Nombre = "supervisor" }
+        );
+    }
 }

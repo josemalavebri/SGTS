@@ -7,6 +7,35 @@ import problemFormHandler from "./problemaForm.js";
 
 // ======================================================
 // -------------------- MAIN ---------------------------
+
+const formConfig = {
+  formSelector: "#problemaForm",
+  fields: {
+    id: {
+      type: "text",
+    },
+    usuarioId: {
+      type: "text",
+      required: true,
+    },
+    descripcion: {
+      type: "text",
+      required: true,
+    },
+    estadoProblemaId: {
+      type: "text",
+      required: true,
+    },
+    prioridadId: {
+      type: "text",
+      required: true,
+    },
+    imagen: {
+      type: "file",
+    },
+  },
+};
+
 const init = () => {
   const table = tableFactory.createTable({
     tableId: "problemTable",
@@ -19,8 +48,6 @@ const init = () => {
     ],
     fetchData: fetchProblemas,
   });
-
-  table.init();
 
   const formHandler = problemFormHandler.createProblemFormHandler({
     fetchUsuarios: handleFetchUsuarios,
@@ -65,7 +92,7 @@ const handleSubmit = async ({ data, isEdit }) => {
 const fetchProblemas = async (params) => {
   try {
     const response = await problemService.query(params);
-    
+
     if (!response.success) {
       const errorMsg =
         MESSAGES.ERROR[response.errorCode] || MESSAGES.ERROR.GENERIC;

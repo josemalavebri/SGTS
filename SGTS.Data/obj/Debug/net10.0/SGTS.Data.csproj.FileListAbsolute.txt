@@ -17,3 +17,4 @@ C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Data\obj\Debug\net10.
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Data\obj\Debug\net10.0\SGTS.Data.pdb
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Data\obj\Debug\net10.0\SGTS.Data.genruntimeconfig.cache
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Data\obj\Debug\net10.0\ref\SGTS.Data.dll
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Data\obj\Debug\net10.0\SGTS.Data.sourcelink.json

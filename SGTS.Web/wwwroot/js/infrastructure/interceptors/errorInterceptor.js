@@ -1,26 +1,25 @@
 import { addErrorInterceptor } from "./interceptors.js";
 import alertUI from "../../components/ui/alert.js";
-
-// ===================== CLASIFICACIÓN =====================
+import { MESSAGES } from "../../constants/messages.js";
 
 addErrorInterceptor((error) => {
   let message;
 
   switch (error.code) {
     case "TIMEOUT":
-      message = "Tiempo de espera agotado";
+      message = MESSAGES.ERROR.TIMEOUT;
       break;
 
     case "NETWORK":
-      message = "Error de conexión";
+      message = MESSAGES.ERROR.NETWORK;
       break;
 
     case "HTTP_ERROR":
-      message = error.data?.message || "Error del servidor";
+      message = error.data?.message || MESSAGES.ERROR.SERVER;
       break;
 
     default:
-      message = "Error inesperado";
+      message = MESSAGES.ERROR.GENERIC;
   }
 
   alertUI.error(message);

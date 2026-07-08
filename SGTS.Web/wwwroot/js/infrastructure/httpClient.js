@@ -104,6 +104,8 @@ async function execute(method, url, body = null, config = {}) {
   } catch (err) {
     let finalError;
 
+    // tengo doble mapeo de errores en el interceptor de red y en el de errores, tengo que unificarlo en uno solo para no repetir tanto código, pero de momento lo dejo así para avanzar
+    
     if (err?.name === "AbortError") {
       finalError = createHttpError({
         status: null,

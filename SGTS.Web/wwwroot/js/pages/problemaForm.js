@@ -1,7 +1,7 @@
 import formComponent from "../components/form/core/formComponent.js";
 import uiModal from "../components/ui/modal.js";
 
-const createProblemFormHandler = ({ onSubmit, onSuccess, fetchUsuarios }) => {
+const createProblemFormHandler = ({formConfig, onSubmit, onSuccess}) => {
   const problemForm = formComponent.createFormComponent({
     formSelector: "#problemaForm",
     fields: {

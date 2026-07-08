@@ -1,6 +1,6 @@
 import loader from "../components/ui/loader.js";
-import "../core/interceptors/errorInterceptor.js";
-import "../core/interceptors/networkInterceptor.js";
+import "../infrastructure/interceptors/networkInterceptor.js";
+import "../infrastructure/interceptors/errorInterceptor.js";
 
 const pages = {
   usuarios: () => import("../pages/userPage.js"),

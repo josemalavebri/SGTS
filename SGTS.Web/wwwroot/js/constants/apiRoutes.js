@@ -1,7 +1,11 @@
 export const API_ROUTES = {
-  USUARIOS: "/usuarios",
-  USUARIOS_QUERY: "/usuarios/query",
-  PROBLEMAS: "/problemas",
-  PROBLEMAS_QUERY: "/problemas/query",
-  USUARIOS_BUSCAR: "/usuarios/buscar",
+  usuarios: {
+    base: "/usuarios",
+    query: "/usuarios/query",
+    buscar: "/usuarios/buscar",
+  },
+  problemas: {
+    base: "/problemas",
+    query: "/problemas/query",
+  },
 };

@@ -18,9 +18,4 @@ public abstract class BaseController : ControllerBase
     {
         return Ok(ApiRes<T>.Success(data, pagination));
     }
-
-    protected IActionResult Fail(string message, int statusCode = StatusCodes.Status400BadRequest)
-    {
-        return StatusCode(statusCode, ApiRes<object>.Fail(message));
-    }
 }

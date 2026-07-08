@@ -1,9 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using SGTS.Business.Interfaces;
-using SGTS.Business.Services;
 using SGTS.Data.Context;
 using SGTS.Data.Interfaces;
-using SGTS.Data.Repositories;
 using SGTS.Data.Services;
 using SGTS.Web.Filters;
 using SGTS.Web.Middleware;
@@ -28,11 +25,6 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-builder.Services.AddScoped<IProblemaRepository, ProblemaRepository>();
-builder.Services.AddScoped<IProblemaService, ProblemaService>();
-builder.Services.AddScoped<DataTableQueryService, DataTableQueryService>();
 
 var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
@@ -54,6 +46,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();
