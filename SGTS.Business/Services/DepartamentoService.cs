@@ -35,6 +35,18 @@ public class DepartamentoService : IDepartamentoService
         return result;
     }
 
+    public async Task<IEnumerable<DepartamentoDTO>> GetAllDepartamentos()
+    {
+        var departamentos = await _departamentosRepository.GetAll();
+        return departamentos.Select(d => new DepartamentoDTO
+        {
+            Id = d.IdDepartamento,
+            Nombre = d.Nombre,
+            Descripcion = d.Descripcion ?? string.Empty,
+            Activo = d.Activo
+        });
+    }
+
     public async Task<DepartamentoDTO> GetDepartamentoByIdAsync(int id)
     {
         var departamento = await _departamentosRepository.GetByIdAsync(id);

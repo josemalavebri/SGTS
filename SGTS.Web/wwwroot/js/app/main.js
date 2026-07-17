@@ -3,8 +3,8 @@ import "../infrastructure/interceptors/networkInterceptor.js";
 import "../infrastructure/interceptors/errorInterceptor.js";
 
 const pages = {
-  administracion: () => import("../pages/administracion/departamentoPage.js"),
-  problemas: () => import("../pages/problemPage.js"),
+  departamentos: () => import("../pages/departamento/departamentoPage.js"),
+  problemas: () => import("../pages/problemas/problemaPage.js"),
 };
 
 document.addEventListener("DOMContentLoaded", async () => {

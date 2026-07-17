@@ -1,5 +1,2 @@
-
-
-SELECT * FROM DEPARTAMENTOS
-
-INSERT INTO DEPARTAMENTOS (NOMBRE, DESCRIPCION, ACTIVO) VALUES ('Departamento 1', 'Descripción del Departamento 1',1);
+select * from roles
+select * from prioridades

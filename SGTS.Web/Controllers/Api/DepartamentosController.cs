@@ -18,7 +18,6 @@ public class DepartamentosController : BaseController
     [HttpPost("query")]
     public async Task<IActionResult> GetAllDepartamentos(DataTableRequestDTO request)
     {
-
         int pageNumber = (request.Start / request.Length) + 1;
         var departamentos = await _departamentoService.GetAllDepartamentosAsync(request);
         int pageSize = request.Length;
@@ -35,9 +34,12 @@ public class DepartamentosController : BaseController
         return Success(departamentos.Items, pagination);
     }
 
-    
-
-
+    [HttpGet("all")]
+    public async Task<IActionResult> GetAllDepartamentos()
+    {
+        var departamentos = await _departamentoService.GetAllDepartamentos();
+        return Success(departamentos);
+    }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDepartamentoById(int id)
@@ -61,7 +63,6 @@ public class DepartamentosController : BaseController
         return SuccessNoContent();
     }
 
-
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateDepartamento(int id, DepartamentoDTO departamento)
     {
@@ -73,5 +74,4 @@ public class DepartamentosController : BaseController
         await _departamentoService.UpdateDepartamentoAsync(departamento);
         return SuccessNoContent();
     }
-
 }

@@ -18,11 +18,20 @@ public class DepartamentosReposity : IDepartamentosRepository
         this.context = context;
         this.dataTQService = dataTableQueryService;
     }
-
     public async Task<(IEnumerable<Departamento>, int, int)> GetAllDepartamentosAsync(DataTableRequestDTO request)
     {
 
-        return await dataTQService.QueryAsync(context.Departamentos.AsNoTracking(), request);
+        return await dataTQService.QueryAsync(
+            context.Departamentos.AsNoTracking(),
+            request,
+            search => d =>
+                d.Nombre.Contains(search) ||
+                d.Descripcion.Contains(search)
+        );
+    }
+    public async Task<IEnumerable<Departamento>> GetAll()
+    {
+        return await context.Departamentos.AsNoTracking().ToListAsync();
     }
 
     public async Task<Departamento?> GetByIdAsync(int id)
@@ -48,4 +57,8 @@ public class DepartamentosReposity : IDepartamentosRepository
         context.Departamentos.Remove(entity);
         return await context.SaveChangesAsync() > 0;
     }
+
+
+
+
 }

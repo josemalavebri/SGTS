@@ -1,7 +1,4 @@
-// messages.js
-
 export const MESSAGES = {
-  // Éxito
   SUCCESS: {
     SAVE: "Registro guardado correctamente",
     UPDATE: "Registro actualizado correctamente",
@@ -9,7 +6,6 @@ export const MESSAGES = {
     FETCH: "Datos obtenidos correctamente",
   },
 
-  // Errores generales
   ERROR: {
     GENERIC: "Ha ocurrido un error inesperado",
     NETWORK: "Error de conexión con el servidor",
@@ -20,13 +16,11 @@ export const MESSAGES = {
     SERVER: "Error interno del servidor",
   },
 
-  // Confirmaciones
   CONFIRM: {
     DELETE: "¿Está seguro de eliminar este registro?",
     LOGOUT: "¿Desea cerrar sesión?",
   },
 
-  // Información
   INFO: {
     LOADING: "Cargando información...",
     EMPTY: "No existen datos para mostrar",

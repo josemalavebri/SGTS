@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SGTS.Web.Controllers.Web;
 
-public class AdministracionController : Controller
+public class DepartamentoController : Controller
 {
     public IActionResult Index()
     {

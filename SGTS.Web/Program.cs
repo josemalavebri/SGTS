@@ -10,6 +10,26 @@ using SGTS.Web.Middleware;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IDepartamentosRepository, DepartamentosReposity>();
 builder.Services.AddScoped<IDepartamentoService, DepartamentoService>();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 builder.Services.AddScoped<DataTableQueryService>();
 
 
