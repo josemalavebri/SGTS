@@ -5,7 +5,7 @@ namespace SGTS.Data.Interfaces;
 
 public interface IUsuarioRepository
 {
-    Task<PagedResult<Usuario>> GetPagedAsync(DataTableRequest request);
+    Task<PagedResult<Usuario>> GetPagedAsync(DataTableRequestDTO request);
 
     Task<Usuario?> GetByIdAsync(int id);
 

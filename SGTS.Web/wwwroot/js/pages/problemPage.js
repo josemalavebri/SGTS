@@ -37,6 +37,7 @@ const formConfig = {
 };
 
 const init = () => {
+  console.log("Initializing problem module...");
   const table = tableFactory.createTable({
     tableId: "problemTable",
     columns: [

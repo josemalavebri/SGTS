@@ -1,5 +1,5 @@
 import { apiClient } from "../infrastructure/apiClient.js";
-import { API_ROUTES } from "../constants/apiRoutes.js";
+import { API_ROUTES } from "../constants/config.js";
 
 const query = async (params) => {
   const data = await apiClient.post(API_ROUTES.usuarios.query, params);

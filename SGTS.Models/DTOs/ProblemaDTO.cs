@@ -10,7 +10,6 @@ public class ProblemaDTOResponse
     public int? ImagenId { get; set; }
 }
 
-
 public class ProblemaDtoRequest
 {
     public int UsuarioId { get; set; }

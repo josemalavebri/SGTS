@@ -32,3 +32,10 @@ export const MESSAGES = {
     EMPTY: "No existen datos para mostrar",
   },
 };
+
+export const ALERT_TYPES = {
+  SUCCESS: "success",
+  ERROR: "error",
+  INFO: "info",
+  WARNING: "warning",
+};

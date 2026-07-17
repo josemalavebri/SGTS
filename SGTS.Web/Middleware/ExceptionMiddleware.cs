@@ -1,7 +1,7 @@
 using SGTS.Business.Exceptions;
 using SGTS.Data.Exceptions;
 using SGTS.Shared.Const;
-using SGTS.Web.Models.Api;
+using SSS.Web.Models.Api;
 
 namespace SGTS.Web.Middleware;
 
@@ -34,16 +34,15 @@ public class ExceptionMiddleware
         var (statusCode, message) = exception switch
         {
             BusinessException ex => (MapStatusCode(ex.Code), ex.Message),
-
             PersistenceException => (StatusCodes.Status500InternalServerError, SystemMessages.Sistema.ERROR_INTERNO),
-
             _ => (StatusCodes.Status500InternalServerError, SystemMessages.Sistema.ERROR_GENERICO)
         };
 
         context.Response.StatusCode = statusCode;
         await context.Response.WriteAsJsonAsync(ApiRes<object>.Fail(message));
     }
-    private int MapStatusCode(string code) => code switch
+
+    private static int MapStatusCode(string code) => code switch
     {
         ErrorCodes.VALIDATION => StatusCodes.Status400BadRequest,
         ErrorCodes.BUSINESS_RULE => StatusCodes.Status400BadRequest,

@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using SGTS.Business.Interfaces;
+using SGTS.Business.Services;
 using SGTS.Data.Context;
 using SGTS.Data.Interfaces;
 using SGTS.Data.Services;
@@ -6,6 +8,11 @@ using SGTS.Web.Filters;
 using SGTS.Web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddScoped<IDepartamentosRepository, DepartamentosReposity>();
+builder.Services.AddScoped<IDepartamentoService, DepartamentoService>();
+builder.Services.AddScoped<DataTableQueryService>();
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews(options =>
@@ -34,6 +41,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
 
 app.UseHttpsRedirection();
 app.UseRouting();

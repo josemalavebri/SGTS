@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using SGMF_backend.Models;
 
-namespace SGTS.Web.Models.Api;
+namespace SSS.Web.Models.Api;
 
 public class ApiRes<T>
 {

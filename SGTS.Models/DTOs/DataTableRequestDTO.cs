@@ -1,6 +1,6 @@
 namespace SGTS.Models.DTOs;
 
-public class DataTableRequest
+public class DataTableRequestDTO
 {
     public int Draw { get; set; }
     public int Start { get; set; }

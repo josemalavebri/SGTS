@@ -1,4 +1,4 @@
-import { TIMEOUT } from "./config.js";
+import { TIMEOUT } from "../constants/config.js";
 import {
   runRequestInterceptors,
   runResponseInterceptors,
@@ -36,20 +36,20 @@ function createHttpError({ status, data, code, name, message }) {
 }
 
 // ===================== RESPONSE HANDLER =====================
-
 async function handleResponse(response) {
   if (response.status === 204) {
     return null;
   }
 
   const contentType = response.headers.get("content-type");
-
   let data = null;
 
   if (contentType?.includes("application/json")) {
     try {
       data = await response.json();
-    } catch {}
+    } catch {
+      // TAREAS: TERMINAR ESTO - If parsing fails, we can ignore the error and keep data as null
+    }
   }
 
   if (!response.ok) {
@@ -104,8 +104,6 @@ async function execute(method, url, body = null, config = {}) {
   } catch (err) {
     let finalError;
 
-    // tengo doble mapeo de errores en el interceptor de red y en el de errores, tengo que unificarlo en uno solo para no repetir tanto código, pero de momento lo dejo así para avanzar
-    
     if (err?.name === "AbortError") {
       finalError = createHttpError({
         status: null,
@@ -154,7 +152,7 @@ export function remove(url, config) {
   return execute("DELETE", url, null, config);
 }
 
-export const httpClient = {
+export default {
   get,
   post,
   put,
