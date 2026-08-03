@@ -6,16 +6,18 @@ using SGTS.Web.Controllers.Base;
 
 namespace SGTS.Web.Controllers.Api;
 
-public class DepartamentosController : BaseController
+public class AdministracionController : BaseController
 {
     private readonly IDepartamentoService _departamentoService;
+    private readonly IUsuarioAsignacionService _usuarioAsignacionService;
 
-    public DepartamentosController(IDepartamentoService departamentoService)
+    public AdministracionController(IDepartamentoService departamentoService, IUsuarioAsignacionService usuarioAsignacionService)
     {
         _departamentoService = departamentoService;
+        _usuarioAsignacionService = usuarioAsignacionService;
     }
 
-    [HttpPost("query")]
+    [HttpPost("departamentos/query")]
     public async Task<IActionResult> GetAllDepartamentos(DataTableRequestDTO request)
     {
         int pageNumber = (request.Start / request.Length) + 1;
@@ -34,21 +36,21 @@ public class DepartamentosController : BaseController
         return Success(departamentos.Items, pagination);
     }
 
-    [HttpGet("all")]
+    [HttpGet("departamentos/all")]
     public async Task<IActionResult> GetAllDepartamentos()
     {
         var departamentos = await _departamentoService.GetAllDepartamentos();
         return Success(departamentos);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("departamentos/{id}")]
     public async Task<IActionResult> GetDepartamentoById(int id)
     {
         var departamento = await _departamentoService.GetDepartamentoByIdAsync(id);
         return Success(departamento);
     }
 
-    [HttpPost]
+    [HttpPost("departamentos")]
     public async Task<IActionResult> CreateDepartamento(DepartamentoDTO departamento)
     {
         await _departamentoService.CreateDepartamentoAsync(departamento);
@@ -56,14 +58,14 @@ public class DepartamentosController : BaseController
         return SuccessCreate();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("departamentos/{id}")]
     public async Task<IActionResult> DeleteDepartamento(int id)
     {
         await _departamentoService.DeleteDepartamentoAsync(id);
         return SuccessNoContent();
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("departamentos/{id}")]
     public async Task<IActionResult> UpdateDepartamento(int id, DepartamentoDTO departamento)
     {
         if (id != departamento.Id)
@@ -74,4 +76,33 @@ public class DepartamentosController : BaseController
         await _departamentoService.UpdateDepartamentoAsync(departamento);
         return SuccessNoContent();
     }
+
+
+
+    [HttpPost("usuariosAsignaciones/query")]
+    public async Task<IActionResult> GetAllUsuarioAsignaciones(DataTableRequestDTO request)
+    {
+        int pageNumber = (request.Start / request.Length) + 1;
+        var usuarioAsignaciones = await _usuarioAsignacionService.GetAllAsync(request);
+        int pageSize = request.Length;
+
+        var pagination = new Pagination
+        {
+            Drawn = request.Draw,
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+            TotalRecords = usuarioAsignaciones.TotalRecords,
+            TotalRecordsFiltered = usuarioAsignaciones.TotalRecordsFiltered
+        };
+
+        return Success(usuarioAsignaciones.Items, pagination);
+    }
+
+    [HttpGet("usuariosAsignaciones/{id}")]
+    public async Task<IActionResult> GetUsuarioAsignacionById(int id)
+    {
+        var usuarioAsignacion = await _usuarioAsignacionService.GetByIdAsync(id);
+        return Success(usuarioAsignacion);
+    }
+
 }

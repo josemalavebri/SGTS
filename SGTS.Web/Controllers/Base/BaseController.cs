@@ -28,7 +28,7 @@ public abstract class BaseController : ControllerBase
     }
 
     // CUANDO FALLA ALGO, SE DEVUELVE UN 400 BAD REQUEST POR DEFECTO CON EL MENSAJE DE ERROR EN EL BODY
-    // EL EXCEPTION MIDDLEWARE CAPTURA LOS ERRORES Y DEVUELVE UN CODIGO DE ERROR CON EL MENSAJE DE ERROR EN EL BODY
+    // ESTO SE USA EN EL EXCEPTION MIDDLEWARE. ESTE CAPTURA LOS ERRORES Y DEVUELVE UN CODIGO DE ERROR CON EL MENSAJE DE ERROR EN EL BODY
     protected IActionResult Fail(string message, int statusCode = StatusCodes.Status400BadRequest)
     {
         return StatusCode(statusCode, ApiRes<object>.Fail(message));

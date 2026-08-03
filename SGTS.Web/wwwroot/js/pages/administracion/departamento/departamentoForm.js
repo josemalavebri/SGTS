@@ -1,5 +1,5 @@
-import formComponent from "../../components/form/core/formComponent.js";
-import uiModal from "../../components/ui/modal.js";
+import formComponent from "../../../components/form/core/formComponent.js";
+import uiModal from "../../../components/ui/modal.js";
 
 const formConfig = {
   formSelector: "#DepartamentoForm",
@@ -46,13 +46,13 @@ const buildPayload = (formData) => ({
 const saveChanges = async ({ event, form, save, onSaved }) => {
   event.preventDefault();
 
-  const formData = await form.submit();
+  const formData = await form.validateAndGetData();
 
   if (!formData) return;
 
   const payload = buildPayload(formData);
 
-  const saved = await save({
+  const saved = await  save({
     payload,
     isEdit: !!payload.id,
   });

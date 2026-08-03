@@ -6,3 +6,5 @@
   <Project Path="SGTS.Tests/SGTS.Tests.csproj" />
   <Project Path="SGTS.Web/SGTS.Web.csproj" />
 </Solution>
+
+

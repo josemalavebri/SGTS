@@ -1,0 +1,64 @@
+@{
+  ViewData["Title"] = "Usuario asignacion";
+}
+<h1>Usuario Asignación</h1>
+<div class="container">
+  <div id="app" data-page="usuarioAsignacion">
+    <table id="usuarioAsignacion"></table>
+  </div>
+</div>
+
+
+<div class="modal fade" id="UsuarioAsignacionModal" tabindex="-1" aria-labelledby="UsuarioAsignacionModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="UsuarioAsignacionModalLabel">
+          Asignar Rol y Departamento
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal">
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form id="UsuarioAsignacionForm">
+
+          <input type="hidden" name="idUsuario" />
+
+          <div class="mb-3">
+            <label class="form-label">Usuario</label>
+            <input type="text" name="nombreUsuario" class="form-control" readonly />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Rol</label>
+            <select name="idRol" class="form-select">
+              <option value="0">Seleccione algun rol</option>
+            </select>
+            <div class="text-danger small" data-error="idRol"></div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Departamento</label>
+            <select name="idDepartamento" class="form-select">
+              <option value="">Seleccione un departamento</option>
+            </select>
+            <div class="text-danger small" data-error="idDepartamento"></div>
+          </div>
+
+          <button type="button" id="btnSave" class="btn btn-primary">
+            Guardar
+          </button>
+
+          <button type="reset" id="btnReset" class="btn btn-secondary">
+            Reiniciar
+          </button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

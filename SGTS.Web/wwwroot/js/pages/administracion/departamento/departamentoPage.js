@@ -1,6 +1,6 @@
-import DepartamentoService from "../../services/departamentoService.js";
-import alertUI from "../../components/ui/alert.js";
-import { MESSAGES } from "../../constants/messages.js";
+import DepartamentoService from "../../../services/administracion/departamentoService.js";
+import alertUI from "../../../components/ui/alert.js";
+import { MESSAGES } from "../../../constants/messages.js";
 import DepartamentoForm from "./DepartamentoForm.js";
 import DepartamentoTable from "./DepartamentoTable.js";
 

@@ -361,9 +361,6 @@ namespace SGTS.Data.Migrations
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdDepartamento")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -377,24 +374,27 @@ namespace SGTS.Data.Migrations
 
                     b.HasKey("IdUsuario");
 
-                    b.HasIndex("IdDepartamento");
-
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("SGTS.Data.Entities.UsuarioRol", b =>
+            modelBuilder.Entity("SGTS.Data.Entities.UsuarioAsignacion", b =>
                 {
                     b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdRol")
+                    b.Property<int?>("IdDepartamento")
                         .HasColumnType("int");
 
-                    b.HasKey("IdUsuario", "IdRol");
+                    b.Property<int?>("IdRol")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdUsuario");
+
+                    b.HasIndex("IdDepartamento");
 
                     b.HasIndex("IdRol");
 
-                    b.ToTable("UsuariosRoles");
+                    b.ToTable("UsuariosAsignaciones");
                 });
 
             modelBuilder.Entity("SGTS.Data.Entities.Adjunto", b =>
@@ -488,30 +488,23 @@ namespace SGTS.Data.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("SGTS.Data.Entities.Usuario", b =>
+            modelBuilder.Entity("SGTS.Data.Entities.UsuarioAsignacion", b =>
                 {
                     b.HasOne("SGTS.Data.Entities.Departamento", "Departamento")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("IdDepartamento")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .WithMany("UsuarioAsignaciones")
+                        .HasForeignKey("IdDepartamento");
+
+                    b.HasOne("SGTS.Data.Entities.Rol", "Rol")
+                        .WithMany("UsuarioAsignaciones")
+                        .HasForeignKey("IdRol");
+
+                    b.HasOne("SGTS.Data.Entities.Usuario", "Usuario")
+                        .WithOne("UsuarioAsignacion")
+                        .HasForeignKey("SGTS.Data.Entities.UsuarioAsignacion", "IdUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Departamento");
-                });
-
-            modelBuilder.Entity("SGTS.Data.Entities.UsuarioRol", b =>
-                {
-                    b.HasOne("SGTS.Data.Entities.Rol", "Rol")
-                        .WithMany("UsuarioRoles")
-                        .HasForeignKey("IdRol")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SGTS.Data.Entities.Usuario", "Usuario")
-                        .WithMany("UsuarioRoles")
-                        .HasForeignKey("IdUsuario")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("Rol");
 
@@ -525,7 +518,7 @@ namespace SGTS.Data.Migrations
 
             modelBuilder.Entity("SGTS.Data.Entities.Departamento", b =>
                 {
-                    b.Navigation("Usuarios");
+                    b.Navigation("UsuarioAsignaciones");
                 });
 
             modelBuilder.Entity("SGTS.Data.Entities.Estado", b =>
@@ -540,7 +533,7 @@ namespace SGTS.Data.Migrations
 
             modelBuilder.Entity("SGTS.Data.Entities.Rol", b =>
                 {
-                    b.Navigation("UsuarioRoles");
+                    b.Navigation("UsuarioAsignaciones");
                 });
 
             modelBuilder.Entity("SGTS.Data.Entities.Ticket", b =>
@@ -562,7 +555,7 @@ namespace SGTS.Data.Migrations
 
                     b.Navigation("TicketsCreados");
 
-                    b.Navigation("UsuarioRoles");
+                    b.Navigation("UsuarioAsignacion");
                 });
 #pragma warning restore 612, 618
         }

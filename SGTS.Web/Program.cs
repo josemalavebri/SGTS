@@ -1,40 +1,26 @@
 using Microsoft.EntityFrameworkCore;
 using SGTS.Business.Interfaces;
+using SGTS.Business.Interfaces.Administracion;
 using SGTS.Business.Services;
+using SGTS.Business.Services.Administracion;
 using SGTS.Data.Context;
 using SGTS.Data.Interfaces;
+using SGTS.Data.Interfaces.Administracion;
+using SGTS.Data.Repositories;
 using SGTS.Data.Services;
 using SGTS.Web.Filters;
 using SGTS.Web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddScoped<IDepartamentosRepository, DepartamentosReposity>();
+builder.Services.AddScoped<IDepartamentosRepository, DepartamentosRepository>();
 builder.Services.AddScoped<IDepartamentoService, DepartamentoService>();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+builder.Services.AddScoped<IUsuarioAsignacionRepository, UsuarioAsignacionRepository>();
+builder.Services.AddScoped<IUsuarioAsignacionService, UsuarioAsignacionService>();
+builder.Services.AddScoped<IRolRepository, RolRepository>();
+builder.Services.AddScoped<IRolService, RolService>();
 
 builder.Services.AddScoped<DataTableQueryService>();
 
-
-
-// Add services to the container.
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add<ValidateModelFilter>();
@@ -61,7 +47,6 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
-
 
 app.UseHttpsRedirection();
 app.UseRouting();

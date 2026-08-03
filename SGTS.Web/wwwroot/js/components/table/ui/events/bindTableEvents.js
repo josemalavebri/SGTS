@@ -9,7 +9,7 @@ const bindTableEvents = ({ tableId, getRowData, actions }) => {
 
     const action = btn.dataset.action;
     const rowData = getRowData(btn.closest("tr"));
-
+    console.log("----- rowData", rowData);
     actions[action]?.(rowData);
   });
 };

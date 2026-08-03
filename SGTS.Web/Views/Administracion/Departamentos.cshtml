@@ -1,0 +1,57 @@
+@{
+  ViewData["Title"] = "Departamentos";
+}
+
+<div class="container">
+  <button class="btn btn-success mb-3" id="btnNew">
+    Nuevo Departamento
+  </button>
+  <div id="app" data-page="departamentos">
+    <table id="DepartamentoTable"></table>
+  </div>
+</div>
+
+<div class="modal fade" id="DepartamentoModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Departamento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <form id="DepartamentoForm">
+          <input type="hidden" name="id" />
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" name="nombre" class="form-control" required />
+            <div class="text-danger small" data-error="nombre"></div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <textarea name="descripcion" class="form-control" rows="3"></textarea>
+            <div class="text-danger small" data-error="descripcion"></div>
+          </div>
+
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="activo" name="activo" />
+            <label class="form-check-label" for="activo">
+              Activo
+            </label>
+            <div class="text-danger small" data-error="activo"></div>
+          </div>
+
+          <button type="button" id="btnSave" class="btn btn-primary">
+            Guardar
+          </button>
+
+          <button type="reset" id="btnReset" class="btn btn-secondary">
+            Reiniciar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

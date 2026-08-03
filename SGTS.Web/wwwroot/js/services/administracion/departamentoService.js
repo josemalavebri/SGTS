@@ -1,5 +1,5 @@
-import apiClient from "../infrastructure/apiClient.js";
-import { API_ROUTES } from "../constants/config.js";
+import apiClient from "../../infrastructure/apiClient.js";
+import { API_ROUTES } from "../../constants/apiRoutes.js";
 
 const query = async (params) => {
   const data = await apiClient.post(API_ROUTES.departamentos.query, params);
@@ -29,6 +29,6 @@ export default {
   query,
   getByNombre,
   create,
-  update, 
+  update,
   remove,
 };

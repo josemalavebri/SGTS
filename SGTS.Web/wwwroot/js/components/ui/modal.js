@@ -1,4 +1,3 @@
-
 const get = (id) => {
   const element = document.getElementById(id);
 

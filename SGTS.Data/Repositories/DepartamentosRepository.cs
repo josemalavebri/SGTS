@@ -6,14 +6,14 @@ using SGTS.Data.Interfaces;
 using SGTS.Data.Services;
 using SGTS.Models.DTOs;
 
-namespace SGTS.Business.Interfaces;
+namespace SGTS.Data.Repositories;
 
-public class DepartamentosReposity : IDepartamentosRepository
+public class DepartamentosRepository : IDepartamentosRepository
 {
     private readonly AppDbContext context;
     private readonly DataTableQueryService dataTQService;
 
-    public DepartamentosReposity(AppDbContext context, DataTableQueryService dataTableQueryService)
+    public DepartamentosRepository(AppDbContext context, DataTableQueryService dataTableQueryService)
     {
         this.context = context;
         this.dataTQService = dataTableQueryService;
@@ -29,6 +29,7 @@ public class DepartamentosReposity : IDepartamentosRepository
                 d.Descripcion.Contains(search)
         );
     }
+
     public async Task<IEnumerable<Departamento>> GetAll()
     {
         return await context.Departamentos.AsNoTracking().ToListAsync();
@@ -57,8 +58,4 @@ public class DepartamentosReposity : IDepartamentosRepository
         context.Departamentos.Remove(entity);
         return await context.SaveChangesAsync() > 0;
     }
-
-
-
-
 }

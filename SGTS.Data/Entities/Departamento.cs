@@ -7,5 +7,5 @@ public class Departamento
     public string? Descripcion { get; set; }
     public bool Activo { get; set; }
 
-    public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
+    public virtual ICollection<UsuarioAsignacion> UsuarioAsignaciones { get; set; } = new List<UsuarioAsignacion>();
 }

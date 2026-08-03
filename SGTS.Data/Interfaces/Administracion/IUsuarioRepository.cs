@@ -18,4 +18,5 @@ public interface IUsuarioRepository
     Task UpdateAsync(Usuario usuario);
 
     Task DeleteAsync(Usuario usuario);
+
 }

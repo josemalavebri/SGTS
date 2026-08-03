@@ -1,28 +1,28 @@
 @{
-  ViewData["Title"] = "Administración";
+  ViewData["Title"] = "Usuarios";
 }
 
 <div class="container">
   <button class="btn btn-success mb-3" id="btnNew">
-    Nuevo Departamento
+    Nuevo Usuario
   </button>
-  <div id="app" data-page="departamentos">
-    <table id="DepartamentoTable"></table>
+
+  <div id="app" data-page="usuarios">
+    <table id="UsuarioTable"></table>
   </div>
 </div>
 
-<div class="modal fade" id="DepartamentoModal" tabindex="-1">
+<div class="modal fade" id="UsuarioModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
 
       <div class="modal-header">
-        <h5 class="modal-title">Departamento</h5>
+        <h5 class="modal-title">Usuario</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <div class="modal-body">
-        <form id="DepartamentoForm">
-
+        <form id="UsuarioForm">
           <input type="hidden" name="id" />
 
           <div class="mb-3">
@@ -32,17 +32,21 @@
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Descripción</label>
-            <textarea name="descripcion" class="form-control" rows="3"></textarea>
-            <div class="text-danger small" data-error="descripcion"></div>
+            <label class="form-label">Apellido</label>
+            <input type="text" name="apellido" class="form-control" required />
+            <div class="text-danger small" data-error="apellido"></div>
           </div>
 
-          <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="activo" name="activo" />
-            <label class="form-check-label" for="activo">
-              Activo
-            </label>
-            <div class="text-danger small" data-error="activo"></div>
+          <div class="mb-3">
+            <label class="form-label">Correo</label>
+            <input type="email" name="correo" class="form-control" required />
+            <div class="text-danger small" data-error="correo"></div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Teléfono</label>
+            <input type="text" name="telefono" class="form-control" />
+            <div class="text-danger small" data-error="telefono"></div>
           </div>
 
           <button type="button" id="btnSave" class="btn btn-primary">

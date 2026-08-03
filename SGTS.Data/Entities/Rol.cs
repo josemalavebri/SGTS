@@ -6,5 +6,5 @@ public class Rol
     public string Nombre { get; set; } = null!;
     public string? Descripcion { get; set; }
 
-    public virtual ICollection<UsuarioRol> UsuarioRoles { get; set; } = new List<UsuarioRol>();
+    public virtual ICollection<UsuarioAsignacion> UsuarioAsignaciones { get; set; } = new List<UsuarioAsignacion>();
 }

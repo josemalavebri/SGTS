@@ -13,23 +13,6 @@ const CONFIG = {
   },
 };
 
-export const API_ROUTES = {
-  usuarios: {
-    base: "/usuarios",
-    query: "/usuarios/query",
-    buscar: "/usuarios/buscar",
-  },
-  problemas: {
-    base: "/problemas",
-    query: "/problemas/query",
-  },
-  departamentos: {
-    query: "/departamentos/query",
-    base: "/departamentos",
-    buscar: "/departamentos/buscar",
-  },
-};
-
 const currentConfig = CONFIG[ENV];
 
 export const API_BASE_URL = currentConfig.API_BASE_URL;

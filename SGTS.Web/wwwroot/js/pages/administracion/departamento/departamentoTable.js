@@ -1,4 +1,4 @@
-import tableFactory from "../../components/table/tableFactory.js";
+import tableFactory from "../../../components/table/tableFactory.js";
 
 const tableConfig = {
   tableId: "DepartamentoTable",

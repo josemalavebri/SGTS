@@ -16,6 +16,7 @@ const tableFactory = {
       fetchData,
     });
 
+    
     let initialized = false;
 
     const init = () => {

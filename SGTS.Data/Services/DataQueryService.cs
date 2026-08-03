@@ -37,10 +37,7 @@ public class DataTableQueryService
         return (items, totalRecords, totalRecordsFiltered);
     }
 
-    private IQueryable<T> ApplyOrdering<T>(
-        IQueryable<T> query,
-        string? column,
-        string direction)
+    private IQueryable<T> ApplyOrdering<T>(IQueryable<T> query, string? column, string direction)
     {
         var properties = typeof(T).GetProperties();
 

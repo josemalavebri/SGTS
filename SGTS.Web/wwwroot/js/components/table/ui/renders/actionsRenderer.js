@@ -25,7 +25,7 @@ const actionTemplates = {
   `,
 };
 
-// 🔹 Renderer
+
 const renderActions = (actions) => {
   return Object.keys(actions)
     .map((action) => {
