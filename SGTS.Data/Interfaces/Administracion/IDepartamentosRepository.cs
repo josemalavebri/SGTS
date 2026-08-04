@@ -7,7 +7,7 @@ public interface IDepartamentosRepository
 {
     Task<(IEnumerable<Departamento>, int, int)> GetAllDepartamentosAsync(DataTableRequestDTO request);
 
-    Task<IEnumerable<Departamento>> GetAll();
+    Task<IEnumerable<Departamento>> GetAllNames();
 
     Task<Departamento?> GetByIdAsync(int id);
 

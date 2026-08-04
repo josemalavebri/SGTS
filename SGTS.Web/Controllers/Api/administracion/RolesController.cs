@@ -4,11 +4,11 @@ using SGTS.Web.Controllers.Base;
 
 namespace SGTS.Web.Controllers.Api;
 
-public class RolesController : BaseController
+public class RolController : BaseController
 {
     private readonly IRolService _rolService;
 
-    public RolesController(IRolService rolService)
+    public RolController(IRolService rolService)
     {
         _rolService = rolService;
     }
@@ -19,6 +19,4 @@ public class RolesController : BaseController
         var roles = await _rolService.GetAllRolesAsync();
         return Success(roles);
     }
-
-
 }

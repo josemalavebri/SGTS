@@ -19,7 +19,7 @@ public class DepartamentoService : IDepartamentoService
         var (departamentos, totalRecords, filteredRecords) = await _departamentosRepository.GetAllDepartamentosAsync(request);
         var departamentoDTOs = departamentos.Select(d => new DepartamentoDTO
         {
-            Id = d.IdDepartamento,
+            IdDepartamento = d.IdDepartamento,
             Nombre = d.Nombre,
             Descripcion = d.Descripcion ?? string.Empty,
             Activo = d.Activo
@@ -35,15 +35,13 @@ public class DepartamentoService : IDepartamentoService
         return result;
     }
 
-    public async Task<IEnumerable<DepartamentoDTO>> GetAllDepartamentos()
+    public async Task<IEnumerable<DepartamentoDTO>> GetAllNames()
     {
-        var departamentos = await _departamentosRepository.GetAll();
+        var departamentos = await _departamentosRepository.GetAllNames();
         return departamentos.Select(d => new DepartamentoDTO
         {
-            Id = d.IdDepartamento,
+            IdDepartamento = d.IdDepartamento,
             Nombre = d.Nombre,
-            Descripcion = d.Descripcion ?? string.Empty,
-            Activo = d.Activo
         });
     }
 
@@ -57,7 +55,7 @@ public class DepartamentoService : IDepartamentoService
 
         return new DepartamentoDTO
         {
-            Id = departamento.IdDepartamento,
+            IdDepartamento = departamento.IdDepartamento,
             Nombre = departamento.Nombre,
             Descripcion = departamento.Descripcion ?? string.Empty,
             Activo = departamento.Activo
@@ -78,10 +76,10 @@ public class DepartamentoService : IDepartamentoService
 
     public async Task<bool> UpdateDepartamentoAsync(DepartamentoDTO departamento)
     {
-        var entity = await _departamentosRepository.GetByIdAsync(departamento.Id);
+        var entity = await _departamentosRepository.GetByIdAsync(departamento.IdDepartamento);
         if (entity == null)
         {
-            throw new KeyNotFoundException($"Departamento with ID {departamento.Id} not found.");
+            throw new KeyNotFoundException($"Departamento with ID {departamento.IdDepartamento} not found.");
         }
 
         entity.Nombre = departamento.Nombre;

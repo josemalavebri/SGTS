@@ -5,12 +5,14 @@ export const API_ROUTES = {
     buscar: "/administracion/usuarios/buscar",
   },
   departamentos: {
-    query: "/administracion/departamentos/query",
-    base: "/administracion/departamentos",
-    buscar: "/administracion/departamentos/buscar",
+    query: "/departamento/query",
+    base: "/departamento",
+    buscar: "/departamento/buscar",
+    names: "/departamento/names",
   },
   usuariosAsignaciones: {
-    query: "/administracion/usuariosAsignaciones/query",
-    base: "/administracion/usuariosAsignaciones",
+    query: "/usuarioAsignacion/query",
+    base: "/usuarioAsignacion",
   },
+  rol: "/rol",
 };

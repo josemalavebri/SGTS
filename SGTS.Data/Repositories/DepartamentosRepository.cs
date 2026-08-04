@@ -30,9 +30,13 @@ public class DepartamentosRepository : IDepartamentosRepository
         );
     }
 
-    public async Task<IEnumerable<Departamento>> GetAll()
+    public async Task<IEnumerable<Departamento>> GetAllNames()
     {
-        return await context.Departamentos.AsNoTracking().ToListAsync();
+        return await context.Departamentos.AsNoTracking().Select(d => new Departamento
+        {
+            IdDepartamento = d.IdDepartamento,
+            Nombre = d.Nombre
+        }).ToListAsync();
     }
 
     public async Task<Departamento?> GetByIdAsync(int id)

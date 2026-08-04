@@ -1,6 +1,10 @@
 import usuarioRolService from "../../../services/administracion/usuariosAsignacionesService.js";
+import rolService from "../../../services/administracion/rolService.js";
+import departamentoService from "../../../services/administracion/departamentoService.js";
+
 import usuarioAsignacionTable from "./usuarioAsignacionTable.js";
 import usuarioAsignacionForm from "./usuarioAsignacionForm.js";
+
 import alertUI from "../../../components/ui/alert.js";
 import { MESSAGES } from "../../../constants/messages.js";
 
@@ -35,21 +39,32 @@ const onUpdate = async ({ payload }) => {
     await usuarioRolService.update(payload);
     alertUI.success(MESSAGES.SUCCESS.UPDATE);
   } catch (error) {
-    return falase;
+    return false;
   }
 };
 
-const init = () => {
+const fetchRoles = async () => {
+  return await rolService.getAll();
+};
+
+const fetchNamesDepartamentos = async () => {
+  return await departamentoService.getAllNames();
+};
+
+const init = async () => {
   let table;
   let form;
+  0;
   table = usuarioAsignacionTable.init({
     loadUsuariosAsignados,
     asignar: (usuarioAsignacion) => form.openEdit(usuarioAsignacion),
   });
 
-  form = usuarioAsignacionForm.init({
+  form = await usuarioAsignacionForm.init({
     onUpdate: onUpdate,
     onUpdated: () => table.reload(),
+    fetchRoles,
+    fetchNamesDepartamentos,
   });
 };
 

@@ -18,7 +18,7 @@ public class RolService : IRolService
         var roles = await _repository.GetAllRolesAsync();
         return roles.Select(r => new RolDTO
         {
-            Id = r.IdRol,
+            IdRol = r.IdRol,
             Nombre = r.Nombre
         });
     }

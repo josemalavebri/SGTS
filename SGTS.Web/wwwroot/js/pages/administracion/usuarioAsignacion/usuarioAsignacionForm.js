@@ -2,25 +2,6 @@ import formComponent from "../../../components/form/core/formComponent.js";
 import formSelect from "../../../components/form/ui/selectForm.js";
 import uiModal from "../../../components/ui/modal.js";
 
-const roles = [
-  {
-    idRol: 1,
-    nombre: "Administrador",
-  },
-  {
-    idRol: 2,
-    nombre: "tecnico",
-  },
-  {
-    idRol: 3,
-    nombre: "empleado",
-  },
-  {
-    idRol: 4,
-    nombre: "Supervisor",
-  },
-];
-
 const departamentos = [
   {
     idDepartamento: 1,
@@ -93,7 +74,12 @@ const update = async ({ event, form, update, onSaved }) => {
   onSaved?.();
 };
 
-const init = ({ onUpdate, onUpdated }) => {
+const init = async ({
+  onUpdate,
+  onUpdated,
+  fetchRoles,
+  fetchNamesDepartamentos,
+}) => {
   const form = formComponent.createFormComponent(formConfig);
   document.getElementById("btnSave")?.addEventListener("click", (event) =>
     update({
@@ -104,19 +90,21 @@ const init = ({ onUpdate, onUpdated }) => {
     }),
   );
 
+  const fetch = await fetchRoles();
   formSelect.fill({
     form: form.getForm(),
     field: "idRol",
-    items: roles,
+    items: fetch.data,
     valueField: "idRol",
     textField: "nombre",
     placeholder: "Seleccione un rol",
   });
 
+  const fetchDepartamentos = await fetchNamesDepartamentos();
   formSelect.fill({
     form: form.getForm(),
     field: "idDepartamento",
-    items: departamentos,
+    items: fetchDepartamentos.data,
     valueField: "idDepartamento",
     textField: "nombre",
     placeholder: "Seleccione un departamento",

@@ -1,5 +1,6 @@
 import apiClient from "../../infrastructure/apiClient.js";
 import { API_ROUTES } from "../../constants/apiRoutes.js";
+import { get } from "../../infrastructure/httpClient.js";
 
 const query = async (params) => {
   const data = await apiClient.post(API_ROUTES.departamentos.query, params);
@@ -8,6 +9,10 @@ const query = async (params) => {
 
 const getByNombre = async (nombre) => {
   return await apiClient.getParams(API_ROUTES.departamentos.buscar, { nombre });
+};
+
+const getAllNames = async () => {
+  return await apiClient.get(API_ROUTES.departamentos.names);
 };
 
 const create = async (departamento) => {
@@ -27,6 +32,7 @@ const remove = async (id) => {
 
 export default {
   query,
+  getAllNames,
   getByNombre,
   create,
   update,
