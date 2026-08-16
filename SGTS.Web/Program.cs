@@ -18,6 +18,8 @@ builder.Services.AddScoped<IUsuarioAsignacionRepository, UsuarioAsignacionReposi
 builder.Services.AddScoped<IUsuarioAsignacionService, UsuarioAsignacionService>();
 builder.Services.AddScoped<IRolRepository, RolRepository>();
 builder.Services.AddScoped<IRolService, RolService>();
+builder.Services.AddScoped<IPrioridadRepository, PrioridadRepository>();
+builder.Services.AddScoped<IPrioridadService, PrioridadService>();
 
 builder.Services.AddScoped<DataTableQueryService>();
 

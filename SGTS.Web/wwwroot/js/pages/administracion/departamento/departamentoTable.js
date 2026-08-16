@@ -3,7 +3,7 @@ import tableFactory from "../../../components/table/tableFactory.js";
 const tableConfig = {
   tableId: "DepartamentoTable",
   columns: [
-    { field: "id", label: "ID" },
+    { field: "idDepartamento", label: "ID" },
     { field: "nombre", label: "Nombre" },
     { field: "descripcion", label: "Descripcion" },
     { field: "activo", label: "Activo" },

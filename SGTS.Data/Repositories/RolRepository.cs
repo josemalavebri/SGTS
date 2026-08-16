@@ -16,7 +16,6 @@ public class RolRepository : IRolRepository
         _appDbContext = appDbContext;
     }
 
-
     public async Task<IEnumerable<Rol>> GetAllRolesAsync()
     {
         return await _appDbContext.Roles.AsNoTracking().ToListAsync();

@@ -1,21 +1,6 @@
 import formComponent from "../../../components/form/core/formComponent.js";
-import formSelect from "../../../components/form/ui/selectForm.js";
+import formSelect from "../../../components/form/ui/formSelect.js";
 import uiModal from "../../../components/ui/modal.js";
-
-const departamentos = [
-  {
-    idDepartamento: 1,
-    nombre: "Sistemas",
-  },
-  {
-    idDepartamento: 2,
-    nombre: "Talento Humano",
-  },
-  {
-    idDepartamento: 3,
-    nombre: "Finanzas",
-  },
-];
 
 const titleModal = "Asignacion de Usuario";
 
@@ -74,13 +59,7 @@ const update = async ({ event, form, update, onSaved }) => {
   onSaved?.();
 };
 
-const init = async ({
-  onUpdate,
-  onUpdated,
-  fetchRoles,
-  fetchNamesDepartamentos,
-}) => {
-  const form = formComponent.createFormComponent(formConfig);
+const initEvents = ({ form, onUpdate, onUpdated }) => {
   document.getElementById("btnSave")?.addEventListener("click", (event) =>
     update({
       event,
@@ -89,35 +68,52 @@ const init = async ({
       onUpdated,
     }),
   );
+};
 
-  const fetch = await fetchRoles();
-  formSelect.fill({
-    form: form.getForm(),
+const loadSelects = async ({ form, fetchRoles, fetchNamesDepartamentos }) => {
+  const [rolesResponse, departamentosResponse] = await Promise.all([
+    fetchRoles(),
+    fetchNamesDepartamentos(),
+  ]);
+
+  form.fillSelect({
     field: "idRol",
-    items: fetch.data,
+    items: rolesResponse.data,
     valueField: "idRol",
     textField: "nombre",
     placeholder: "Seleccione un rol",
   });
 
-  const fetchDepartamentos = await fetchNamesDepartamentos();
-  formSelect.fill({
-    form: form.getForm(),
+  form.fillSelect({
     field: "idDepartamento",
-    items: fetchDepartamentos.data,
+    items: departamentosResponse.data,
     valueField: "idDepartamento",
     textField: "nombre",
     placeholder: "Seleccione un departamento",
   });
+};
 
-  return {
-    openEdit: (usuarioAsignado) =>
-      open({
-        form,
-        title: "Asignar Usuario",
-        data: usuarioAsignado,
-      }),
-  };
+const init = async ({
+  onUpdate,
+  onUpdated,
+  fetchRoles,
+  fetchNamesDepartamentos,
+}) => {
+  const form = formComponent.createFormComponent(formConfig);
+
+  initEvents({
+    form,
+    onUpdate,
+    onUpdated,
+  });
+
+  await loadSelects({
+    form,
+    fetchRoles,
+    fetchNamesDepartamentos,
+  });
+
+  return createActions(form);
 };
 
 export default {

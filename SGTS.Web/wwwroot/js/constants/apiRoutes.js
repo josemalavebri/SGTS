@@ -15,4 +15,5 @@ export const API_ROUTES = {
     base: "/usuarioAsignacion",
   },
   rol: "/rol",
+  prioridad: "/prioridad",
 };

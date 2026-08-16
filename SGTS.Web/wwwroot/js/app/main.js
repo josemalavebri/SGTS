@@ -8,6 +8,7 @@ const pages = {
   usuarios: () => import("../pages/administracion/usuarios/usuariosPage.js"),
   usuarioAsignacion: () =>
     import("../pages/administracion/usuarioAsignacion/usuarioAsignacionPage.js"),
+  tickets: () => import("../pages/tickets/ticketsPage.js"),
 };
 
 document.addEventListener("DOMContentLoaded", async () => {

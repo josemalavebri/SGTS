@@ -4,7 +4,7 @@ import uiModal from "../../../components/ui/modal.js";
 const formConfig = {
   formSelector: "#DepartamentoForm",
   fields: {
-    id: { type: "text" },
+    idDepartamento: { type: "text" },
     nombre: { type: "text", required: true, minLength: 3, maxLength: 50 },
     descripcion: {
       type: "text",
@@ -40,7 +40,9 @@ const buildPayload = (formData) => ({
   nombre: formData.nombre,
   descripcion: formData.descripcion,
   activo: formData.activo,
-  ...(formData.id && { id: Number(formData.id) }),
+  ...(formData.idDepartamento && {
+    idDepartamento: Number(formData.idDepartamento),
+  }),
 });
 
 const saveChanges = async ({ event, form, save, onSaved }) => {
@@ -52,7 +54,7 @@ const saveChanges = async ({ event, form, save, onSaved }) => {
 
   const payload = buildPayload(formData);
 
-  const saved = await  save({
+  const saved = await save({
     payload,
     isEdit: !!payload.id,
   });
