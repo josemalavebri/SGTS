@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (pageName && pages[pageName]) {
     const module = await pages[pageName]();
+    console.log("modulo", pageName);
     module.default.init();
   }
 });
+ 

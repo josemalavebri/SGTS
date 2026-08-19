@@ -37,6 +37,15 @@ const selectFills = async (form) => {
   );
 };
 
+import Modal from "../../components/ui/modal.js";
+
+const newTicketButton = document.getElementById("newTicketButton");
+
+newTicketButton.addEventListener("click", () => {
+  Modal.setTitle("newTicketModal", "Nuevo ticket");
+  Modal.show("newTicketModal");
+});
+
 const guardarDatos = async (form) => {
   const formData = await form.validateAndGetData();
   if (!formData) return;

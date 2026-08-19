@@ -1,315 +1,136 @@
 @{
   ViewData["Title"] = "Mis Tickets";
 }
+<div id="app" class="tickets-page" data-page="tickets">
 
-<div class="tickets-page">
-
-
+  <!-- ENCABEZADO Y ACCIONES -->
   <div class="d-flex justify-content-between align-items-center mb-4">
-
     <div>
-      <h5 class="mb-1">
-        Todas mis solicitudes
-      </h5>
-
-      <small class="text-muted">
-        12 tickets encontrados
-      </small>
+      <h5 class="mb-1">Todas mis solicitudes</h5>
+      <small class="text-muted">12 tickets encontrados</small>
     </div>
-
-    <a asp-controller="Tickets" asp-action="Index" class="btn btn-primary">
-
+    <button type="button" class="btn btn-primary" id="newTicketButton">
       <i class="bi bi-plus-lg me-1"></i>
-
       Nuevo ticket
-
-    </a>
-
+    </button>
   </div>
 
-
   <!-- FILTROS -->
-
   <div class="card filter-card shadow-sm mb-4">
-
     <div class="card-body">
-
       <div class="row g-3">
 
-        <!-- BUSCAR -->
-
+        <!-- Buscar -->
         <div class="col-lg-5">
-
-          <label for="searchInput" class="form-label small fw-semibold">
-
-            Buscar
-
-          </label>
-
+          <label for="searchInput" class="form-label small fw-semibold">Buscar</label>
           <div class="input-group">
-
             <span class="input-group-text bg-white">
               <i class="bi bi-search"></i>
             </span>
-
             <input type="text" id="searchInput" class="form-control" placeholder="Buscar por título o descripción..." />
-
           </div>
-
         </div>
 
-
-        <!-- ESTADO -->
-
+        <!-- Estado -->
         <div class="col-lg-2">
-
-          <label for="statusFilter" class="form-label small fw-semibold">
-
-            Estado
-
-          </label>
-
+          <label for="statusFilter" class="form-label small fw-semibold">Estado</label>
           <select id="statusFilter" class="form-select">
-
-            <option value="">
-              Todos
-            </option>
-
-            <option value="Abierto">
-              Abierto
-            </option>
-
-            <option value="En proceso">
-              En proceso
-            </option>
-
-            <option value="Cerrado">
-              Cerrado
-            </option>
-
+            <option value="">Todos</option>
+            <option value="Abierto">Abierto</option>
+            <option value="En proceso">En proceso</option>
+            <option value="Cerrado">Cerrado</option>
           </select>
-
         </div>
 
-
-        <!-- PRIORIDAD -->
-
+        <!-- Prioridad -->
         <div class="col-lg-2">
-
-          <label for="priorityFilter" class="form-label small fw-semibold">
-
-            Prioridad
-
-          </label>
-
+          <label for="priorityFilter" class="form-label small fw-semibold">Prioridad</label>
           <select id="priorityFilter" class="form-select">
-
-            <option value="">
-              Todas
-            </option>
-
-            <option value="Alta">
-              Alta
-            </option>
-
-            <option value="Media">
-              Media
-            </option>
-
-            <option value="Baja">
-              Baja
-            </option>
-
+            <option value="">Todas</option>
+            <option value="Alta">Alta</option>
+            <option value="Media">Media</option>
+            <option value="Baja">Baja</option>
           </select>
-
         </div>
 
-
-        <!-- CATEGORÍA -->
-
+        <!-- Categoría -->
         <div class="col-lg-3">
-
-          <label for="categoryFilter" class="form-label small fw-semibold">
-
-            Categoría
-
-          </label>
-
+          <label for="categoryFilter" class="form-label small fw-semibold">Categoría</label>
           <select id="categoryFilter" class="form-select">
-
-            <option value="">
-              Todas las categorías
-            </option>
-
-            <option value="Sistema">
-              Sistema
-            </option>
-
-            <option value="Hardware">
-              Hardware
-            </option>
-
-            <option value="Software">
-              Software
-            </option>
-
-            <option value="Permisos">
-              Permisos
-            </option>
-
+            <option value="">Todas las categorías</option>
+            <option value="Sistema">Sistema</option>
+            <option value="Hardware">Hardware</option>
+            <option value="Software">Software</option>
+            <option value="Permisos">Permisos</option>
           </select>
-
         </div>
 
       </div>
-
     </div>
-
   </div>
 
-
   <!-- LISTA DE TICKETS -->
-
   <div id="ticketContainer" class="ticket-list">
 
-
-    <!-- TICKET -->
-
+    <!-- Ticket #TCK-0012 -->
     <div class="card ticket-card shadow-sm mb-3 ticket-item" data-title="No puedo acceder al sistema"
          data-description="El sistema muestra un error al intentar iniciar sesión." data-status="Abierto"
          data-priority="Alta" data-category="Sistema">
-
       <div class="card-body p-4">
 
-        <!-- CABECERA -->
-
         <div class="d-flex justify-content-between align-items-start mb-3">
-
           <div>
-
             <div class="d-flex align-items-center gap-2 mb-2">
-
-              <span class="ticket-id">
-                #TCK-0012
-              </span>
-
-              <span class="status status-open">
-                Abierto
-              </span>
-
+              <span class="ticket-id">#TCK-0012</span>
+              <span class="status status-open">Abierto</span>
             </div>
-
-            <h6 class="ticket-title mb-1">
-              No puedo acceder al sistema
-            </h6>
-
+            <h6 class="ticket-title mb-1">No puedo acceder al sistema</h6>
           </div>
-
           <button type="button" class="btn btn-sm btn-light">
-
             <i class="bi bi-three-dots"></i>
-
           </button>
-
         </div>
-
-
-        <!-- DESCRIPCIÓN -->
 
         <p class="ticket-description mb-4">
           El sistema muestra un error al intentar iniciar sesión.
         </p>
 
-
-        <!-- INFORMACIÓN -->
-
         <div class="d-flex flex-wrap gap-4 small text-muted">
-
-          <span>
-            <i class="bi bi-folder me-1"></i>
-            Sistema
-          </span>
-
-          <span class="priority-high">
-            <i class="bi bi-flag-fill me-1"></i>
-            Alta
-          </span>
-
-          <span>
-            <i class="bi bi-calendar3 me-1"></i>
-            17 Ago 2026
-          </span>
-
-          <span>
-            <i class="bi bi-person me-1"></i>
-            Sin técnico asignado
-          </span>
-
+          <span><i class="bi bi-folder me-1"></i>Sistema</span>
+          <span class="priority-high"><i class="bi bi-flag-fill me-1"></i>Alta</span>
+          <span><i class="bi bi-calendar3 me-1"></i>17 Ago 2026</span>
+          <span><i class="bi bi-person me-1"></i>Sin técnico asignado</span>
         </div>
-
 
         <hr />
 
-
-        <!-- PIE -->
-
         <div class="d-flex justify-content-between align-items-center">
-
-          <small class="text-muted">
-            Última actualización: hace 20 minutos
-          </small>
-
+          <small class="text-muted">Última actualización: hace 20 minutos</small>
           <a href="#" class="btn btn-sm btn-outline-primary">
-
-            <i class="bi bi-eye me-1"></i>
-
-            Ver ticket
-
+            <i class="bi bi-eye me-1"></i>Ver ticket
           </a>
-
         </div>
 
       </div>
-
     </div>
 
-
-    <!-- TICKET -->
-
+    <!-- Ticket #TCK-0011 -->
     <div class="card ticket-card shadow-sm mb-3 ticket-item" data-title="Problema con impresora"
          data-description="La impresora no responde al enviar documentos." data-status="En proceso" data-priority="Media"
          data-category="Hardware">
-
       <div class="card-body p-4">
 
         <div class="d-flex justify-content-between align-items-start mb-3">
-
           <div>
-
             <div class="d-flex align-items-center gap-2 mb-2">
-
-              <span class="ticket-id">
-                #TCK-0011
-              </span>
-
-              <span class="status status-progress">
-                En proceso
-              </span>
-
+              <span class="ticket-id">#TCK-0011</span>
+              <span class="status status-progress">En proceso</span>
             </div>
-
-            <h6 class="ticket-title mb-1">
-              Problema con impresora
-            </h6>
-
+            <h6 class="ticket-title mb-1">Problema con impresora</h6>
           </div>
-
           <button type="button" class="btn btn-sm btn-light">
-
             <i class="bi bi-three-dots"></i>
-
           </button>
-
         </div>
 
         <p class="ticket-description mb-4">
@@ -317,88 +138,41 @@
         </p>
 
         <div class="d-flex flex-wrap gap-4 small text-muted">
-
-          <span>
-            <i class="bi bi-folder me-1"></i>
-            Hardware
-          </span>
-
-          <span class="priority-medium">
-            <i class="bi bi-flag-fill me-1"></i>
-            Media
-          </span>
-
-          <span>
-            <i class="bi bi-calendar3 me-1"></i>
-            16 Ago 2026
-          </span>
-
-          <span>
-            <i class="bi bi-person-check me-1"></i>
-            Carlos Andrade
-          </span>
-
+          <span><i class="bi bi-folder me-1"></i>Hardware</span>
+          <span class="priority-medium"><i class="bi bi-flag-fill me-1"></i>Media</span>
+          <span><i class="bi bi-calendar3 me-1"></i>16 Ago 2026</span>
+          <span><i class="bi bi-person-check me-1"></i>Carlos Andrade</span>
         </div>
 
         <hr />
 
         <div class="d-flex justify-content-between align-items-center">
-
-          <small class="text-muted">
-            Última actualización: hace 2 horas
-          </small>
-
+          <small class="text-muted">Última actualización: hace 2 horas</small>
           <a href="#" class="btn btn-sm btn-outline-primary">
-
-            <i class="bi bi-eye me-1"></i>
-
-            Ver ticket
-
+            <i class="bi bi-eye me-1"></i>Ver ticket
           </a>
-
         </div>
 
       </div>
-
     </div>
 
-
-    <!-- TICKET -->
-
+    <!-- Ticket #TCK-0010 -->
     <div class="card ticket-card shadow-sm mb-3 ticket-item" data-title="Solicitud de acceso al módulo administrativo"
          data-description="Necesito permisos para acceder al módulo administrativo." data-status="Cerrado"
          data-priority="Baja" data-category="Permisos">
-
       <div class="card-body p-4">
 
         <div class="d-flex justify-content-between align-items-start mb-3">
-
           <div>
-
             <div class="d-flex align-items-center gap-2 mb-2">
-
-              <span class="ticket-id">
-                #TCK-0010
-              </span>
-
-              <span class="status status-closed">
-                Cerrado
-              </span>
-
+              <span class="ticket-id">#TCK-0010</span>
+              <span class="status status-closed">Cerrado</span>
             </div>
-
-            <h6 class="ticket-title mb-1">
-              Solicitud de acceso al módulo administrativo
-            </h6>
-
+            <h6 class="ticket-title mb-1">Solicitud de acceso al módulo administrativo</h6>
           </div>
-
           <button type="button" class="btn btn-sm btn-light">
-
             <i class="bi bi-three-dots"></i>
-
           </button>
-
         </div>
 
         <p class="ticket-description mb-4">
@@ -406,88 +180,41 @@
         </p>
 
         <div class="d-flex flex-wrap gap-4 small text-muted">
-
-          <span>
-            <i class="bi bi-folder me-1"></i>
-            Permisos
-          </span>
-
-          <span class="priority-low">
-            <i class="bi bi-flag-fill me-1"></i>
-            Baja
-          </span>
-
-          <span>
-            <i class="bi bi-calendar3 me-1"></i>
-            14 Ago 2026
-          </span>
-
-          <span>
-            <i class="bi bi-person-check me-1"></i>
-            María López
-          </span>
-
+          <span><i class="bi bi-folder me-1"></i>Permisos</span>
+          <span class="priority-low"><i class="bi bi-flag-fill me-1"></i>Baja</span>
+          <span><i class="bi bi-calendar3 me-1"></i>14 Ago 2026</span>
+          <span><i class="bi bi-person-check me-1"></i>María López</span>
         </div>
 
         <hr />
 
         <div class="d-flex justify-content-between align-items-center">
-
-          <small class="text-muted">
-            Cerrado el 15 Ago 2026
-          </small>
-
+          <small class="text-muted">Cerrado el 15 Ago 2026</small>
           <a href="#" class="btn btn-sm btn-outline-primary">
-
-            <i class="bi bi-eye me-1"></i>
-
-            Ver ticket
-
+            <i class="bi bi-eye me-1"></i>Ver ticket
           </a>
-
         </div>
 
       </div>
-
     </div>
 
-
-    <!-- TICKET -->
-
+    <!-- Ticket #TCK-0009 -->
     <div class="card ticket-card shadow-sm mb-3 ticket-item" data-title="Error al cargar documentos"
          data-description="Los documentos no aparecen después de subirlos." data-status="En proceso" data-priority="Alta"
          data-category="Software">
-
       <div class="card-body p-4">
 
         <div class="d-flex justify-content-between align-items-start mb-3">
-
           <div>
-
             <div class="d-flex align-items-center gap-2 mb-2">
-
-              <span class="ticket-id">
-                #TCK-0009
-              </span>
-
-              <span class="status status-progress">
-                En proceso
-              </span>
-
+              <span class="ticket-id">#TCK-0009</span>
+              <span class="status status-progress">En proceso</span>
             </div>
-
-            <h6 class="ticket-title mb-1">
-              Error al cargar documentos
-            </h6>
-
+            <h6 class="ticket-title mb-1">Error al cargar documentos</h6>
           </div>
-
           <button type="button" class="btn btn-sm btn-light">
-
             <i class="bi bi-three-dots"></i>
-
           </button>
-
         </div>
 
         <p class="ticket-description mb-4">
@@ -495,104 +222,50 @@
         </p>
 
         <div class="d-flex flex-wrap gap-4 small text-muted">
-
-          <span>
-            <i class="bi bi-folder me-1"></i>
-            Software
-          </span>
-
-          <span class="priority-high">
-            <i class="bi bi-flag-fill me-1"></i>
-            Alta
-          </span>
-
-          <span>
-            <i class="bi bi-calendar3 me-1"></i>
-            12 Ago 2026
-          </span>
-
-          <span>
-            <i class="bi bi-person-check me-1"></i>
-            Carlos Andrade
-          </span>
-
+          <span><i class="bi bi-folder me-1"></i>Software</span>
+          <span class="priority-high"><i class="bi bi-flag-fill me-1"></i>Alta</span>
+          <span><i class="bi bi-calendar3 me-1"></i>12 Ago 2026</span>
+          <span><i class="bi bi-person-check me-1"></i>Carlos Andrade</span>
         </div>
 
         <hr />
 
         <div class="d-flex justify-content-between align-items-center">
-
-          <small class="text-muted">
-            Última actualización: hace 1 día
-          </small>
-
+          <small class="text-muted">Última actualización: hace 1 día</small>
           <a href="#" class="btn btn-sm btn-outline-primary">
-
-            <i class="bi bi-eye me-1"></i>
-
-            Ver ticket
-
+            <i class="bi bi-eye me-1"></i>Ver ticket
           </a>
-
         </div>
 
       </div>
-
     </div>
 
   </div>
 
-
   <!-- PAGINACIÓN -->
-
   <div class="d-flex justify-content-between align-items-center mt-4 ticket-pagination">
-
-    <small class="text-muted">
-      Mostrando 1–4 de 12 tickets
-    </small>
+    <small class="text-muted">Mostrando 1–4 de 12 tickets</small>
 
     <nav aria-label="Paginación de tickets">
-
       <ul class="pagination mb-0">
-
         <li class="page-item disabled">
-
           <a class="page-link" href="#" aria-label="Anterior">
             <i class="bi bi-chevron-left"></i>
           </a>
-
         </li>
-
-        <li class="page-item active">
-          <a class="page-link" href="#">
-            1
-          </a>
-        </li>
-
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
         <li class="page-item">
-          <a class="page-link" href="#">
-            2
-          </a>
-        </li>
-
-        <li class="page-item">
-          <a class="page-link" href="#">
-            3
-          </a>
-        </li>
-
-        <li class="page-item">
-
           <a class="page-link" href="#" aria-label="Siguiente">
             <i class="bi bi-chevron-right"></i>
           </a>
-
         </li>
-
       </ul>
-
     </nav>
-
   </div>
 
 </div>
+
+
+<partial name="ModalCrearTicket" />

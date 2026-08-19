@@ -1,0 +1,106 @@
+<!-- MODAL: NUEVO TICKET -->
+<div class="modal fade" id="newTicketModal" tabindex="-1" aria-labelledby="newTicketModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- ENCABEZADO -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="newTicketModalLabel">
+          Nuevo ticket
+        </h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar">
+        </button>
+      </div>
+
+      <!-- CUERPO -->
+      <div class="modal-body">
+
+        <div class="row g-3">
+
+          <!-- Título -->
+          <div class="col-12">
+            <label for="ticketTitle" class="form-label fw-semibold">
+              Título
+            </label>
+
+            <input type="text" id="ticketTitle" name="Title" class="form-control"
+                   placeholder="Describe brevemente tu problema o solicitud..." maxlength="150">
+          </div>
+
+          <!-- Categoría -->
+          <div class="col-md-6">
+            <label for="ticketCategory" class="form-label fw-semibold">
+              Categoría
+            </label>
+
+            <select id="ticketCategory" name="Category" class="form-select">
+              <option value="">Selecciona una categoría</option>
+              <option value="Sistema">Sistema</option>
+              <option value="Hardware">Hardware</option>
+              <option value="Software">Software</option>
+              <option value="Permisos">Permisos</option>
+            </select>
+          </div>
+
+          <!-- Prioridad -->
+          <div class="col-md-6">
+            <label for="ticketPriority" class="form-label fw-semibold">
+              Prioridad
+            </label>
+
+            <select id="ticketPriority" name="Priority" class="form-select">
+              <option value="">Selecciona una prioridad</option>
+              <option value="Baja">Baja</option>
+              <option value="Media">Media</option>
+              <option value="Alta">Alta</option>
+            </select>
+          </div>
+
+          <!-- Descripción -->
+          <div class="col-12">
+            <label for="ticketDescription" class="form-label fw-semibold">
+              Descripción
+            </label>
+
+            <textarea id="ticketDescription" name="Description" class="form-control" rows="6"
+                      placeholder="Describe detalladamente el problema o solicitud..." maxlength="2000"></textarea>
+
+            <div class="form-text">
+              Incluye toda la información que pueda ayudar al técnico a resolver tu solicitud.
+            </div>
+          </div>
+
+          <!-- Archivo adjunto -->
+          <div class="col-12">
+            <label for="ticketAttachment" class="form-label fw-semibold">
+              Archivo adjunto
+              <span class="text-muted fw-normal">(opcional)</span>
+            </label>
+
+            <input type="file" id="ticketAttachment" name="Attachment" class="form-control">
+
+            <div class="form-text">
+              Puedes adjuntar capturas de pantalla o archivos relacionados con el problema.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- PIE -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+
+        <button type="button" id="createTicketButton" class="btn btn-primary">
+          <i class="bi bi-send me-1"></i>
+          Crear ticket
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
