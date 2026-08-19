@@ -54,7 +54,6 @@ const fetchNamesDepartamentos = async () => {
 const init = async () => {
   let table;
   let form;
-  0;
   table = usuarioAsignacionTable.init({
     loadUsuariosAsignados,
     asignar: (usuarioAsignacion) => form.openEdit(usuarioAsignacion),

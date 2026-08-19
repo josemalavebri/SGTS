@@ -1,0 +1,18 @@
+/* components/forms.css */
+
+.form-control,
+.form-select {
+  border-color: var(--color-border);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.15);
+}
+
+.input-group-text {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}

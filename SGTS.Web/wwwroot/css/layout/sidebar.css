@@ -1,0 +1,16 @@
+/* layout/sidebar.css */
+
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background-color: var(--color-sidebar);
+}
+.sidebar .nav-link {
+  color: var(--color-text-secondary);
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: var(--color-sidebar-hover);
+  color: #ffffff;
+}

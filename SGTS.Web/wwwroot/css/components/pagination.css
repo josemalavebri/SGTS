@@ -1,0 +1,22 @@
+/* components/pagination.css */
+
+.pagination .page-link {
+  color: var(--color-primary);
+  border-color: var(--color-border);
+}
+
+.pagination .page-link:hover {
+  color: var(--color-primary-hover);
+  background-color: var(--color-primary-light);
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: var(--color-text-secondary);
+  background-color: var(--color-surface);
+}

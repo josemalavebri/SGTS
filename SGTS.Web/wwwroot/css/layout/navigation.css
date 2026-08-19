@@ -1,0 +1,16 @@
+/* layout/navigation.css */
+
+/* layout/navigation.css */
+
+.sidebar .nav-link {
+  color: var(--color-text-secondary);
+  padding: 12px 15px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 5px;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: var(--color-sidebar-hover);
+  color: #ffffff;
+}

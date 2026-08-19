@@ -20,6 +20,10 @@ builder.Services.AddScoped<IRolRepository, RolRepository>();
 builder.Services.AddScoped<IRolService, RolService>();
 builder.Services.AddScoped<IPrioridadRepository, PrioridadRepository>();
 builder.Services.AddScoped<IPrioridadService, PrioridadService>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddScoped<ITicketService, TicketService>();
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 
 builder.Services.AddScoped<DataTableQueryService>();
 

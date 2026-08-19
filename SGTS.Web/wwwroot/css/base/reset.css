@@ -1,0 +1,17 @@
+/* base/reset.css */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #f5f7fb;
+  color: #1f2937;
+}

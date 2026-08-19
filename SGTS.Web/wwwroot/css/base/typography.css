@@ -1,0 +1,36 @@
+/* base/typography.css */
+
+body {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #1f2937;
+}
+
+.ticket-id {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.ticket-title {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.ticket-description {
+  font-size: 0.9rem;
+  color: #6b7280;
+}

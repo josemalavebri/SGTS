@@ -1,0 +1,149 @@
+/* ============================================================
+   TICKETS
+   modules/tickets/index.css
+   ============================================================ */
+
+
+/* ============================================================
+   TICKET FILTERS
+   ============================================================ */
+
+.filter-card {
+  background-color: var(--color-surface);
+}
+
+.filter-card .form-label {
+  color: var(--color-text);
+}
+
+
+/* ============================================================
+   TICKET PAGINATION
+   ============================================================ */
+
+.ticket-pagination {
+  color: var(--color-text-muted);
+}
+
+
+/* ============================================================
+   TICKET STATUS
+   ============================================================ */
+
+.status {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: var(--radius-pill);
+
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.status-open {
+  background-color: var(--color-status-open-background);
+  color: var(--color-status-open-text);
+}
+
+.status-progress {
+  background-color: var(--color-status-progress-background);
+  color: var(--color-status-progress-text);
+}
+
+.status-closed {
+  background-color: var(--color-status-closed-background);
+  color: var(--color-status-closed-text);
+}
+
+.priority-high {
+  color: var(--color-danger);
+}
+
+.priority-medium {
+  color: var(--color-warning);
+}
+
+.priority-low {
+  color: var(--color-success);
+}
+
+
+/* ============================================================
+   TICKET CARD
+   ============================================================ */
+
+.ticket-card {
+  border: none;
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.ticket-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.ticket-card .ticket-id {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.ticket-card .ticket-title {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.ticket-card .ticket-description {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.ticket-card hr {
+  border-color: var(--color-border);
+  opacity: 1;
+}
+
+
+/* ============================================================
+   TICKET FORM
+   ============================================================ */
+
+
+/* ============================================================
+   TICKET LIST
+   ============================================================ */
+
+.ticket-list {
+  color: var(--color-text);
+}
+
+
+/* ============================================================
+   TICKETS
+   ============================================================ */
+
+.empty-state {
+  padding: 80px 20px;
+}
+
+.empty-state-icon {
+  width: 80px;
+  height: 80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: auto;
+
+  border-radius: 50%;
+
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+
+  font-size: 2rem;
+}

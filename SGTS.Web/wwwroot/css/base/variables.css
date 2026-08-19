@@ -1,0 +1,39 @@
+/* base/variables.css */
+
+:root {
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+
+  --color-page-background: #f5f7fb;
+  --color-surface: #ffffff;
+
+  --color-sidebar: #111827;
+  --color-sidebar-hover: #1f2937;
+
+  --color-text: #1f2937;
+  --color-text-muted: #6b7280;
+  --color-text-secondary: #9ca3af;
+
+  --color-border: #e5e7eb;
+
+  --color-danger: #dc2626;
+  --color-warning: #d97706;
+  --color-success: #16a34a;
+
+  --color-status-open-background: #fff7ed;
+  --color-status-open-text: #c2410c;
+
+  --color-status-progress-background: #eff6ff;
+  --color-status-progress-text: #2563eb;
+
+  --color-status-closed-background: #ecfdf5;
+  --color-status-closed-text: #059669;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-pill: 999px;
+
+  --shadow-card-hover: 0 8px 25px rgba(0, 0, 0, 0.07);
+
+  --transition-fast: 0.15s ease;
+}

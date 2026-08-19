@@ -1,32 +1,24 @@
 import prioridadService from "../../services/administracion/prioridadService.js";
+import categoriaService from "../../services/administracion/categoriaService.js";
+import ticketService from "../../services/ticketService.js";
+
+import { MESSAGES } from "../../constants/messages.js";
+import alertUI from "../../components/ui/alert.js";
+
 import formComponent from "../../components/form/core/formComponent.js";
 
 const formConfig = {
   formSelector: "#ticketForm",
   fields: {
-    prioridad: { type: "select-one", required: true },
+    titulo: { type: "text", required: true },
+    descripcion: { type: "text", required: true },
+    idPrioridad: { type: "select-one", required: true },
+    idCategoria: { type: "select-one", required: true },
   },
 };
-const selectFillPrioridades = (dataPrioridades, form) => {};
 
-const guardarDatos = async (form) => {
-  console.log("guardar datos");
-  const formData = await form.validateAndGetData();
-  if (!formData) return;
-
-  console.log("FORM DATA:", formData);
-};
-
-const initEvents = (form) => {
-  console.log("Iniciando init events");
-  document
-    .getElementById("btnCrear")
-    ?.addEventListener("click", () => guardarDatos(form));
-};
-
-const initModule = async () => {
+const selectFills = async (form) => {
   const dataPrioridades = await prioridadService.getAll();
-  const form = formComponent.createFormComponent(formConfig);
   form.fillSelect(
     "prioridad",
     dataPrioridades.data,
@@ -34,7 +26,36 @@ const initModule = async () => {
     "nombre",
     "Seleccione una prioridad",
   );
-  initEvents(form);
+
+  const dataCategorias = await categoriaService.getAll();
+  form.fillSelect(
+    "categoria",
+    dataCategorias.data,
+    "idCategoria",
+    "nombre",
+    "Seleccione una categoria",
+  );
+};
+
+const guardarDatos = async (form) => {
+  const formData = await form.validateAndGetData();
+  if (!formData) return;
+  console.log(formData);
+  const response = await ticketService.post(formData);
+  alertUI.success(MESSAGES.SUCCESS.UPDATE);
+};
+
+const initEventsForm = (form) => {
+  document
+    .getElementById("btnCrear")
+    ?.addEventListener("click", () => guardarDatos(form));
+};
+
+const initModule = async () => {
+  const form = formComponent.createFormComponent(formConfig);
+  selectFills(form);
+
+  initEventsForm(form);
 };
 
 export default {

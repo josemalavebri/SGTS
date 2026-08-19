@@ -16,4 +16,6 @@ export const API_ROUTES = {
   },
   rol: "/rol",
   prioridad: "/prioridad",
+  categoria: "/categoria",
+  ticket: "/ticket",
 };

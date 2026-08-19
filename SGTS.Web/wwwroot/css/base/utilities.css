@@ -1,0 +1,17 @@
+/* base/utilities.css */
+
+.text-muted-custom {
+  color: #6b7280;
+}
+
+.text-primary-custom {
+  color: #2563eb;
+}
+
+.bg-surface {
+  background-color: #ffffff;
+}
+
+.bg-page {
+  background-color: #f5f7fb;
+}

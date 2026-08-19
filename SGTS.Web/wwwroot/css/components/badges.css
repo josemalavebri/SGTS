@@ -1,0 +1,26 @@
+/* components/badges.css */
+
+.status {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.status-open {
+  background-color: var(--color-status-open-background);
+  color: var(--color-status-open-text);
+}
+
+.status-progress {
+  background-color: var(--color-status-progress-background);
+  color: var(--color-status-progress-text);
+}
+
+.status-closed {
+  background-color: var(--color-status-closed-background);
+  color: var(--color-status-closed-text);
+}
