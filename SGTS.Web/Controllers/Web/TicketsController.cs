@@ -9,4 +9,9 @@ public class TicketsController : Controller
     {
         return View();
     }
+
+    public IActionResult CrearTickets()
+    {
+        return View();
+    }
 }

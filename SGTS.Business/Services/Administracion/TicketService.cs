@@ -13,6 +13,26 @@ public class TicketService : ITicketService
         _ticketRepository = ticketRepository;
     }
 
+    public async Task<List<TicketDtoResponse>> GetAllTicketsAsync()
+    {
+        var tickets = await _ticketRepository.GetAllTicketsAsync();
+
+        return tickets.Select(ticket => new TicketDtoResponse
+        {
+            IdTicket = ticket.IdTicket,
+            Titulo = ticket.Titulo,
+            Descripcion = ticket.Descripcion,
+            Categoria = ticket.Categoria.Nombre,
+            Prioridad = ticket.Prioridad.Nombre,
+            Estado = ticket.Estado.Nombre,
+            TecnicoAsignado = ticket.TecnicoAsignado != null
+                ? ticket.TecnicoAsignado.Nombre
+                : null,
+            FechaCreacion = ticket.FechaCreacion,
+            FechaActualizacion = ticket.FechaActualizacion
+        }).ToList();
+    }
+
     public async Task<Ticket> CreateTicketAsync(TicketDto ticketDto)
     {
         var ticket = new Ticket

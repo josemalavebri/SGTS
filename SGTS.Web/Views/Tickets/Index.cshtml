@@ -1,6 +1,13 @@
 @{
   ViewData["Title"] = "Mis Tickets";
+
 }
+
+@section Styles {
+  <link rel="stylesheet" href="~/css/modules/tickets/tickets.css" />
+  <link rel="stylesheet" href="~/css/pages/my-tickets.css" />
+}
+
 <div id="app" class="tickets-page" data-page="tickets">
 
   <!-- ENCABEZADO Y ACCIONES -->
@@ -72,174 +79,7 @@
   <!-- LISTA DE TICKETS -->
   <div id="ticketContainer" class="ticket-list">
 
-    <!-- Ticket #TCK-0012 -->
-    <div class="card ticket-card shadow-sm mb-3 ticket-item" data-title="No puedo acceder al sistema"
-         data-description="El sistema muestra un error al intentar iniciar sesión." data-status="Abierto"
-         data-priority="Alta" data-category="Sistema">
-      <div class="card-body p-4">
-
-        <div class="d-flex justify-content-between align-items-start mb-3">
-          <div>
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <span class="ticket-id">#TCK-0012</span>
-              <span class="status status-open">Abierto</span>
-            </div>
-            <h6 class="ticket-title mb-1">No puedo acceder al sistema</h6>
-          </div>
-          <button type="button" class="btn btn-sm btn-light">
-            <i class="bi bi-three-dots"></i>
-          </button>
-        </div>
-
-        <p class="ticket-description mb-4">
-          El sistema muestra un error al intentar iniciar sesión.
-        </p>
-
-        <div class="d-flex flex-wrap gap-4 small text-muted">
-          <span><i class="bi bi-folder me-1"></i>Sistema</span>
-          <span class="priority-high"><i class="bi bi-flag-fill me-1"></i>Alta</span>
-          <span><i class="bi bi-calendar3 me-1"></i>17 Ago 2026</span>
-          <span><i class="bi bi-person me-1"></i>Sin técnico asignado</span>
-        </div>
-
-        <hr />
-
-        <div class="d-flex justify-content-between align-items-center">
-          <small class="text-muted">Última actualización: hace 20 minutos</small>
-          <a href="#" class="btn btn-sm btn-outline-primary">
-            <i class="bi bi-eye me-1"></i>Ver ticket
-          </a>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Ticket #TCK-0011 -->
-    <div class="card ticket-card shadow-sm mb-3 ticket-item" data-title="Problema con impresora"
-         data-description="La impresora no responde al enviar documentos." data-status="En proceso" data-priority="Media"
-         data-category="Hardware">
-      <div class="card-body p-4">
-
-        <div class="d-flex justify-content-between align-items-start mb-3">
-          <div>
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <span class="ticket-id">#TCK-0011</span>
-              <span class="status status-progress">En proceso</span>
-            </div>
-            <h6 class="ticket-title mb-1">Problema con impresora</h6>
-          </div>
-          <button type="button" class="btn btn-sm btn-light">
-            <i class="bi bi-three-dots"></i>
-          </button>
-        </div>
-
-        <p class="ticket-description mb-4">
-          La impresora no responde al enviar documentos.
-        </p>
-
-        <div class="d-flex flex-wrap gap-4 small text-muted">
-          <span><i class="bi bi-folder me-1"></i>Hardware</span>
-          <span class="priority-medium"><i class="bi bi-flag-fill me-1"></i>Media</span>
-          <span><i class="bi bi-calendar3 me-1"></i>16 Ago 2026</span>
-          <span><i class="bi bi-person-check me-1"></i>Carlos Andrade</span>
-        </div>
-
-        <hr />
-
-        <div class="d-flex justify-content-between align-items-center">
-          <small class="text-muted">Última actualización: hace 2 horas</small>
-          <a href="#" class="btn btn-sm btn-outline-primary">
-            <i class="bi bi-eye me-1"></i>Ver ticket
-          </a>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Ticket #TCK-0010 -->
-    <div class="card ticket-card shadow-sm mb-3 ticket-item" data-title="Solicitud de acceso al módulo administrativo"
-         data-description="Necesito permisos para acceder al módulo administrativo." data-status="Cerrado"
-         data-priority="Baja" data-category="Permisos">
-      <div class="card-body p-4">
-
-        <div class="d-flex justify-content-between align-items-start mb-3">
-          <div>
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <span class="ticket-id">#TCK-0010</span>
-              <span class="status status-closed">Cerrado</span>
-            </div>
-            <h6 class="ticket-title mb-1">Solicitud de acceso al módulo administrativo</h6>
-          </div>
-          <button type="button" class="btn btn-sm btn-light">
-            <i class="bi bi-three-dots"></i>
-          </button>
-        </div>
-
-        <p class="ticket-description mb-4">
-          Necesito permisos para acceder al módulo administrativo.
-        </p>
-
-        <div class="d-flex flex-wrap gap-4 small text-muted">
-          <span><i class="bi bi-folder me-1"></i>Permisos</span>
-          <span class="priority-low"><i class="bi bi-flag-fill me-1"></i>Baja</span>
-          <span><i class="bi bi-calendar3 me-1"></i>14 Ago 2026</span>
-          <span><i class="bi bi-person-check me-1"></i>María López</span>
-        </div>
-
-        <hr />
-
-        <div class="d-flex justify-content-between align-items-center">
-          <small class="text-muted">Cerrado el 15 Ago 2026</small>
-          <a href="#" class="btn btn-sm btn-outline-primary">
-            <i class="bi bi-eye me-1"></i>Ver ticket
-          </a>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Ticket #TCK-0009 -->
-    <div class="card ticket-card shadow-sm mb-3 ticket-item" data-title="Error al cargar documentos"
-         data-description="Los documentos no aparecen después de subirlos." data-status="En proceso" data-priority="Alta"
-         data-category="Software">
-      <div class="card-body p-4">
-
-        <div class="d-flex justify-content-between align-items-start mb-3">
-          <div>
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <span class="ticket-id">#TCK-0009</span>
-              <span class="status status-progress">En proceso</span>
-            </div>
-            <h6 class="ticket-title mb-1">Error al cargar documentos</h6>
-          </div>
-          <button type="button" class="btn btn-sm btn-light">
-            <i class="bi bi-three-dots"></i>
-          </button>
-        </div>
-
-        <p class="ticket-description mb-4">
-          Los documentos no aparecen después de subirlos.
-        </p>
-
-        <div class="d-flex flex-wrap gap-4 small text-muted">
-          <span><i class="bi bi-folder me-1"></i>Software</span>
-          <span class="priority-high"><i class="bi bi-flag-fill me-1"></i>Alta</span>
-          <span><i class="bi bi-calendar3 me-1"></i>12 Ago 2026</span>
-          <span><i class="bi bi-person-check me-1"></i>Carlos Andrade</span>
-        </div>
-
-        <hr />
-
-        <div class="d-flex justify-content-between align-items-center">
-          <small class="text-muted">Última actualización: hace 1 día</small>
-          <a href="#" class="btn btn-sm btn-outline-primary">
-            <i class="bi bi-eye me-1"></i>Ver ticket
-          </a>
-        </div>
-
-      </div>
-    </div>
-
+    
   </div>
 
   <!-- PAGINACIÓN -->
@@ -264,8 +104,6 @@
       </ul>
     </nav>
   </div>
-
 </div>
 
-
-<partial name="ModalCrearTicket" />
+<partial name="_TicketItem" />

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SGTS.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5ee2f829c0faac4927512ce91849b5d20bacd3f4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b2b89224d3088cb2873cf317ea9c012dd100459f")]
 [assembly: System.Reflection.AssemblyProductAttribute("SGTS.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SGTS.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

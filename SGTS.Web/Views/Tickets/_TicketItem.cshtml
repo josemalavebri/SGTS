@@ -1,0 +1,79 @@
+<template id="ticketTemplate">
+  <article class="card ticket-card shadow-sm mb-3 ticket-item border-0">
+    <div class="card-body p-4">
+
+      <!-- CABECERA DE LA TARJETA -->
+      <div class="d-flex justify-content-between align-items-start mb-3">
+        <div>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="badge bg-light text-dark border ticket-id"></span>
+            <span class="badge status"></span>
+          </div>
+          <h5 class="ticket-title fs-6 fw-bold mb-0 text-dark"></h5>
+        </div>
+
+        <!-- Opciones / Menú contextual -->
+        <div class="dropdown">
+          <button type="button" class="btn btn-sm btn-icon btn-ghost-secondary rounded-circle" data-bs-toggle="dropdown"
+                  aria-expanded="false" aria-label="Opciones del ticket">
+            <i class="bi bi-three-dots-vertical" aria-hidden="true"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+            <li>
+              <a class="dropdown-menu-item dropdown-item ticket-view-link" href="#">
+                <i class="bi bi-eye me-2"></i>Ver detalles
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-menu-item dropdown-item ticket-edit-link" href="#">
+                <i class="bi bi-pencil me-2"></i>Editar
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DESCRIPCIÓN -->
+      <p class="ticket-description text-secondary mb-3 small text-truncate-3"></p>
+
+      <!-- METADATOS -->
+      <div class="d-flex flex-wrap gap-3 small text-muted mb-3">
+        <span class="d-inline-flex align-items-center">
+          <i class="bi bi-folder me-1.5" aria-hidden="true"></i>
+          <span class="ticket-category"></span>
+        </span>
+
+        <span class="d-inline-flex align-items-center">
+          <i class="bi bi-flag-fill me-1.5" aria-hidden="true"></i>
+          <span class="ticket-priority"></span>
+        </span>
+
+        <span class="d-inline-flex align-items-center">
+          <i class="bi bi-calendar3 me-1.5" aria-hidden="true"></i>
+          <time class="ticket-date"></time>
+        </span>
+
+        <span class="d-inline-flex align-items-center">
+          <i class="bi bi-person-check me-1.5" aria-hidden="true"></i>
+          <span class="ticket-technician"></span>
+        </span>
+      </div>
+
+      <hr class="my-3 text-border-light" />
+
+      <!-- PIE DE TARJETA -->
+      <div class="d-flex justify-content-between align-items-center pt-1">
+        <small class="text-muted d-flex align-items-center gap-1">
+          <i class="bi bi-clock-history" aria-hidden="true"></i>
+          <span class="ticket-updated"></span>
+        </small>
+
+        <a href="#" class="btn btn-sm btn-outline-primary ticket-view-btn d-inline-flex align-items-center gap-1">
+          <i class="bi bi-eye" aria-hidden="true"></i>
+          <span>Ver ticket</span>
+        </a>
+      </div>
+
+    </div>
+  </article>
+</template>

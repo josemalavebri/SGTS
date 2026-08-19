@@ -58,12 +58,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/josem/Programacion/Proyectos Produccion/SGTS/SGTS.Web/Views/Tickets/CrearTickets.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xDcmVhclRpY2tldHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/josem/Programacion/Proyectos Produccion/SGTS/SGTS.Web/Views/Tickets/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/josem/Programacion/Proyectos Produccion/SGTS/SGTS.Web/Views/Tickets/ModalCrearTicket.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xNb2RhbENyZWFyVGlja2V0LmNzaHRtbA==
+[C:/Users/josem/Programacion/Proyectos Produccion/SGTS/SGTS.Web/Views/Tickets/_TicketItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xfVGlja2V0SXRlbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/josem/Programacion/Proyectos Produccion/SGTS/SGTS.Web/Views/_ViewImports.cshtml]

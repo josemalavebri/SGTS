@@ -8,7 +8,8 @@ const pages = {
   usuarios: () => import("../pages/administracion/usuarios/usuariosPage.js"),
   usuarioAsignacion: () =>
     import("../pages/administracion/usuarioAsignacion/usuarioAsignacionPage.js"),
-  tickets: () => import("../pages/tickets/ticketsPage.js"),
+  tickets: () => import("../pages/tickets/tickets.js"),
+  createTicketPage: () => import("../pages/tickets/crearTickets.js"),
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -22,4 +23,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     module.default.init();
   }
 });
- 
+
+console.log("CARGANDO MAIN");

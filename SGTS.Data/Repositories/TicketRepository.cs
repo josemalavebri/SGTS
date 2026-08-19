@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using SGTS.Data.Context;
 using SGTS.Data.Entities;
 using SGTS.Data.Interfaces;
@@ -11,6 +12,17 @@ public class TicketRepository : ITicketRepository
     public TicketRepository(AppDbContext context)
     {
         _context = context;
+    }
+
+    public async Task<List<Ticket>> GetAllTicketsAsync()
+    {
+        return await _context.Tickets
+            .AsNoTracking()
+            .Include(t => t.Categoria)
+            .Include(t => t.Prioridad)
+            .Include(t => t.Estado)
+            .Include(t => t.TecnicoAsignado)
+            .ToListAsync();
     }
 
     public async Task<Ticket> CreateTicketAsync(Ticket ticket)
