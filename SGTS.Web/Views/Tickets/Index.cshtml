@@ -16,10 +16,10 @@
       <h5 class="mb-1">Todas mis solicitudes</h5>
       <small class="text-muted">12 tickets encontrados</small>
     </div>
-    <button type="button" class="btn btn-primary" id="newTicketButton">
+    <a asp-controller="Tickets" asp-action="CrearTickets" class="btn btn-primary">
       <i class="bi bi-plus-lg me-1"></i>
       Nuevo ticket
-    </button>
+    </a>
   </div>
 
   <!-- FILTROS -->
@@ -29,47 +29,64 @@
 
         <!-- Buscar -->
         <div class="col-lg-5">
-          <label for="searchInput" class="form-label small fw-semibold">Buscar</label>
+          <label for="searchInput" class="form-label small fw-semibold">
+            Buscar
+          </label>
+
           <div class="input-group">
             <span class="input-group-text bg-white">
               <i class="bi bi-search"></i>
             </span>
+
             <input type="text" id="searchInput" class="form-control" placeholder="Buscar por título o descripción..." />
           </div>
         </div>
 
         <!-- Estado -->
         <div class="col-lg-2">
-          <label for="statusFilter" class="form-label small fw-semibold">Estado</label>
+          <label for="statusFilter" class="form-label small fw-semibold">
+            Estado
+          </label>
+
           <select id="statusFilter" class="form-select">
             <option value="">Todos</option>
-            <option value="Abierto">Abierto</option>
-            <option value="En proceso">En proceso</option>
-            <option value="Cerrado">Cerrado</option>
+            <option value="1">Abierto</option>
+            <option value="2">En proceso</option>
+            <option value="3">Cerrado</option>
           </select>
         </div>
 
         <!-- Prioridad -->
         <div class="col-lg-2">
-          <label for="priorityFilter" class="form-label small fw-semibold">Prioridad</label>
+          <label for="priorityFilter" class="form-label small fw-semibold">
+            Prioridad
+          </label>
+
           <select id="priorityFilter" class="form-select">
             <option value="">Todas</option>
-            <option value="Alta">Alta</option>
-            <option value="Media">Media</option>
-            <option value="Baja">Baja</option>
+            <option value="1">Alta</option>
+            <option value="2">Media</option>
+            <option value="3">Baja</option>
           </select>
         </div>
 
         <!-- Categoría -->
-        <div class="col-lg-3">
-          <label for="categoryFilter" class="form-label small fw-semibold">Categoría</label>
+        <div class="col-lg-2">
+          <label for="categoryFilter" class="form-label small fw-semibold">
+            Categoría
+          </label>
+
           <select id="categoryFilter" class="form-select">
             <option value="">Todas las categorías</option>
-            <option value="Sistema">Sistema</option>
-            <option value="Hardware">Hardware</option>
-            <option value="Software">Software</option>
-            <option value="Permisos">Permisos</option>
           </select>
+        </div>
+
+        <!-- Reiniciar -->
+        <div class="col-lg-1 d-flex align-items-end">
+          <button type="button" id="resetFiltersButton" class="btn btn-outline-secondary w-100"
+                  title="Reiniciar filtros">
+            <i class="bi bi-arrow-counterclockwise"></i>
+          </button>
         </div>
 
       </div>
@@ -77,9 +94,8 @@
   </div>
 
   <!-- LISTA DE TICKETS -->
-  <div id="ticketContainer" class="ticket-list">
+  <div id="ticketContainer" class="ticket-list row g-3">
 
-    
   </div>
 
   <!-- PAGINACIÓN -->

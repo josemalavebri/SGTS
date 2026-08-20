@@ -6,6 +6,7 @@
       string.Equals(currentController, ctrl, StringComparison.OrdinalIgnoreCase) &&
       string.Equals(currentAction, act, StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
 }
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -107,12 +108,12 @@
   </div>
 
   <!-- LOADER GLOBAL -->
-  <div id="globalLoader"
-       class="d-none position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 justify-content-center align-items-center"
-       style="z-index: 9999;" aria-hidden="true">
+  <div id="globalLoader" class="global-loader d-none" aria-hidden="true">
+
     <div class="spinner-border text-light" role="status">
       <span class="visually-hidden">Cargando...</span>
     </div>
+
   </div>
 
   <!-- SCRIPTS -->

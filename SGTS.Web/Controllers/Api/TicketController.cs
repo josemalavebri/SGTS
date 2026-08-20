@@ -21,6 +21,16 @@ public class TicketController : BaseController
         return Ok(tickets);
     }
 
+
+    [HttpGet("filtrar")]
+    public async Task<IActionResult> GetFilteredTickets(
+        [FromQuery] TicketFilterDto filter)
+    {
+        var tickets = await _ticketService
+            .GetFilteredTicketsAsync(filter);
+
+        return Ok(tickets);
+    }
     [HttpPost]
     public async Task<IActionResult> CreateTicket(TicketDto ticketDto)
     {

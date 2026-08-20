@@ -1,5 +1,6 @@
 /* layout/content.css */
 
 .content {
+  min-width: 0;
   background-color: var(--color-page-background);
 }

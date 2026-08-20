@@ -5,5 +5,7 @@ public interface ITicketService
 {
     Task<List<TicketDtoResponse>> GetAllTicketsAsync();
 
+    Task<List<TicketDtoResponse>> GetFilteredTicketsAsync(TicketFilterDto filter);
+
     Task<Ticket> CreateTicketAsync(TicketDto ticketDto);
 }

@@ -224,6 +224,7 @@ C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Web\obj\Debug\net10.0
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Web\obj\Debug\net10.0\compressed\ikvqe3tgjm-{0}-djnl4xy5wn-djnl4xy5wn.gz
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Web\obj\Debug\net10.0\compressed\q9ywcdhgno-{0}-dbi6j5zhr2-dbi6j5zhr2.gz
 C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Web\obj\Debug\net10.0\compressed\o3txw6osbs-{0}-dfemkh77x7-dfemkh77x7.gz
-C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Web\obj\Debug\net10.0\compressed\9b9g5l44bf-{0}-azs4b0s0w7-azs4b0s0w7.gz
-C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Web\obj\Debug\net10.0\compressed\jb3jfwzzmg-{0}-w55ax9rylf-w55ax9rylf.gz
-C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Web\obj\Debug\net10.0\compressed\4qs71azmfz-{0}-93v1mxgghf-93v1mxgghf.gz
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Web\obj\Debug\net10.0\compressed\374r0ndiye-{0}-nw4y7cw9g0-nw4y7cw9g0.gz
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Web\obj\Debug\net10.0\compressed\jb3jfwzzmg-{0}-8it04jje8j-8it04jje8j.gz
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Web\obj\Debug\net10.0\compressed\4qs71azmfz-{0}-gmhzknj14f-gmhzknj14f.gz
+C:\Users\josem\Programacion\Proyectos Produccion\SGTS\SGTS.Web\obj\Debug\net10.0\compressed\9b9g5l44bf-{0}-044peey7cz-044peey7cz.gz
