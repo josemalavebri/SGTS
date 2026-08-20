@@ -1,11 +1,10 @@
 using SGTS.Data.Entities;
-using SGTS.Models.DTOs;
+using SGTS.Models.Query.DTOs;
+using SGTS.Models.Ticket.Dtos;
 
 public interface ITicketService
 {
-    Task<List<TicketDtoResponse>> GetAllTicketsAsync();
-
-    Task<List<TicketDtoResponse>> GetFilteredTicketsAsync(TicketFilterDto filter);
+    Task<PagedResult<TicketDtoResponse>> GetAllTicketsAsync(TicketQueryRequestDTO request);
 
     Task<Ticket> CreateTicketAsync(TicketDto ticketDto);
 }

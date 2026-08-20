@@ -47,19 +47,19 @@ const getFilters = () => {
   const busqueda = searchInput?.value.trim();
 
   if (busqueda) {
-    filters.busqueda = busqueda;
+    filters.Busqueda = busqueda;
   }
 
   if (statusFilter?.value) {
-    filters.idEstado = Number(statusFilter.value);
+    filters.IdEstado = Number(statusFilter.value);
   }
 
   if (priorityFilter?.value) {
-    filters.idPrioridad = Number(priorityFilter.value);
+    filters.IdPrioridad = Number(priorityFilter.value);
   }
 
   if (categoryFilter?.value) {
-    filters.idCategoria = Number(categoryFilter.value);
+    filters.IdCategoria = Number(categoryFilter.value);
   }
 
   return filters;

@@ -1,7 +1,10 @@
 import ticketService from "../../services/ticketService.js";
 
 import ticketFilters from "./ticketFilters.js";
+import ticketSorting from "./ticketSorting.js";
 import ticketList from "./ticketList.js";
+import pagination from "./pagination.js";
+
 const getCategoriesMock = async () => {
   await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -39,25 +42,51 @@ const getCategoriesMock = async () => {
   ];
 };
 
+const buildRequest = () => {
+  return {
+    pagination: pagination.getParams(),
+    order: ticketSorting.getSort(),
+    filters: ticketFilters.getFilters(),
+  };
+};
+
+const loadTickets = async () => {
+  try {
+    const request = buildRequest();
+
+    console.log("--------- REQUEST", request);
+
+    const response = await ticketService.getAll(request);
+
+    ticketList.renderTickets(response.data);
+
+    pagination.setPagination(response.pagination);
+  } catch (error) {
+    console.error("Error obteniendo tickets:", error);
+  }
+};
+
+const reloadFromFirstPage = async () => {
+  pagination.reset();
+
+  await loadTickets();
+};
 
 const init = async () => {
   try {
-    const [tickets, categories] = await Promise.all([
-      ticketService.getAll(),
-      getCategoriesMock(),
-    ]);
-
-    ticketList.renderTickets(tickets);
+    const categories = await getCategoriesMock();
 
     ticketFilters.renderCategories(categories);
 
-    ticketFilters.initEvents(async () => {
-      const filters = ticketFilters.getFilters();
+    pagination.init();
 
-      const tickets = await ticketService.filter(filters);
+    pagination.onPageChange(loadTickets);
 
-      ticketList.renderTickets(tickets);
-    });
+    ticketFilters.initEvents(reloadFromFirstPage);
+
+    ticketSorting.initEvents(reloadFromFirstPage);
+
+    await loadTickets();
   } catch (error) {
     console.error("Error inicializando tickets:", error);
   }

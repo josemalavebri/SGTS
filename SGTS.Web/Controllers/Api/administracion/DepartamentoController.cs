@@ -15,22 +15,10 @@ public class DepartamentoController : BaseController
     }
 
     [HttpPost("query")]
-    public async Task<IActionResult> GetAllDepartamentos(DataTableRequestDTO request)
+    public async Task<IActionResult> GetAllDepartamentos()
     {
-        int pageNumber = (request.Start / request.Length) + 1;
-        var departamentos = await _departamentoService.GetAllDepartamentosAsync(request);
-        int pageSize = request.Length;
 
-        var pagination = new Pagination
-        {
-            Drawn = request.Draw,
-            PageNumber = pageNumber,
-            PageSize = pageSize,
-            TotalRecords = departamentos.TotalRecords,
-            TotalRecordsFiltered = departamentos.TotalRecordsFiltered
-        };
-
-        return Success(departamentos.Items, pagination);
+        return Ok();
     }
 
     [HttpGet("names")]

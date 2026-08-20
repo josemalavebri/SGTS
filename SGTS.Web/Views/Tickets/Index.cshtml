@@ -1,6 +1,5 @@
 @{
   ViewData["Title"] = "Mis Tickets";
-
 }
 
 @section Styles {
@@ -14,8 +13,9 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
       <h5 class="mb-1">Todas mis solicitudes</h5>
-      <small class="text-muted">12 tickets encontrados</small>
+      <small class="text-muted">Tickets encontrados</small>
     </div>
+
     <a asp-controller="Tickets" asp-action="CrearTickets" class="btn btn-primary">
       <i class="bi bi-plus-lg me-1"></i>
       Nuevo ticket
@@ -25,6 +25,7 @@
   <!-- FILTROS -->
   <div class="card filter-card shadow-sm mb-4">
     <div class="card-body">
+
       <div class="row g-3">
 
         <!-- Buscar -->
@@ -64,9 +65,9 @@
 
           <select id="priorityFilter" class="form-select">
             <option value="">Todas</option>
-            <option value="1">Alta</option>
+            <option value="1">Baja</option>
             <option value="2">Media</option>
-            <option value="3">Baja</option>
+            <option value="3">Alta</option>
           </select>
         </div>
 
@@ -90,36 +91,63 @@
         </div>
 
       </div>
+
     </div>
+  </div>
+
+  <!-- ORDENAMIENTO -->
+  <div class="col-lg-2 mb-4">
+    <label for="sortFilter" class="form-label small fw-semibold">
+      Ordenar por
+    </label>
+
+    <select id="sortFilter" class="form-select">
+      <option value="" selected>Ordenar por...</option>
+
+      <option value="FechaCreacion_desc">
+        Más recientes
+      </option>
+
+      <option value="FechaCreacion_asc">
+        Más antiguos
+      </option>
+
+      <option value="Prioridad_desc">
+        Mayor prioridad
+      </option>
+
+      <option value="Prioridad_asc">
+        Menor prioridad
+      </option>
+
+      <option value="Titulo_asc">
+        Título A-Z
+      </option>
+
+      <option value="Titulo_desc">
+        Título Z-A
+      </option>
+    </select>
   </div>
 
   <!-- LISTA DE TICKETS -->
   <div id="ticketContainer" class="ticket-list row g-3">
-
   </div>
 
   <!-- PAGINACIÓN -->
   <div class="d-flex justify-content-between align-items-center mt-4 ticket-pagination">
-    <small class="text-muted">Mostrando 1–4 de 12 tickets</small>
+
+    <small class="text-muted pagination-summary">
+      No se encontraron tickets
+    </small>
 
     <nav aria-label="Paginación de tickets">
       <ul class="pagination mb-0">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" aria-label="Anterior">
-            <i class="bi bi-chevron-left"></i>
-          </a>
-        </li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Siguiente">
-            <i class="bi bi-chevron-right"></i>
-          </a>
-        </li>
       </ul>
     </nav>
+
   </div>
+
 </div>
 
 <partial name="_TicketItem" />

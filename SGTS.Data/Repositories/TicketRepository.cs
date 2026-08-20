@@ -2,7 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using SGTS.Data.Context;
 using SGTS.Data.Entities;
 using SGTS.Data.Interfaces;
-using SGTS.Models.DTOs;
+using SGTS.Models.Query.DTOs;
+using SGTS.Models.Query.Enums;
+using SGTS.Models.Ticket.Dtos;
+using SGTS.Models.Ticket.Enums;
 
 namespace SGTS.Data.Repositories;
 
@@ -15,55 +18,132 @@ public class TicketRepository : ITicketRepository
         _context = context;
     }
 
-    public async Task<List<Ticket>> GetAllTicketsAsync()
+    public async Task<PagedResult<Ticket>> GetAllTicketsAsync(
+        TicketQueryRequestDTO request)
     {
-        return await _context.Tickets
+        var pagination = request.Pagination ?? new PaginationRequestDTO
+        {
+            Start = 0,
+            Length = 5
+        };
+
+        IQueryable<Ticket> query = _context.Tickets
             .AsNoTracking()
             .Include(t => t.Categoria)
             .Include(t => t.Prioridad)
             .Include(t => t.Estado)
-            .Include(t => t.TecnicoAsignado)
+            .Include(t => t.TecnicoAsignado);
+
+        var totalRecords = await query.CountAsync();
+
+        query = ApplySearch(
+            query,
+            request.Filters?.Busqueda);
+
+        query = ApplyFilters(
+            query,
+            request.Filters);
+
+        var totalRecordsFiltered = await query.CountAsync();
+
+        query = ApplyOrdering(
+            query,
+            request.Order);
+
+        var items = await query
+            .Skip(pagination.Start)
+            .Take(pagination.Length)
             .ToListAsync();
+
+        var pageNumber =
+            (pagination.Start / pagination.Length) + 1;
+
+        return new PagedResult<Ticket>
+        {
+            Items = items,
+            PageNumber = pageNumber,
+            PageSize = pagination.Length,
+            TotalRecords = totalRecords,
+            TotalRecordsFiltered = totalRecordsFiltered
+        };
     }
 
-    public async Task<List<Ticket>> GetFilteredTicketsAsync(TicketFilterDto filter)
+    private IQueryable<Ticket> ApplySearch(
+        IQueryable<Ticket> query,
+        string? busqueda)
     {
-        var query = _context.Tickets
-            .AsNoTracking()
-            .Include(t => t.Categoria)
-            .Include(t => t.Prioridad)
-            .Include(t => t.Estado)
-            .Include(t => t.TecnicoAsignado)
-            .AsQueryable();
+        if (string.IsNullOrWhiteSpace(busqueda))
+            return query;
 
-        if (!string.IsNullOrWhiteSpace(filter.Busqueda))
-        {   
-            var busqueda = filter.Busqueda.Trim();
+        busqueda = busqueda.Trim();
 
-            query = query.Where(t =>
-                t.Titulo.Contains(busqueda) ||
-                t.Descripcion.Contains(busqueda));
-        }
+        return query.Where(t =>
+            t.Titulo.Contains(busqueda) ||
+            t.Descripcion.Contains(busqueda));
+    }
 
-        if (filter.IdEstado.HasValue)
+    private IQueryable<Ticket> ApplyFilters(
+        IQueryable<Ticket> query,
+        TicketFilterDto? filters)
+    {
+        if (filters == null)
+            return query;
+
+        if (filters.IdEstado.HasValue)
         {
             query = query.Where(t =>
-                t.IdEstado == filter.IdEstado.Value);
+                t.IdEstado == filters.IdEstado.Value);
         }
 
-        if (filter.IdPrioridad.HasValue)
+        if (filters.IdPrioridad.HasValue)
         {
             query = query.Where(t =>
-                t.IdPrioridad == filter.IdPrioridad.Value);
+                t.IdPrioridad == filters.IdPrioridad.Value);
         }
 
-        if (filter.IdCategoria.HasValue)
+        if (filters.IdCategoria.HasValue)
         {
             query = query.Where(t =>
-                t.IdCategoria == filter.IdCategoria.Value);
+                t.IdCategoria == filters.IdCategoria.Value);
         }
 
-        return await query.ToListAsync();
+        return query;
+    }
+
+    private IQueryable<Ticket> ApplyOrdering(
+        IQueryable<Ticket> query,
+        OrderRequestDTO<TicketOrderColumn>? order)
+    {
+        if (order?.Column == null)
+        {
+            return query.OrderByDescending(
+                t => t.FechaCreacion);
+        }
+
+        var ascending =
+            order.Direction == OrderDirection.Asc;
+
+        return order.Column switch
+        {
+            TicketOrderColumn.Titulo =>
+                ascending
+                    ? query.OrderBy(t => t.Titulo)
+                    : query.OrderByDescending(t => t.Titulo),
+
+            TicketOrderColumn.FechaCreacion =>
+                ascending
+                    ? query.OrderBy(t => t.FechaCreacion)
+                    : query.OrderByDescending(t => t.FechaCreacion),
+
+            TicketOrderColumn.Prioridad =>
+                ascending
+                    ? query.OrderBy(t => t.IdPrioridad)
+                    : query.OrderByDescending(t => t.IdPrioridad),
+
+            _ =>
+                query.OrderByDescending(
+                    t => t.FechaCreacion)
+        };
     }
 
     public async Task<Ticket> CreateTicketAsync(Ticket ticket)

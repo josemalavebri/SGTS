@@ -2,31 +2,22 @@ using Microsoft.EntityFrameworkCore;
 using SGTS.Data.Context;
 using SGTS.Data.Entities;
 using SGTS.Data.Interfaces;
-using SGTS.Data.Services;
-using SGTS.Models.DTOs;
 
 namespace SGTS.Data.Repositories;
 
 public class UsuarioAsignacionRepository : IUsuarioAsignacionRepository
 {
     private readonly AppDbContext _context;
-    private readonly DataTableQueryService _dataTQueryService;
 
-    public UsuarioAsignacionRepository(AppDbContext context, DataTableQueryService dataTableQueryService)
+    public UsuarioAsignacionRepository(AppDbContext context)
     {
         this._context = context;
-        this._dataTQueryService = dataTableQueryService;
     }
 
-    public async Task<(IEnumerable<UsuarioAsignacion>, int, int)> GetAllAsync(DataTableRequestDTO request)
+    public async Task<(IEnumerable<UsuarioAsignacion>, int, int)> GetAllAsync()
     {
-        return await _dataTQueryService.QueryAsync(
-            _context.UsuariosAsignaciones.AsNoTracking()
-                .Include(r => r.Departamento)
-                .Include(r => r.Rol)
-                .Include(r => r.Usuario),
-            request
-        );
+        //Todo el sistema de query service cambio
+        return (null, 0, 0);
     }
 
     public async Task<UsuarioAsignacion?> GetByIdAsync(int idUsuario)

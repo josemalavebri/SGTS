@@ -3,31 +3,21 @@ using Microsoft.EntityFrameworkCore;
 using SGTS.Data.Context;
 using SGTS.Data.Entities;
 using SGTS.Data.Interfaces;
-using SGTS.Data.Services;
-using SGTS.Models.DTOs;
 
 namespace SGTS.Data.Repositories;
 
 public class DepartamentosRepository : IDepartamentosRepository
 {
     private readonly AppDbContext context;
-    private readonly DataTableQueryService dataTQService;
 
-    public DepartamentosRepository(AppDbContext context, DataTableQueryService dataTableQueryService)
+    public DepartamentosRepository(AppDbContext context)
     {
         this.context = context;
-        this.dataTQService = dataTableQueryService;
     }
-    public async Task<(IEnumerable<Departamento>, int, int)> GetAllDepartamentosAsync(DataTableRequestDTO request)
+    public async Task<(IEnumerable<Departamento>, int, int)> GetAllDepartamentosAsync()
     {
 
-        return await dataTQService.QueryAsync(
-            context.Departamentos.AsNoTracking(),
-            request,
-            search => d =>
-                d.Nombre.Contains(search) ||
-                d.Descripcion.Contains(search)
-        );
+        return (null, 0, 0);
     }
 
     public async Task<IEnumerable<Departamento>> GetAllNames()

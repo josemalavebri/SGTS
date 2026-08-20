@@ -1,8 +1,8 @@
 using SGTS.Business.Interfaces;
 using SGTS.Data.Entities;
 using SGTS.Data.Interfaces;
-using SGTS.Models.DTOs;
 using SGTS.Models.DTOs.Administracion;
+using SGTS.Models.Query.DTOs;
 
 namespace SGTS.Business.Services.Administracion;
 
@@ -15,19 +15,9 @@ public class UsuarioAsignacionService : IUsuarioAsignacionService
         _repository = repository;
     }
 
-    public async Task<PagedResult<UsuarioAsignacionDTO>> GetAllAsync(DataTableRequestDTO dto)
+    public async Task<PagedResult<UsuarioAsignacionDTO>> GetAllAsync()
     {
-        var (usuariosRoles, totalRecords, filteredRecords) =
-            await _repository.GetAllAsync(dto);
-
-        var items = usuariosRoles.Select(ur => MapToDTO(ur));
-
-        return new PagedResult<UsuarioAsignacionDTO>
-        {
-            Items = items,
-            TotalRecords = totalRecords,
-            TotalRecordsFiltered = filteredRecords
-        };
+        return null;
     }
 
     public async Task<UsuarioAsignacionDTO?> GetByIdAsync(int id)
@@ -93,8 +83,4 @@ public class UsuarioAsignacionService : IUsuarioAsignacionService
         };
     }
 
-    public Task<object> GetAllAsync()
-    {
-        throw new NotImplementedException();
-    }
 }

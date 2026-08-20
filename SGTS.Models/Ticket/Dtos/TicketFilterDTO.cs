@@ -1,4 +1,4 @@
-namespace SGTS.Models.DTOs;
+namespace SGTS.Models.Ticket.Dtos;
 
 public class TicketFilterDto
 {
@@ -7,3 +7,4 @@ public class TicketFilterDto
     public int? IdPrioridad { get; set; }
     public int? IdCategoria { get; set; }
 }
+

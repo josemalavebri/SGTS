@@ -83,8 +83,9 @@ async function execute(method, url, body = null, config = {}) {
       headers: { ...(finalConfig.headers || {}) },
     };
 
-    if (finalConfig.params) {
+    if (finalConfig.params && Object.keys(finalConfig.params).length > 0) {
       const query = new URLSearchParams(finalConfig.params).toString();
+
       finalUrl += `?${query}`;
     }
 

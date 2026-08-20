@@ -1,11 +1,10 @@
 using SGTS.Data.Entities;
-using SGTS.Models.DTOs;
 
 namespace SGTS.Data.Interfaces;
 
 public interface IDepartamentosRepository
 {
-    Task<(IEnumerable<Departamento>, int, int)> GetAllDepartamentosAsync(DataTableRequestDTO request);
+    Task<(IEnumerable<Departamento>, int, int)> GetAllDepartamentosAsync();
 
     Task<IEnumerable<Departamento>> GetAllNames();
 

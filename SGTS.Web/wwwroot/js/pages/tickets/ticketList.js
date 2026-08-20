@@ -1,5 +1,3 @@
-import ticketService from "../../services/ticketService.js";
-
 const ticketContainer = document.querySelector("#ticketContainer");
 const ticketTemplate = document.querySelector("#ticketTemplate");
 
@@ -23,6 +21,12 @@ const STATUS_MAP = {
     className: "status-closed",
     label: "Cerrado",
   },
+};
+
+const PRIORITY_MAP = {
+  alta: "priority-high",
+  media: "priority-medium",
+  baja: "priority-low",
 };
 
 const formatDate = (date) => {
@@ -54,6 +58,7 @@ const createTicketElement = (ticket) => {
     }
   };
 
+  // STATUS
   const statusConfig = getStatusConfig(ticket.estado);
   const statusElement = clone.querySelector(".status");
 
@@ -65,19 +70,35 @@ const createTicketElement = (ticket) => {
     }
   }
 
+  // CONTENIDO
   setContent(".ticket-id", `#TCK-${String(ticket.idTicket).padStart(4, "0")}`);
 
   setContent(".ticket-title", ticket.titulo ?? "");
   setContent(".ticket-description", ticket.descripcion ?? "");
   setContent(".ticket-category", ticket.categoria ?? "");
-  setContent(".ticket-priority", ticket.prioridad ?? "");
   setContent(".ticket-date", formatDate(ticket.fechaCreacion));
 
+  // PRIORIDAD
+  const priorityElement = clone.querySelector(".ticket-priority");
+
+  if (priorityElement) {
+    const priority = ticket.prioridad?.toLowerCase().trim();
+    const priorityClass = PRIORITY_MAP[priority];
+
+    priorityElement.textContent = ticket.prioridad ?? "";
+
+    if (priorityClass) {
+      priorityElement.classList.add(priorityClass);
+    }
+  }
+
+  // TÉCNICO
   setContent(
     ".ticket-technician",
     ticket.tecnicoAsignado ?? "Sin técnico asignado",
   );
 
+  // ACTUALIZACIÓN
   setContent(
     ".ticket-updated",
     ticket.fechaActualizacion
@@ -85,11 +106,10 @@ const createTicketElement = (ticket) => {
       : "Sin actualizaciones",
   );
 
-  // Crear columna Bootstrap
+  // COLUMNA BOOTSTRAP
   const column = document.createElement("div");
   column.className = "col-12 col-lg-6";
 
-  // El template contiene el article
   column.appendChild(clone);
 
   return column;
@@ -122,28 +142,6 @@ const renderTickets = (tickets = []) => {
   ticketContainer.appendChild(fragment);
 };
 
-const loadTickets = async () => {
-  try {
-    const tickets = await ticketService.getAll();
-
-    renderTickets(tickets);
-  } catch (error) {
-    console.error("Error obteniendo tickets:", error);
-  }
-};
-
-const filterTickets = async (filters) => {
-  try {
-    const tickets = await ticketService.filter(filters);
-
-    renderTickets(tickets);
-  } catch (error) {
-    console.error("Error filtrando tickets:", error);
-  }
-};
-
 export default {
-  loadTickets,
-  filterTickets,
   renderTickets,
 };

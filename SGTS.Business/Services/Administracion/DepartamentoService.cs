@@ -2,6 +2,7 @@ using SGTS.Business.Interfaces;
 using SGTS.Data.Entities;
 using SGTS.Data.Interfaces;
 using SGTS.Models.DTOs;
+using SGTS.Models.Query.DTOs;
 
 namespace SGTS.Business.Services;
 
@@ -14,25 +15,9 @@ public class DepartamentoService : IDepartamentoService
         _departamentosRepository = departamentosRepository;
     }
 
-    public async Task<PagedResult<DepartamentoDTO>> GetAllDepartamentosAsync(DataTableRequestDTO request)
+    public async Task<PagedResult<DepartamentoDTO>> GetAllDepartamentosAsync()
     {
-        var (departamentos, totalRecords, filteredRecords) = await _departamentosRepository.GetAllDepartamentosAsync(request);
-        var departamentoDTOs = departamentos.Select(d => new DepartamentoDTO
-        {
-            IdDepartamento = d.IdDepartamento,
-            Nombre = d.Nombre,
-            Descripcion = d.Descripcion ?? string.Empty,
-            Activo = d.Activo
-        });
-
-        PagedResult<DepartamentoDTO> result = new PagedResult<DepartamentoDTO>
-        {
-            Items = departamentoDTOs,
-            TotalRecords = totalRecords,
-            TotalRecordsFiltered = filteredRecords
-        };
-
-        return result;
+        return null;
     }
 
     public async Task<IEnumerable<DepartamentoDTO>> GetAllNames()

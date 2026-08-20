@@ -1,11 +1,11 @@
 using SGTS.Data.Entities;
-using SGTS.Models.DTOs;
+using SGTS.Models.Query.DTOs;
 
 namespace SGTS.Data.Interfaces;
 
 public interface IUsuarioRepository
 {
-    Task<PagedResult<Usuario>> GetPagedAsync(DataTableRequestDTO request);
+    Task<PagedResult<Usuario>> GetPagedAsync( );
 
     Task<Usuario?> GetByIdAsync(int id);
 

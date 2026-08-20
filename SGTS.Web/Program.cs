@@ -7,7 +7,6 @@ using SGTS.Data.Context;
 using SGTS.Data.Interfaces;
 using SGTS.Data.Interfaces.Administracion;
 using SGTS.Data.Repositories;
-using SGTS.Data.Services;
 using SGTS.Web.Filters;
 using SGTS.Web.Middleware;
 
@@ -25,7 +24,6 @@ builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<ITicketService, TicketService>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 
-builder.Services.AddScoped<DataTableQueryService>();
 
 builder.Services.AddControllersWithViews(options =>
 {

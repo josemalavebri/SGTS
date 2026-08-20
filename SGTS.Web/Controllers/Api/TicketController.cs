@@ -1,5 +1,7 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
-using SGTS.Models.DTOs;
+using SGMF_backend.Models;
+using SGTS.Models.Ticket.Dtos;
 using SGTS.Web.Controllers.Base;
 
 namespace SGTS.Web.Controllers.Api;
@@ -14,23 +16,29 @@ public class TicketController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllTickets()
+    public async Task<IActionResult> GetAllTickets(
+    [FromQuery] TicketQueryRequestDTO request)
     {
-        var tickets = await _ticketService.GetAllTicketsAsync();
+        Console.WriteLine(
+            "---------- REQUEST: " +
+            JsonSerializer.Serialize(request)
+        );
 
-        return Ok(tickets);
-    }
-
-
-    [HttpGet("filtrar")]
-    public async Task<IActionResult> GetFilteredTickets(
-        [FromQuery] TicketFilterDto filter)
-    {
         var tickets = await _ticketService
-            .GetFilteredTicketsAsync(filter);
+            .GetAllTicketsAsync(request);
 
-        return Ok(tickets);
+        var pagination = new Pagination
+        {
+            PageNumber = tickets.PageNumber,
+            PageSize = tickets.PageSize,
+            TotalRecords = tickets.TotalRecords,
+            TotalRecordsFiltered = tickets.TotalRecordsFiltered
+        };
+
+        return Success(tickets.Items, pagination);
     }
+
+
     [HttpPost]
     public async Task<IActionResult> CreateTicket(TicketDto ticketDto)
     {

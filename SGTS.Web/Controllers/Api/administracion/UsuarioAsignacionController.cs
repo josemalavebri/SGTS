@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using SGMF_backend.Models;
 using SGTS.Business.Interfaces;
-using SGTS.Models.DTOs;
 using SGTS.Web.Controllers.Base;
 
 namespace SGTS.Web.Controllers.Api;
@@ -16,22 +14,11 @@ public class UsuarioAsignacionController : BaseController
     }
 
     [HttpPost("query")]
-    public async Task<IActionResult> GetAllUsuarioAsignaciones(DataTableRequestDTO request)
+    public async Task<IActionResult> GetAllUsuarioAsignaciones()
     {
-        int pageNumber = (request.Start / request.Length) + 1;
-        var usuarioAsignaciones = await _usuarioAsignacionService.GetAllAsync(request);
-        int pageSize = request.Length;
 
-        var pagination = new Pagination
-        {
-            Drawn = request.Draw,
-            PageNumber = pageNumber,
-            PageSize = pageSize,
-            TotalRecords = usuarioAsignaciones.TotalRecords,
-            TotalRecordsFiltered = usuarioAsignaciones.TotalRecordsFiltered
-        };
 
-        return Success(usuarioAsignaciones.Items, pagination);
+        return Ok();
     }
 
     [HttpGet("{id}")]

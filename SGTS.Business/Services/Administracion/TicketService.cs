@@ -1,6 +1,7 @@
 using SGTS.Data.Entities;
 using SGTS.Data.Interfaces;
-using SGTS.Models.DTOs;
+using SGTS.Models.Query.DTOs;
+using SGTS.Models.Ticket.Dtos;
 
 namespace SGTS.Business.Services.Administracion;
 
@@ -13,21 +14,25 @@ public class TicketService : ITicketService
         _ticketRepository = ticketRepository;
     }
 
-    public async Task<List<TicketDtoResponse>> GetAllTicketsAsync()
+    public async Task<PagedResult<TicketDtoResponse>> GetAllTicketsAsync(
+    TicketQueryRequestDTO request)
     {
-        var tickets = await _ticketRepository.GetAllTicketsAsync();
+        var result = await _ticketRepository.GetAllTicketsAsync(request);
 
-        return MapToResponse(tickets);
+        var tickets = MapToResponse(result.Items);
+
+        return new PagedResult<TicketDtoResponse>
+        {
+            Items = tickets,
+            PageNumber = result.PageNumber,
+            PageSize = result.PageSize,
+            TotalRecords = result.TotalRecords,
+            TotalRecordsFiltered = result.TotalRecordsFiltered
+        };
     }
 
-    public async Task<List<TicketDtoResponse>> GetFilteredTicketsAsync(
-        TicketFilterDto filter)
-    {
-        var tickets = await _ticketRepository
-            .GetFilteredTicketsAsync(filter);
 
-        return MapToResponse(tickets);
-    }
+
     public async Task<Ticket> CreateTicketAsync(TicketDto ticketDto)
     {
         var ticket = new Ticket
@@ -46,7 +51,7 @@ public class TicketService : ITicketService
 
 
     private static List<TicketDtoResponse> MapToResponse(
-       List<Ticket> tickets)
+       IEnumerable<Ticket> tickets)
     {
         return tickets.Select(ticket => new TicketDtoResponse
         {
