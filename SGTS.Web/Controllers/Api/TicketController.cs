@@ -38,6 +38,19 @@ public class TicketController : BaseController
         return Success(tickets.Items, pagination);
     }
 
+    [HttpGet("{idTicket:int}")]
+    public async Task<IActionResult> GetTicketDetail(int idTicket)
+    {
+        var ticket = await _ticketService
+            .GetTicketDetailAsync(idTicket);
+
+        if (ticket is null)
+        {
+            return NotFound();
+        }
+
+        return Success(ticket);
+    }
 
     [HttpPost]
     public async Task<IActionResult> CreateTicket(TicketDto ticketDto)

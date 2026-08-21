@@ -34,7 +34,7 @@ const getAll = async (request = {}) => {
 };
 
 const getById = async (id) => {
-  return await apiClient.getParams(API_ROUTES.ticket, id);
+  return await apiClient.get(`${API_ROUTES.ticket}/${id}`);
 };
 const post = async (ticket) => {
   return await apiClient.post(API_ROUTES.ticket, ticket);

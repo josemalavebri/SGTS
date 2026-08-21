@@ -9,6 +9,7 @@ const pages = {
   usuarioAsignacion: () =>
     import("../pages/administracion/usuarioAsignacion/usuarioAsignacionPage.js"),
   tickets: () => import("../pages/tickets/tickets.js"),
+  ticketsDetail: () => import("../pages/tickets/ticketDetailPage.js"),
   createTicketPage: () => import("../pages/tickets/crearTickets.js"),
 };
 

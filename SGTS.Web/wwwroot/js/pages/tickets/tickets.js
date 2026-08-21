@@ -72,6 +72,22 @@ const reloadFromFirstPage = async () => {
   await loadTickets();
 };
 
+const loadTicketDetail = async (idTicket) => {
+  try {
+    console.log("--------- ID TICKET:", idTicket);
+
+    const response = await ticketService.getById(idTicket);
+
+    console.log("--------- DATOS TICKET:", response);
+
+    return response;
+  } catch (error) {
+    console.error("Error obteniendo el detalle del ticket:", error);
+
+    throw error;
+  }
+};
+
 const init = async () => {
   try {
     const categories = await getCategoriesMock();

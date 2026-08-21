@@ -31,7 +31,10 @@ public class TicketService : ITicketService
         };
     }
 
-
+    public async Task<TicketDetailDto?> GetTicketDetailAsync(int idTicket)
+    {
+        return await _ticketRepository.GetTicketDetailAsync(idTicket);
+    }
 
     public async Task<Ticket> CreateTicketAsync(TicketDto ticketDto)
     {
@@ -48,6 +51,7 @@ public class TicketService : ITicketService
 
         return await _ticketRepository.CreateAsync(ticket);
     }
+
 
 
     private static List<TicketDtoResponse> MapToResponse(

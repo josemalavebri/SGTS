@@ -145,20 +145,63 @@ public class TicketRepository : ITicketRepository
         };
     }
 
-
-    public async Task<Ticket?> GetByIdAsync(int id)
+    public async Task<TicketDetailDto?> GetTicketDetailAsync(int idTicket)
     {
         return await _context.Tickets
-            .Include(t => t.Usuario)
-            .Include(t => t.Actividades)
-            .Include(t => t.Categoria)
-            .Include(t => t.Prioridad)
-            .Include(t => t.Estado)
-            .Include(t => t.Comentarios)
-            .Include(t => t.Adjuntos)
-            .FirstOrDefaultAsync(t => t.IdTicket == id);
-    }
+            .AsNoTracking()
+            .Where(t => t.IdTicket == idTicket)
+            .Select(t => new TicketDetailDto
+            {
+                // DATOS DEL TICKET
+                IdTicket = t.IdTicket,
+                Titulo = t.Titulo,
+                Descripcion = t.Descripcion,
+                FechaCreacion = t.FechaCreacion,
+                FechaCierre = t.FechaCierre,
 
+                // INFORMACIÓN DEL TICKET
+                Categoria = t.Categoria.Nombre,
+                Prioridad = t.Prioridad.Nombre,
+                Estado = t.Estado.Nombre,
+
+                // ÚLTIMA ACTUALIZACIÓN
+                UltimaActualizacion = t.Actividades
+                    .OrderByDescending(a => a.Fecha)
+                    .Select(a => (DateTime?)a.Fecha)
+                    .FirstOrDefault(),
+
+                // SOLICITANTE
+                Solicitante = new UsuarioTicketDto
+                {
+                    IdUsuario = t.Usuario.IdUsuario,
+                    Nombre = t.Usuario.Nombre,
+                    Apellido = t.Usuario.Apellido,
+                },
+
+                // TÉCNICO ACTUAL
+                TecnicoAsignado = t.Asignaciones
+                    .Where(a => a.FechaDesasignacion == null)
+                    .Select(a => new UsuarioTicketDto
+                    {
+                        IdUsuario = a.Tecnico.IdUsuario,
+                        Nombre = a.Tecnico.Nombre,
+                        Apellido = a.Tecnico.Apellido,
+                    })
+                    .FirstOrDefault(),
+
+                // ACTIVIDADES
+                Actividades = t.Actividades
+                    .OrderBy(a => a.Fecha)
+                    .Select(a => new ActividadTicketDto
+                    {
+                        Tipo = a.TipoActividad.Nombre,
+
+                        Fecha = a.Fecha
+                    })
+                    .ToList()
+            })
+            .FirstOrDefaultAsync();
+    }
 
     public async Task<Ticket> CreateAsync(Ticket ticket)
     {

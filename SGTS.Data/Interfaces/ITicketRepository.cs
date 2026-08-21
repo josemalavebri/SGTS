@@ -8,8 +8,9 @@ public interface ITicketRepository
 {
     Task<PagedResult<Ticket>> GetAllAsync(TicketQueryRequestDTO request);
 
-    Task<Ticket?> GetByIdAsync(int id);
+    Task<TicketDetailDto?> GetTicketDetailAsync(int idTicket);
+
 
     Task<Ticket> CreateAsync(Ticket ticket);
-    
+
 }
