@@ -14,4 +14,9 @@ public class TicketsController : Controller
     {
         return View();
     }
+    public IActionResult TicketDetail(int id)
+    {
+        ViewBag.IdTicket = id;
+        return View();
+    }
 }

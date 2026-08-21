@@ -50,6 +50,12 @@ const createTicketElement = (ticket) => {
 
   const clone = ticketTemplate.content.cloneNode(true);
 
+  const ticketElement = clone.querySelector(".ticket-item");
+
+  if (ticketElement) {
+    ticketElement.dataset.ticketId = ticket.idTicket;
+  }
+
   const setContent = (selector, value) => {
     const element = clone.querySelector(selector);
 
@@ -77,6 +83,23 @@ const createTicketElement = (ticket) => {
   setContent(".ticket-description", ticket.descripcion ?? "");
   setContent(".ticket-category", ticket.categoria ?? "");
   setContent(".ticket-date", formatDate(ticket.fechaCreacion));
+
+  const ticketUrl = `/Tickets/TicketDetail/${ticket.idTicket}`;
+
+  const viewLink = clone.querySelector(".ticket-view-link");
+  const viewButton = clone.querySelector(".ticket-view-btn");
+
+  if (viewLink) {
+    viewLink.href = ticketUrl;
+  }
+
+  if (viewButton) {
+    viewButton.href = ticketUrl;
+  }
+
+  console.log("ID:", ticket.idTicket);
+  console.log("URL:", ticketUrl);
+  console.log("BUTTON:", viewButton);
 
   // PRIORIDAD
   const priorityElement = clone.querySelector(".ticket-priority");

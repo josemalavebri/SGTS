@@ -33,11 +33,15 @@ const getAll = async (request = {}) => {
   return await apiClient.getParams(API_ROUTES.ticket, params);
 };
 
+const getById = async (id) => {
+  return await apiClient.getParams(API_ROUTES.ticket, id);
+};
 const post = async (ticket) => {
   return await apiClient.post(API_ROUTES.ticket, ticket);
 };
 
 export default {
   getAll,
+  getById,
   post,
 };

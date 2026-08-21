@@ -1,0 +1,385 @@
+@{
+  ViewData["Title"] = "Detalle del Ticket";
+}
+
+<div class="ticket-detail" data-ticket-id="@ViewBag.IdTicket">
+
+  <!-- CABECERA -->
+
+  <div class="d-flex justify-content-between align-items-start gap-3 mb-4">
+
+    <div>
+      <div class="d-flex align-items-center gap-2 mb-2">
+
+        <span class="ticket-id">
+          #TCK-0012
+        </span>
+
+        <span class="status status-open">
+          Abierto
+        </span>
+
+      </div>
+
+      <h2 class="ticket-title mb-0">
+        No puedo acceder al sistema
+      </h2>
+    </div>
+
+    <a asp-controller="Tickets" asp-action="Index" class="btn btn-outline-secondary">
+
+      <i class="bi bi-arrow-left me-1"></i>
+
+      Volver
+    </a>
+
+  </div>
+
+
+  <!-- CONTENIDO -->
+
+  <div class="row g-4">
+
+    <!-- INFORMACIÓN PRINCIPAL -->
+
+    <div class="col-lg-8">
+
+      <!-- DESCRIPCIÓN -->
+
+      <div class="card border-0 shadow-sm rounded-3">
+
+        <div class="card-body p-4">
+
+          <h5 class="fw-semibold mb-3">
+            Descripción
+          </h5>
+
+          <p class="ticket-description mb-0">
+            El sistema muestra un error al intentar iniciar
+            sesión. Desde esta mañana no puedo acceder con
+            mis credenciales habituales y el mensaje de error
+            aparece después de ingresar mi usuario y contraseña.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- ARCHIVOS ADJUNTOS -->
+
+      <div class="card border-0 shadow-sm rounded-3 mt-4">
+
+        <div class="card-body p-4">
+
+          <h5 class="fw-semibold mb-3">
+            Archivos adjuntos
+          </h5>
+
+          <div class="ticket-attachment
+            d-flex
+            justify-content-between
+            align-items-center
+            gap-3
+            border
+            rounded-2
+            p-3">
+
+            <div class="d-flex align-items-center gap-3">
+
+              <div class="ticket-attachment__icon
+                d-flex
+                align-items-center
+                justify-content-center">
+
+                <i class="bi bi-file-earmark-image"></i>
+
+              </div>
+
+              <div>
+
+                <div class="ticket-attachment__name fw-semibold">
+                  captura-error.png
+                </div>
+
+                <small class="ticket-attachment__size">
+                  245 KB
+                </small>
+
+              </div>
+
+            </div>
+
+            <button type="button" class="btn btn-sm btn-outline-primary">
+
+              <i class="bi bi-download me-1"></i>
+
+              Descargar
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- SEGUIMIENTO -->
+
+      <div class="card border-0 shadow-sm rounded-3 mt-4">
+
+        <div class="card-body p-4">
+
+          <h5 class="fw-semibold mb-4">
+            Seguimiento
+          </h5>
+
+          <div class="ticket-timeline">
+
+            <!-- EVENTO -->
+
+            <div class="ticket-timeline__item position-relative pb-4">
+
+              <span class="ticket-timeline__dot position-absolute"></span>
+
+              <div>
+
+                <div class="fw-semibold">
+                  Ticket creado
+                </div>
+
+                <div class="small text-muted mb-2">
+                  17 Ago 2026 · 08:30
+                </div>
+
+                <p class="small text-muted mb-0">
+                  El ticket fue registrado correctamente
+                  y quedó pendiente de asignación.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <!-- EVENTO -->
+
+            <div class="ticket-timeline__item position-relative pb-4">
+
+              <span class="ticket-timeline__dot position-absolute"></span>
+
+              <div>
+
+                <div class="fw-semibold">
+                  Ticket asignado
+                </div>
+
+                <div class="small text-muted mb-2">
+                  17 Ago 2026 · 09:15
+                </div>
+
+                <p class="small text-muted mb-0">
+                  El ticket fue asignado al área de soporte.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <!-- EVENTO -->
+
+            <div class="ticket-timeline__item position-relative">
+
+              <span class="ticket-timeline__dot position-absolute"></span>
+
+              <div>
+
+                <div class="fw-semibold">
+                  En revisión
+                </div>
+
+                <div class="small text-muted mb-2">
+                  17 Ago 2026 · 09:40
+                </div>
+
+                <p class="small text-muted mb-0">
+                  El técnico inició la revisión del problema
+                  reportado.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- INFORMACIÓN SECUNDARIA -->
+
+    <div class="col-lg-4">
+
+      <!-- INFORMACIÓN DEL TICKET -->
+
+      <div class="card border-0 shadow-sm rounded-3">
+
+        <div class="card-body p-4">
+
+          <h5 class="fw-semibold mb-4">
+            Información del ticket
+          </h5>
+
+          <div class="d-flex flex-column gap-3">
+
+            <div>
+              <div class="small text-muted mb-1">
+                Categoría
+              </div>
+
+              <div class="fw-medium">
+                <i class="bi bi-folder me-1"></i>
+                Sistema
+              </div>
+            </div>
+
+
+            <div>
+              <div class="small text-muted mb-1">
+                Prioridad
+              </div>
+
+              <div class="ticket-info__value--high fw-medium">
+                <i class="bi bi-flag-fill me-1"></i>
+                Alta
+              </div>
+            </div>
+
+
+            <div>
+              <div class="small text-muted mb-1">
+                Estado
+              </div>
+
+              <span class="status status-open">
+                Abierto
+              </span>
+            </div>
+
+
+            <div>
+              <div class="small text-muted mb-1">
+                Fecha de creación
+              </div>
+
+              <div class="fw-medium">
+                17 Ago 2026 · 08:30
+              </div>
+            </div>
+
+
+            <div>
+              <div class="small text-muted mb-1">
+                Última actualización
+              </div>
+
+              <div class="fw-medium">
+                17 Ago 2026 · 09:40
+              </div>
+            </div>
+
+
+            <div>
+              <div class="small text-muted mb-1">
+                Técnico asignado
+              </div>
+
+              <div class="fw-medium">
+                Sin técnico asignado
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- SOLICITANTE -->
+
+      <div class="card border-0 shadow-sm rounded-3 mt-4">
+
+        <div class="card-body p-4">
+
+          <h5 class="fw-semibold mb-4">
+            Solicitante
+          </h5>
+
+          <div class="d-flex align-items-center gap-3">
+
+            <div class="ticket-requester__avatar
+              d-flex
+              align-items-center
+              justify-content-center">
+
+              JP
+
+            </div>
+
+            <div>
+
+              <div class="fw-semibold">
+                Juan Pérez
+              </div>
+
+              <small class="text-muted">
+                Usuario
+              </small>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ACCIONES -->
+
+      <div class="d-grid gap-2 mt-4">
+
+        <button type="button" class="btn btn-outline-primary">
+
+          <i class="bi bi-pencil me-1"></i>
+
+          Editar ticket
+
+        </button>
+
+        <button type="button" class="btn btn-outline-danger">
+
+          <i class="bi bi-x-circle me-1"></i>
+
+          Cancelar ticket
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+@section Styles {
+  <link rel="stylesheet" href="~/css/pages/ticket-detail.css" />
+}

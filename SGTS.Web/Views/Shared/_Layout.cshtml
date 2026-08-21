@@ -36,9 +36,8 @@
       <div class="mb-4 px-2">
         <h5 class="text-white mb-0 d-flex align-items-center gap-2">
           <i class="bi bi-headset"></i>
-          <span>Soporte</span>
+          <span>SGTS</span>
         </h5>
-        <small class="text-secondary">Sistema de Tickets</small>
       </div>
 
       <!-- Navegación Principal -->
@@ -51,6 +50,10 @@
         <a asp-controller="Tickets" asp-action="CrearTickets" class="nav-link @IsActive("Tickets", "CrearTickets")">
           <i class="bi bi-plus-circle me-2"></i>
           Crear Tickets
+        </a>
+        <a asp-controller="Tickets" asp-action="TicketDetail" class="nav-link @IsActive("Tickets", "TicketDetail")">
+          <i class="bi bi-plus-circle me-2"></i>
+          Ticket Detalles
         </a>
       </nav>
 
@@ -77,7 +80,7 @@
 
           <div>
             <h4 class="mb-0">@ViewData["Title"]</h4>
-            <small class="text-muted">Sistema de Gestión de Tickets</small>
+            <small class="text-muted">Sistema de Gestión de Tickets de Soporte</small>
           </div>
 
           <!-- Usuario -->
