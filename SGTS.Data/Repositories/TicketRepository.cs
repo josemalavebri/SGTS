@@ -18,7 +18,7 @@ public class TicketRepository : ITicketRepository
         _context = context;
     }
 
-    public async Task<PagedResult<Ticket>> GetAllTicketsAsync(
+    public async Task<PagedResult<Ticket>> GetAllAsync(
         TicketQueryRequestDTO request)
     {
         var pagination = request.Pagination ?? new PaginationRequestDTO
@@ -31,8 +31,7 @@ public class TicketRepository : ITicketRepository
             .AsNoTracking()
             .Include(t => t.Categoria)
             .Include(t => t.Prioridad)
-            .Include(t => t.Estado)
-            .Include(t => t.TecnicoAsignado);
+            .Include(t => t.Estado);
 
         var totalRecords = await query.CountAsync();
 
@@ -146,7 +145,22 @@ public class TicketRepository : ITicketRepository
         };
     }
 
-    public async Task<Ticket> CreateTicketAsync(Ticket ticket)
+
+    public async Task<Ticket?> GetByIdAsync(int id)
+    {
+        return await _context.Tickets
+            .Include(t => t.Usuario)
+            .Include(t => t.Actividades)
+            .Include(t => t.Categoria)
+            .Include(t => t.Prioridad)
+            .Include(t => t.Estado)
+            .Include(t => t.Comentarios)
+            .Include(t => t.Adjuntos)
+            .FirstOrDefaultAsync(t => t.IdTicket == id);
+    }
+
+
+    public async Task<Ticket> CreateAsync(Ticket ticket)
     {
         await _context.Tickets.AddAsync(ticket);
         await _context.SaveChangesAsync();

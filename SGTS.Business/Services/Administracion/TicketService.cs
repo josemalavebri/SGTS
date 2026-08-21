@@ -17,7 +17,7 @@ public class TicketService : ITicketService
     public async Task<PagedResult<TicketDtoResponse>> GetAllTicketsAsync(
     TicketQueryRequestDTO request)
     {
-        var result = await _ticketRepository.GetAllTicketsAsync(request);
+        var result = await _ticketRepository.GetAllAsync(request);
 
         var tickets = MapToResponse(result.Items);
 
@@ -46,7 +46,7 @@ public class TicketService : ITicketService
             FechaCreacion = DateTime.Now
         };
 
-        return await _ticketRepository.CreateTicketAsync(ticket);
+        return await _ticketRepository.CreateAsync(ticket);
     }
 
 
@@ -61,11 +61,9 @@ public class TicketService : ITicketService
             Categoria = ticket.Categoria.Nombre,
             Prioridad = ticket.Prioridad.Nombre,
             Estado = ticket.Estado.Nombre,
-            TecnicoAsignado = ticket.TecnicoAsignado != null
-                ? ticket.TecnicoAsignado.Nombre
-                : null,
+            TecnicoAsignado = "",
             FechaCreacion = ticket.FechaCreacion,
-            FechaActualizacion = ticket.FechaActualizacion
+            FechaActualizacion = DateTime.Now,
         }).ToList();
     }
 }
