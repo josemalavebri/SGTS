@@ -1,4 +1,4 @@
-namespace SGMF_backend.Models
+namespace SGTS.Web.Models.Api
 {
     public class Pagination
     {

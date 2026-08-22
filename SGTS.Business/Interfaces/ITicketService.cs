@@ -6,7 +6,7 @@ public interface ITicketService
 {
     Task<PagedResult<TicketDtoResponse>> GetAllTicketsAsync(TicketQueryRequestDTO request);
 
-    Task<TicketDetailDto?> GetTicketDetailAsync(int idTicket);
+    Task<TicketDetailDto> GetTicketDetailAsync(int idTicket);
 
     Task<Ticket> CreateTicketAsync(TicketDto ticketDto);
 }

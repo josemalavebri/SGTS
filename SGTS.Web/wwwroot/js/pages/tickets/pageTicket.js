@@ -1,9 +1,9 @@
 import ticketService from "../../services/ticketService.js";
 
-import ticketFilters from "./ticketFilters.js";
-import ticketSorting from "./ticketSorting.js";
-import ticketList from "./ticketList.js";
-import pagination from "./pagination.js";
+import ticketFilters from "./filterTicket.js";
+import ticketSorting from "./sortingTicket.js";
+import ticketList from "./listTicket.js";
+import pagination from "./paginationTicket.js";
 
 const getCategoriesMock = async () => {
   await new Promise((resolve) => setTimeout(resolve, 500));

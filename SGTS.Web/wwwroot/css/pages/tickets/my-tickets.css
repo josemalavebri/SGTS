@@ -1,0 +1,35 @@
+/* =========================================
+   MY TICKETS
+   ========================================= */
+
+.filter-card {
+  background-color: var(--color-surface);
+}
+
+.filter-card .form-label {
+  color: var(--color-text);
+}
+
+.ticket-pagination {
+  color: var(--color-text-muted);
+}
+
+.ticket-list {
+  color: var(--color-text);
+}
+
+.user-avatar {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background-color: var(--color-primary);
+  color: #ffffff;
+
+  font-weight: 600;
+}

@@ -1,0 +1,15 @@
+/* =========================================
+   PRIORITY
+   ========================================= */
+
+.priority-high {
+  color: var(--color-danger);
+}
+
+.priority-medium {
+  color: var(--color-warning);
+}
+
+.priority-low {
+  color: var(--color-success);
+}

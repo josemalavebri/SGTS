@@ -16,3 +16,15 @@
   border-color: var(--color-border);
   color: var(--color-text-muted);
 }
+
+
+
+.ticket-form {
+  border: none;
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+.ticket-field-error {
+  margin-top: 0.25rem;
+}

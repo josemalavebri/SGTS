@@ -1,13 +1,16 @@
+using SGTS.Shared.Enums;
+using SGTS.Shared.Exceptions;
+
 namespace SGTS.Data.Exceptions;
 
-public class PersistenceException : Exception
+public class PersistenceException
+    : Exception, IApplicationException
 {
-    public PersistenceException(string message)
-        : base(message)
-    {
-    }
+    public ErrorCode Code => ErrorCode.Persistence;
 
-    public PersistenceException(string message, Exception innerException)
+    public PersistenceException(
+        string message,
+        Exception innerException)
         : base(message, innerException)
     {
     }

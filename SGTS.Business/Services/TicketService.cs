@@ -1,9 +1,12 @@
+using SGTS.Business.Const;
+using SGTS.Business.Exceptions;
 using SGTS.Data.Entities;
 using SGTS.Data.Interfaces;
 using SGTS.Models.Query.DTOs;
 using SGTS.Models.Ticket.Dtos;
+using SGTS.Shared.Enums;
 
-namespace SGTS.Business.Services.Administracion;
+namespace SGTS.Business.Services;
 
 public class TicketService : ITicketService
 {
@@ -17,30 +20,29 @@ public class TicketService : ITicketService
     public async Task<PagedResult<TicketDtoResponse>> GetAllTicketsAsync(
     TicketQueryRequestDTO request)
     {
-        var result = await _ticketRepository.GetAllAsync(request);
-
-        var tickets = MapToResponse(result.Items);
-
-        return new PagedResult<TicketDtoResponse>
-        {
-            Items = tickets,
-            PageNumber = result.PageNumber,
-            PageSize = result.PageSize,
-            TotalRecords = result.TotalRecords,
-            TotalRecordsFiltered = result.TotalRecordsFiltered
-        };
+        return await _ticketRepository.GetAllAsync(request);
     }
 
-    public async Task<TicketDetailDto?> GetTicketDetailAsync(int idTicket)
+    public async Task<TicketDetailDto> GetTicketDetailAsync(int idTicket)
     {
-        return await _ticketRepository.GetTicketDetailAsync(idTicket);
+        var ticket = await _ticketRepository
+            .GetTicketDetailAsync(idTicket);
+
+        if (ticket is null)
+        {
+            throw new BusinessException(
+                ErrorCode.NotFound,
+                TicketMessages.NOT_FOUND);
+        }
+
+        return ticket;
     }
 
     public async Task<Ticket> CreateTicketAsync(TicketDto ticketDto)
     {
         var ticket = new Ticket
         {
-            IdUsuario = 1,
+            IdUsuario = ticketDto.IdUsuario,
             IdCategoria = ticketDto.IdCategoria,
             IdPrioridad = ticketDto.IdPrioridad,
             IdEstado = 1,
@@ -54,20 +56,4 @@ public class TicketService : ITicketService
 
 
 
-    private static List<TicketDtoResponse> MapToResponse(
-       IEnumerable<Ticket> tickets)
-    {
-        return tickets.Select(ticket => new TicketDtoResponse
-        {
-            IdTicket = ticket.IdTicket,
-            Titulo = ticket.Titulo,
-            Descripcion = ticket.Descripcion,
-            Categoria = ticket.Categoria.Nombre,
-            Prioridad = ticket.Prioridad.Nombre,
-            Estado = ticket.Estado.Nombre,
-            TecnicoAsignado = "",
-            FechaCreacion = ticket.FechaCreacion,
-            FechaActualizacion = DateTime.Now,
-        }).ToList();
-    }
 }

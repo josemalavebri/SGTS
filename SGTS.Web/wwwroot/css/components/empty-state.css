@@ -1,0 +1,25 @@
+/* =========================================
+   EMPTY STATE
+   ========================================= */
+
+.empty-state {
+  padding: 80px 20px;
+}
+
+.empty-state-icon {
+  width: 80px;
+  height: 80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: auto;
+
+  border-radius: 50%;
+
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+
+  font-size: 2rem;
+}

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using SGMF_backend.Models;
+using SGTS.Web.Models.Api;
 using SSS.Web.Models.Api;
 
 namespace SGTS.Web.Controllers.Base;

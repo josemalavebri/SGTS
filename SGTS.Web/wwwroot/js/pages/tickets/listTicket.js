@@ -84,7 +84,7 @@ const createTicketElement = (ticket) => {
   setContent(".ticket-category", ticket.categoria ?? "");
   setContent(".ticket-date", formatDate(ticket.fechaCreacion));
 
-  const ticketUrl = `/Tickets/TicketDetail/${ticket.idTicket}`;
+  const ticketUrl = `/Tickets/DetalleTicket/${ticket.idTicket}`;
 
   const viewLink = clone.querySelector(".ticket-view-link");
   const viewButton = clone.querySelector(".ticket-view-btn");

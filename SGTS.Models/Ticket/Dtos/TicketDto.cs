@@ -2,6 +2,7 @@ namespace SGTS.Models.Ticket.Dtos;
 
 public class TicketDto
 {
+    public int IdUsuario { get; set; }
     public string Titulo { get; set; } = null!;
     public string Descripcion { get; set; } = null!;
     public int IdPrioridad { get; set; }

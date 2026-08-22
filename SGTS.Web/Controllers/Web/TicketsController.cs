@@ -10,11 +10,12 @@ public class TicketsController : Controller
         return View();
     }
 
-    public IActionResult CrearTickets()
+    public IActionResult NuevoTicket()
     {
         return View();
     }
-    public IActionResult TicketDetail(int id)
+
+    public IActionResult DetalleTicket(int id)
     {
         ViewBag.IdTicket = id;
         return View();

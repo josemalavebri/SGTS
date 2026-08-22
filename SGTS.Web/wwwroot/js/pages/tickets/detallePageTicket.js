@@ -1,6 +1,6 @@
 import ticketService from "../../services/ticketService.js";
 
-import ticketDetail from "./ticketDetail.js";
+import ticketDetail from "./detalleTicket.js";
 
 const loadTicketDetail = async (idTicket) => {
   try {

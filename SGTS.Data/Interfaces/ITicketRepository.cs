@@ -6,11 +6,8 @@ namespace SGTS.Data.Interfaces;
 
 public interface ITicketRepository
 {
-    Task<PagedResult<Ticket>> GetAllAsync(TicketQueryRequestDTO request);
-
+    Task<PagedResult<TicketDtoResponse>> GetAllAsync(TicketQueryRequestDTO request);
     Task<TicketDetailDto?> GetTicketDetailAsync(int idTicket);
-
-
     Task<Ticket> CreateAsync(Ticket ticket);
 
 }

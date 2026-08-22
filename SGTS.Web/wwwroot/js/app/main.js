@@ -8,9 +8,9 @@ const pages = {
   usuarios: () => import("../pages/administracion/usuarios/usuariosPage.js"),
   usuarioAsignacion: () =>
     import("../pages/administracion/usuarioAsignacion/usuarioAsignacionPage.js"),
-  tickets: () => import("../pages/tickets/tickets.js"),
-  ticketsDetail: () => import("../pages/tickets/ticketDetailPage.js"),
-  createTicketPage: () => import("../pages/tickets/crearTickets.js"),
+  pageTicket: () => import("../pages/tickets/pageTicket.js"),
+  detallePageTicket: () => import("../pages/tickets/detallePageTicket.js"),
+  nuevoTicketPage: () => import("../pages/tickets/nuevoPageTicket.js"),
 };
 
 document.addEventListener("DOMContentLoaded", async () => {

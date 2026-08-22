@@ -10,7 +10,14 @@
   border-radius: var(--radius-md);
 }
 
+/* =========================================
+   TICKET CARD
+   ========================================= */
+
 .ticket-card {
+  border: none;
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
   transition:
     transform var(--transition-fast),
     box-shadow var(--transition-fast);
@@ -19,4 +26,24 @@
 .ticket-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-card-hover);
+}
+
+.ticket-card .ticket-id {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.ticket-card .ticket-title {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.ticket-card .ticket-description {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.ticket-card hr {
+  border-color: var(--color-border);
+  opacity: 1;
 }

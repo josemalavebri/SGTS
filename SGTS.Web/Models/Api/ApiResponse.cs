@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-using SGMF_backend.Models;
+using SGTS.Web.Models.Api;
 
 namespace SSS.Web.Models.Api;
 

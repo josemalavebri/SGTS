@@ -1,6 +1,9 @@
+using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
+using SGTS.Data.Constants;
 using SGTS.Data.Context;
 using SGTS.Data.Entities;
+using SGTS.Data.Exceptions;
 using SGTS.Data.Interfaces;
 using SGTS.Models.Query.DTOs;
 using SGTS.Models.Query.Enums;
@@ -18,53 +21,74 @@ public class TicketRepository : ITicketRepository
         _context = context;
     }
 
-    public async Task<PagedResult<Ticket>> GetAllAsync(
+    public async Task<PagedResult<TicketDtoResponse>> GetAllAsync(
         TicketQueryRequestDTO request)
     {
-        var pagination = request.Pagination ?? new PaginationRequestDTO
+        try
         {
-            Start = 0,
-            Length = 5
-        };
+            var pagination = request.Pagination ?? new PaginationRequestDTO
+            {
+                Start = 0,
+                Length = 5
+            };
 
-        IQueryable<Ticket> query = _context.Tickets
-            .AsNoTracking()
-            .Include(t => t.Categoria)
-            .Include(t => t.Prioridad)
-            .Include(t => t.Estado);
+            IQueryable<Ticket> query = _context.Tickets
+                .AsNoTracking();
 
-        var totalRecords = await query.CountAsync();
+            var totalRecords = await query.CountAsync();
 
-        query = ApplySearch(
-            query,
-            request.Filters?.Busqueda);
+            query = ApplySearch(
+                query,
+                request.Filters?.Busqueda);
 
-        query = ApplyFilters(
-            query,
-            request.Filters);
+            query = ApplyFilters(
+                query,
+                request.Filters);
 
-        var totalRecordsFiltered = await query.CountAsync();
+            var totalRecordsFiltered = await query.CountAsync();
 
-        query = ApplyOrdering(
-            query,
-            request.Order);
+            query = ApplyOrdering(
+                query,
+                request.Order);
 
-        var items = await query
-            .Skip(pagination.Start)
-            .Take(pagination.Length)
-            .ToListAsync();
+            var items = await query
+                .Skip(pagination.Start)
+                .Take(pagination.Length)
+                .Select(t => new TicketDtoResponse
+                {
+                    IdTicket = t.IdTicket,
+                    Titulo = t.Titulo,
+                    Descripcion = t.Descripcion,
+                    Categoria = t.Categoria.Nombre,
+                    Prioridad = t.Prioridad.Nombre,
+                    Estado = t.Estado.Nombre,
+                    TecnicoAsignado = "",
+                    FechaCreacion = t.FechaCreacion,
+                    FechaActualizacion = t.Actividades
+                        .OrderByDescending(a => a.Fecha)
+                        .Select(a => (DateTime?)a.Fecha)
+                        .FirstOrDefault()
+                })
+                .ToListAsync();
 
-        var pageNumber =
-            (pagination.Start / pagination.Length) + 1;
+            var pageNumber =
+                (pagination.Start / pagination.Length) + 1;
 
-        return new PagedResult<Ticket>
+            return new PagedResult<TicketDtoResponse>
+            {
+                Items = items,
+                PageNumber = pageNumber,
+                PageSize = pagination.Length,
+                TotalRecords = totalRecords,
+                TotalRecordsFiltered = totalRecordsFiltered
+            };
+        }
+        catch (DbException ex)
         {
-            Items = items,
-            PageNumber = pageNumber,
-            PageSize = pagination.Length,
-            TotalRecords = totalRecords,
-            TotalRecordsFiltered = totalRecordsFiltered
-        };
+            throw new PersistenceException(
+                PersistenceMessages.ERROR_CONSULTA,
+                ex);
+        }
     }
 
     private IQueryable<Ticket> ApplySearch(
@@ -145,69 +169,87 @@ public class TicketRepository : ITicketRepository
         };
     }
 
-    public async Task<TicketDetailDto?> GetTicketDetailAsync(int idTicket)
+    public async Task<TicketDetailDto?> GetTicketDetailAsync(
+        int idTicket)
     {
-        return await _context.Tickets
-            .AsNoTracking()
-            .Where(t => t.IdTicket == idTicket)
-            .Select(t => new TicketDetailDto
-            {
-                // DATOS DEL TICKET
-                IdTicket = t.IdTicket,
-                Titulo = t.Titulo,
-                Descripcion = t.Descripcion,
-                FechaCreacion = t.FechaCreacion,
-                FechaCierre = t.FechaCierre,
-
-                // INFORMACIÓN DEL TICKET
-                Categoria = t.Categoria.Nombre,
-                Prioridad = t.Prioridad.Nombre,
-                Estado = t.Estado.Nombre,
-
-                // ÚLTIMA ACTUALIZACIÓN
-                UltimaActualizacion = t.Actividades
-                    .OrderByDescending(a => a.Fecha)
-                    .Select(a => (DateTime?)a.Fecha)
-                    .FirstOrDefault(),
-
-                // SOLICITANTE
-                Solicitante = new UsuarioTicketDto
+        try
+        {
+            return await _context.Tickets
+                .AsNoTracking()
+                .Where(t => t.IdTicket == idTicket)
+                .Select(t => new TicketDetailDto
                 {
-                    IdUsuario = t.Usuario.IdUsuario,
-                    Nombre = t.Usuario.Nombre,
-                    Apellido = t.Usuario.Apellido,
-                },
+                    IdTicket = t.IdTicket,
+                    Titulo = t.Titulo,
+                    Descripcion = t.Descripcion,
+                    FechaCreacion = t.FechaCreacion,
+                    FechaCierre = t.FechaCierre,
 
-                // TÉCNICO ACTUAL
-                TecnicoAsignado = t.Asignaciones
-                    .Where(a => a.FechaDesasignacion == null)
-                    .Select(a => new UsuarioTicketDto
+                    Categoria = t.Categoria.Nombre,
+                    Prioridad = t.Prioridad.Nombre,
+                    Estado = t.Estado.Nombre,
+
+                    UltimaActualizacion = t.Actividades
+                        .OrderByDescending(a => a.Fecha)
+                        .Select(a => (DateTime?)a.Fecha)
+                        .FirstOrDefault(),
+
+                    Solicitante = new UsuarioTicketDto
                     {
-                        IdUsuario = a.Tecnico.IdUsuario,
-                        Nombre = a.Tecnico.Nombre,
-                        Apellido = a.Tecnico.Apellido,
-                    })
-                    .FirstOrDefault(),
+                        IdUsuario = t.Usuario.IdUsuario,
+                        Nombre = t.Usuario.Nombre,
+                        Apellido = t.Usuario.Apellido
+                    },
 
-                // ACTIVIDADES
-                Actividades = t.Actividades
-                    .OrderBy(a => a.Fecha)
-                    .Select(a => new ActividadTicketDto
-                    {
-                        Tipo = a.TipoActividad.Nombre,
+                    TecnicoAsignado = t.Asignaciones
+                        .Where(a => a.FechaDesasignacion == null)
+                        .Select(a => new UsuarioTicketDto
+                        {
+                            IdUsuario = a.Tecnico.IdUsuario,
+                            Nombre = a.Tecnico.Nombre,
+                            Apellido = a.Tecnico.Apellido
+                        })
+                        .FirstOrDefault(),
 
-                        Fecha = a.Fecha
-                    })
-                    .ToList()
-            })
-            .FirstOrDefaultAsync();
+                    Actividades = t.Actividades
+                        .OrderBy(a => a.Fecha)
+                        .Select(a => new ActividadTicketDto
+                        {
+                            Tipo = a.TipoActividad.Nombre,
+                            Fecha = a.Fecha
+                        })
+                        .ToList()
+                })
+                .FirstOrDefaultAsync();
+        }
+        catch (DbException ex)
+        {
+            throw new PersistenceException(
+                PersistenceMessages.ERROR_CONSULTA,
+                ex);
+        }
     }
 
     public async Task<Ticket> CreateAsync(Ticket ticket)
     {
-        await _context.Tickets.AddAsync(ticket);
-        await _context.SaveChangesAsync();
+        try
+        {
+            await _context.Tickets.AddAsync(ticket);
+            await _context.SaveChangesAsync();
 
-        return ticket;
+            return ticket;
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            throw new PersistenceException(
+                PersistenceMessages.ERROR_CONCURRENCIA,
+                ex);
+        }
+        catch (DbUpdateException ex)
+        {
+            throw new PersistenceException(
+                PersistenceMessages.ERROR_GUARDAR,
+                ex);
+        }
     }
-}
+} 

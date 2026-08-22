@@ -1,0 +1,119 @@
+/* =========================================
+   TICKET DETAIL PAGE
+   ========================================= */
+
+.ticket-detail-page {
+  width: 100%;
+}
+
+.ticket-detail {
+  width: 100%;
+}
+
+.ticket-detail .ticket-title {
+  font-size: 1.35rem;
+}
+
+
+/* =========================================
+   ATTACHMENT
+   ========================================= */
+
+.ticket-attachment {
+  border-color: var(--color-border) !important;
+  background-color: var(--color-surface);
+}
+
+.ticket-attachment__icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+
+  border-radius: var(--radius-sm);
+
+  background-color: var(--color-status-progress-background);
+  color: var(--color-primary);
+
+  font-size: 1.1rem;
+}
+
+.ticket-attachment__name {
+  color: var(--color-text);
+  font-size: 0.85rem;
+}
+
+.ticket-attachment__size {
+  color: var(--color-text-muted);
+}
+
+
+/* =========================================
+   PRIORITY
+   ========================================= */
+
+.ticket-info__value--high {
+  color: var(--color-danger);
+}
+
+.ticket-info__value--medium {
+  color: var(--color-warning);
+}
+
+.ticket-info__value--low {
+  color: var(--color-success);
+}
+
+
+/* =========================================
+   REQUESTER
+   ========================================= */
+
+.ticket-requester__avatar {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background-color: var(--color-primary);
+  color: #ffffff;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   TIMELINE
+   ========================================= */
+
+.ticket-timeline {
+  position: relative;
+  padding-left: 1.75rem;
+}
+
+.ticket-timeline::before {
+  content: "";
+
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 7px;
+
+  width: 2px;
+
+  background-color: var(--color-border);
+}
+
+.ticket-timeline__dot {
+  top: 4px;
+  left: -1.75rem;
+
+  width: 16px;
+  height: 16px;
+
+  border: 3px solid var(--color-status-progress-background);
+  border-radius: 50%;
+
+  background-color: var(--color-primary);
+}
